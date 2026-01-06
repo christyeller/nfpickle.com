@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  hashedPassword String
+  name           String?
+  role           String   @default("admin")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Event {
+  id                   String   @id @default(cuid())
+  title                String
+  slug                 String   @unique
+  eventType            String   @default("open-play")
+  description          String?  @db.Text
+  startDate            DateTime
+  endDate              DateTime
+  locationName         String   @default("Paonia Town Park")
+  locationAddress      String?
+  capacity             Int?
+  cost                 Float?   @default(0)
+  registrationRequired Boolean  @default(false)
+  isRecurring          Boolean  @default(false)
+  recurringPattern     String?
+  status               String   @default("published")
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+model Post {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String?
+  content     String   @db.Text
+  featuredImg String?
+  status      String   @default("published")
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Member {
+  id               String   @id @default(cuid())
+  email            String   @unique
+  firstName        String
+  lastName         String
+  phone            String?
+  skillLevel       String?
+  membershipTier   String   @default("free")
+  membershipStatus String   @default("active")
+  joinedAt         DateTime @default(now())
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String   @db.Text
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model SiteSettings {
+  id              String  @id @default("settings")
+  clubName        String  @default("North Fork Pickleball Club")
+  tagline         String  @default("Serving the North Fork Valley of Colorado")
+  contactEmail    String?
+  facebookUrl     String?
+  instagramUrl    String?
+  primaryLocation String  @default("Paonia Town Park")
+  aboutText       String? @db.Text
+}
