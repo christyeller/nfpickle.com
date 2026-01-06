@@ -4,7 +4,7 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import AdminHeader from '@/components/admin/AdminHeader'
 import StatsCard from '@/components/admin/StatsCard'
-import { Calendar, Users, Mail, Newspaper } from 'lucide-react'
+import { Calendar, Users, Mail, Newspaper, Heart } from 'lucide-react'
 import Link from 'next/link'
 import { formatDate } from '@/lib/utils'
 
@@ -15,12 +15,13 @@ export default async function AdminDashboard() {
     redirect('/admin/login')
   }
 
-  const [eventsCount, membersCount, unreadMessagesCount, postsCount, recentEvents, recentMessages] =
+  const [eventsCount, membersCount, unreadMessagesCount, postsCount, donationsCount, recentEvents, recentMessages] =
     await Promise.all([
       prisma.event.count(),
       prisma.member.count(),
       prisma.contactSubmission.count({ where: { read: false } }),
       prisma.post.count({ where: { status: 'published' } }),
+      prisma.donation.count({ where: { status: 'completed' } }),
       prisma.event.findMany({
         orderBy: { startDate: 'desc' },
         take: 5,
@@ -60,6 +61,12 @@ export default async function AdminDashboard() {
             value={postsCount}
             icon={Newspaper}
             color="gray"
+          />
+          <StatsCard
+            title="Total Donations"
+            value={donationsCount}
+            icon={Heart}
+            color="accent"
           />
         </div>
 

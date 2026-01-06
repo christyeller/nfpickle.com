@@ -1,6 +1,6 @@
-import { User, Event, Post, Member, ContactSubmission, SiteSettings } from '@prisma/client'
+import { User, Event, Post, Member, ContactSubmission, SiteSettings, Donation } from '@prisma/client'
 
-export type { User, Event, Post, Member, ContactSubmission, SiteSettings }
+export type { User, Event, Post, Member, ContactSubmission, SiteSettings, Donation }
 
 export type EventType = 'open-play' | 'tournament' | 'clinic' | 'social' | 'meeting'
 export type EventStatus = 'published' | 'draft'
@@ -26,4 +26,33 @@ export const membershipTierLabels: Record<MembershipTier, string> = {
   free: 'Community (Free)',
   annual: 'Annual ($25/year)',
   lifetime: 'Lifetime ($200)',
+}
+
+export type DonationType = 'one-time' | 'recurring'
+export type DonationFrequency = 'monthly' | 'yearly'
+export type DonationStatus = 'pending' | 'completed' | 'failed' | 'cancelled'
+export type PaymentStatus = 'incomplete' | 'processing' | 'succeeded' | 'failed'
+
+export const donationTypeLabels: Record<DonationType, string> = {
+  'one-time': 'One-Time',
+  'recurring': 'Recurring',
+}
+
+export const donationFrequencyLabels: Record<DonationFrequency, string> = {
+  'monthly': 'Monthly',
+  'yearly': 'Yearly',
+}
+
+export const donationStatusLabels: Record<DonationStatus, string> = {
+  'pending': 'Pending',
+  'completed': 'Completed',
+  'failed': 'Failed',
+  'cancelled': 'Cancelled',
+}
+
+export const paymentStatusLabels: Record<PaymentStatus, string> = {
+  'incomplete': 'Incomplete',
+  'processing': 'Processing',
+  'succeeded': 'Succeeded',
+  'failed': 'Failed',
 }

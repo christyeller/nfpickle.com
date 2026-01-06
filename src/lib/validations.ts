@@ -49,8 +49,20 @@ export const settingsSchema = z.object({
   aboutText: z.string().optional(),
 })
 
+export const donationSchema = z.object({
+  donorName: z.string().min(1, 'Name is required'),
+  donorEmail: z.string().email('Invalid email address'),
+  donorPhone: z.string().optional(),
+  donorMessage: z.string().optional(),
+  donorAddress: z.string().optional(),
+  amount: z.number().min(1, 'Amount must be at least $1').max(100000, 'Amount cannot exceed $100,000'),
+  donationType: z.enum(['one-time', 'recurring']),
+  frequency: z.enum(['monthly', 'yearly']).optional(),
+})
+
 export type EventFormData = z.infer<typeof eventSchema>
 export type PostFormData = z.infer<typeof postSchema>
 export type ContactFormData = z.infer<typeof contactSchema>
 export type MemberFormData = z.infer<typeof memberSchema>
 export type SettingsFormData = z.infer<typeof settingsSchema>
+export type DonationFormData = z.infer<typeof donationSchema>

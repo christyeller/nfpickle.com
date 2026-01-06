@@ -1,12 +1,23 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Heart, Target, Users, Award, ArrowRight, Sparkles } from 'lucide-react'
+import { Heart, Target, Users, Award, Sparkles, CreditCard, CheckCircle, DollarSign } from 'lucide-react'
 import PageHero from '@/components/public/PageHero'
 import SectionHeader from '@/components/public/SectionHeader'
 import { ScrollReveal } from '@/components/public/ScrollReveal'
 import { staggerContainer, staggerItem } from '@/lib/animations'
+import { donationSchema, type DonationFormData } from '@/lib/validations'
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
+
+// Initialize Stripe
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+
+const presetAmounts = [10, 25, 50, 100]
 
 const impactAreas = [
   {
@@ -138,85 +149,490 @@ export default function DonatePage() {
         </div>
       </section>
 
-      {/* How to Donate */}
+      {/* Donation Form Section */}
       <section className="section bg-white relative overflow-hidden">
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-lime/5 rounded-full blur-3xl" />
 
         <div className="container-custom relative z-10">
-          <div className="max-w-2xl mx-auto">
-            <SectionHeader
-              title="How to Donate"
-              subtitle="Thank you for your generosity"
-              badge="Support Us"
-              badgeIcon={Heart}
-              badgeColor="teal"
-              highlightWord="Donate"
-              highlightColor="teal"
-            />
+          <SectionHeader
+            title="Make a Donation"
+            subtitle="Every contribution helps our community thrive"
+            badge="Donate Now"
+            badgeIcon={Heart}
+            badgeColor="coral"
+            highlightWord="Donation"
+            highlightColor="coral"
+          />
 
-            <ScrollReveal>
-              <div className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-coral via-teal to-lime rounded-3xl blur-sm opacity-20" />
-                <div className="relative bg-white rounded-3xl p-10 shadow-elevation-2 border border-gray-100">
-                  <p className="text-gray-600 mb-8 text-center">
-                    We&apos;re currently setting up online donation capabilities. In the meantime,
-                    you can support the club by:
-                  </p>
+          <DonationFormWrapper />
+        </div>
+      </section>
+    </>
+  )
+}
 
-                  <div className="space-y-4 mb-10">
-                    {[
-                      { num: 1, text: 'Contact us', detail: 'to arrange a check or cash donation', color: 'coral' },
-                      { num: 2, text: 'Become a member', detail: '- membership dues directly support club activities', color: 'teal' },
-                      { num: 3, text: 'Volunteer', detail: 'your time at events and open play sessions', color: 'lime' },
-                    ].map((item, index) => (
-                      <motion.div
-                        key={item.num}
-                        className="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100"
-                        initial={prefersReducedMotion ? {} : { opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
-                        whileHover={prefersReducedMotion ? {} : { x: 4 }}
-                      >
-                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-white flex-shrink-0
-                          ${item.color === 'coral' ? 'bg-coral' : item.color === 'teal' ? 'bg-teal' : 'bg-lime text-court-dark'}`}>
-                          {item.num}
-                        </div>
-                        <p className="text-gray-600 pt-2">
-                          <strong className="text-charcoal-dark">{item.text}</strong> {item.detail}
-                        </p>
-                      </motion.div>
-                    ))}
+function DonationFormWrapper() {
+  const [clientSecret, setClientSecret] = useState<string | null>(null)
+  const [donationData, setDonationData] = useState<DonationFormData | null>(null)
+
+  if (clientSecret && donationData) {
+    return (
+      <Elements stripe={stripePromise} options={{ clientSecret }}>
+        <StripePaymentForm
+          donationData={donationData}
+          onBack={() => {
+            setClientSecret(null)
+            setDonationData(null)
+          }}
+        />
+      </Elements>
+    )
+  }
+
+  return (
+    <DonationDetailsForm
+      onSubmit={(data, secret) => {
+        setDonationData(data)
+        setClientSecret(secret)
+      }}
+    />
+  )
+}
+
+interface DonationDetailsFormProps {
+  onSubmit: (data: DonationFormData, clientSecret: string) => void
+}
+
+function DonationDetailsForm({ onSubmit }: DonationDetailsFormProps) {
+  const [selectedAmount, setSelectedAmount] = useState<number | null>(null)
+  const [customAmount, setCustomAmount] = useState('')
+  const [donationType, setDonationType] = useState<'one-time' | 'recurring'>('one-time')
+  const [frequency, setFrequency] = useState<'monthly' | 'yearly'>('monthly')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState('')
+  const prefersReducedMotion = useReducedMotion()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<DonationFormData>({
+    resolver: zodResolver(donationSchema),
+  })
+
+  const finalAmount = selectedAmount || parseFloat(customAmount) || 0
+
+  const onSubmitForm = async (data: DonationFormData) => {
+    if (finalAmount < 1) {
+      setError('Please select or enter an amount')
+      return
+    }
+
+    setIsSubmitting(true)
+    setError('')
+
+    try {
+      const res = await fetch('/api/donations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...data,
+          amount: finalAmount,
+          donationType,
+          frequency: donationType === 'recurring' ? frequency : undefined,
+        }),
+      })
+
+      if (!res.ok) {
+        const result = await res.json()
+        throw new Error(result.error || 'Failed to create donation')
+      }
+
+      const result = await res.json()
+      onSubmit(data, result.clientSecret)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to process donation')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  return (
+    <ScrollReveal>
+      <div className="max-w-3xl mx-auto">
+        <div className="relative">
+          <div className="absolute -inset-1 bg-gradient-to-r from-coral via-teal to-lime rounded-3xl blur-sm opacity-20" />
+          <div className="relative bg-white rounded-3xl p-8 md:p-10 shadow-elevation-2">
+            {error && (
+              <motion.div
+                className="bg-coral/10 text-coral p-4 rounded-xl text-sm mb-6 border border-coral/20"
+                initial={prefersReducedMotion ? {} : { opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                {error}
+              </motion.div>
+            )}
+
+            <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-8">
+              {/* Donation Type Toggle */}
+              <div>
+                <label className="block text-sm font-medium text-charcoal-dark mb-3">
+                  Donation Type
+                </label>
+                <div className="grid grid-cols-2 gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setDonationType('one-time')}
+                    className={`p-4 rounded-xl border-2 font-medium transition-all
+                      ${donationType === 'one-time'
+                        ? 'border-coral bg-coral/10 text-coral'
+                        : 'border-gray-200 hover:border-gray-300'
+                      }`}
+                  >
+                    One-Time
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setDonationType('recurring')}
+                    className={`p-4 rounded-xl border-2 font-medium transition-all
+                      ${donationType === 'recurring'
+                        ? 'border-teal bg-teal/10 text-teal'
+                        : 'border-gray-200 hover:border-gray-300'
+                      }`}
+                  >
+                    Recurring
+                  </button>
+                </div>
+              </div>
+
+              {/* Frequency Selection (for recurring) */}
+              {donationType === 'recurring' && (
+                <motion.div
+                  initial={prefersReducedMotion ? {} : { opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                >
+                  <label className="block text-sm font-medium text-charcoal-dark mb-3">
+                    Frequency
+                  </label>
+                  <div className="grid grid-cols-2 gap-4">
+                    <button
+                      type="button"
+                      onClick={() => setFrequency('monthly')}
+                      className={`p-3 rounded-xl border-2 font-medium transition-all
+                        ${frequency === 'monthly'
+                          ? 'border-teal bg-teal/10 text-teal'
+                          : 'border-gray-200 hover:border-gray-300'
+                        }`}
+                    >
+                      Monthly
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setFrequency('yearly')}
+                      className={`p-3 rounded-xl border-2 font-medium transition-all
+                        ${frequency === 'yearly'
+                          ? 'border-teal bg-teal/10 text-teal'
+                          : 'border-gray-200 hover:border-gray-300'
+                        }`}
+                    >
+                      Yearly
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Preset Amounts */}
+              <div>
+                <label className="block text-sm font-medium text-charcoal-dark mb-3">
+                  Select Amount
+                </label>
+                <div className="grid grid-cols-4 gap-3">
+                  {presetAmounts.map((amount) => (
+                    <button
+                      key={amount}
+                      type="button"
+                      onClick={() => {
+                        setSelectedAmount(amount)
+                        setCustomAmount('')
+                      }}
+                      className={`p-4 rounded-xl border-2 font-bold transition-all
+                        ${selectedAmount === amount
+                          ? 'border-lime bg-lime/10 text-lime-700'
+                          : 'border-gray-200 hover:border-gray-300'
+                        }`}
+                    >
+                      ${amount}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Custom Amount */}
+              <div>
+                <label className="block text-sm font-medium text-charcoal-dark mb-2">
+                  Or Enter Custom Amount
+                </label>
+                <div className="relative">
+                  <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                  <input
+                    type="number"
+                    min="1"
+                    step="0.01"
+                    value={customAmount}
+                    onChange={(e) => {
+                      setCustomAmount(e.target.value)
+                      setSelectedAmount(null)
+                    }}
+                    className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-gray-50
+                      focus:border-lime focus:ring-2 focus:ring-lime/20 focus:bg-white
+                      transition-all outline-none"
+                    placeholder="Enter amount"
+                  />
+                </div>
+              </div>
+
+              {/* Donor Information */}
+              <div className="border-t pt-6">
+                <h3 className="text-lg font-display font-bold text-charcoal-dark mb-4">
+                  Your Information
+                </h3>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-charcoal-dark mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      {...register('donorName')}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50
+                        focus:border-teal focus:ring-2 focus:ring-teal/20 focus:bg-white
+                        transition-all outline-none"
+                      placeholder="John Doe"
+                    />
+                    {errors.donorName && (
+                      <p className="text-coral text-sm mt-1">{errors.donorName.message}</p>
+                    )}
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-coral to-teal
-                        text-white font-bold rounded-xl hover:shadow-glow-coral transition-shadow"
-                    >
-                      Contact Us
-                      <ArrowRight className="w-5 h-5" />
-                    </Link>
-                    <Link
-                      href="/membership"
-                      className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-court
-                        text-court font-bold rounded-xl hover:bg-court hover:text-white transition-colors"
-                    >
-                      Become a Member
-                    </Link>
+                  <div>
+                    <label className="block text-sm font-medium text-charcoal-dark mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      {...register('donorEmail')}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50
+                        focus:border-teal focus:ring-2 focus:ring-teal/20 focus:bg-white
+                        transition-all outline-none"
+                      placeholder="john@example.com"
+                    />
+                    {errors.donorEmail && (
+                      <p className="text-coral text-sm mt-1">{errors.donorEmail.message}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-charcoal-dark mb-2">
+                      Phone Number (Optional)
+                    </label>
+                    <input
+                      type="tel"
+                      {...register('donorPhone')}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50
+                        focus:border-teal focus:ring-2 focus:ring-teal/20 focus:bg-white
+                        transition-all outline-none"
+                      placeholder="(555) 123-4567"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-charcoal-dark mb-2">
+                      Message/Note (Optional)
+                    </label>
+                    <textarea
+                      {...register('donorMessage')}
+                      rows={3}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50
+                        focus:border-teal focus:ring-2 focus:ring-teal/20 focus:bg-white
+                        transition-all outline-none resize-none"
+                      placeholder="Your message..."
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-charcoal-dark mb-2">
+                      Address (Optional)
+                    </label>
+                    <input
+                      {...register('donorAddress')}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50
+                        focus:border-teal focus:ring-2 focus:ring-teal/20 focus:bg-white
+                        transition-all outline-none"
+                      placeholder="123 Main St, City, State ZIP"
+                    />
                   </div>
                 </div>
               </div>
 
-              <p className="text-sm text-gray-500 text-center mt-8">
-                North Fork Pickleball Club is a community organization.
-                Donations may not be tax-deductible. Please consult with a tax professional.
-              </p>
-            </ScrollReveal>
+              {/* Submit Button */}
+              <motion.button
+                type="submit"
+                disabled={isSubmitting || finalAmount < 1}
+                className="w-full inline-flex items-center justify-center gap-2 px-6 py-4
+                  bg-gradient-to-r from-coral to-teal text-white font-bold text-lg rounded-xl
+                  hover:shadow-glow-coral transition-shadow disabled:opacity-50"
+                whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
+                whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
+              >
+                {isSubmitting ? (
+                  'Processing...'
+                ) : (
+                  <>
+                    <CreditCard size={20} />
+                    Continue to Payment - ${finalAmount.toFixed(2)}
+                  </>
+                )}
+              </motion.button>
+            </form>
+
+            <p className="text-xs text-gray-500 text-center mt-6">
+              Secure payment processing powered by Stripe. Your payment information is never stored on our servers.
+            </p>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </ScrollReveal>
+  )
+}
+
+interface StripePaymentFormProps {
+  donationData: DonationFormData
+  onBack: () => void
+}
+
+function StripePaymentForm({ donationData, onBack }: StripePaymentFormProps) {
+  const stripe = useStripe()
+  const elements = useElements()
+  const [isProcessing, setIsProcessing] = useState(false)
+  const [isComplete, setIsComplete] = useState(false)
+  const [error, setError] = useState('')
+  const prefersReducedMotion = useReducedMotion()
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    if (!stripe || !elements) {
+      return
+    }
+
+    setIsProcessing(true)
+    setError('')
+
+    const { error: submitError } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: `${window.location.origin}/donate?success=true`,
+      },
+      redirect: 'if_required',
+    })
+
+    if (submitError) {
+      setError(submitError.message || 'Payment failed')
+      setIsProcessing(false)
+    } else {
+      setIsComplete(true)
+    }
+  }
+
+  if (isComplete) {
+    return (
+      <ScrollReveal>
+        <div className="max-w-2xl mx-auto">
+          <motion.div
+            className="bg-white rounded-3xl p-10 text-center shadow-elevation-2"
+            initial={prefersReducedMotion ? {} : { scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+          >
+            <motion.div
+              className="w-24 h-24 rounded-2xl bg-lime/10 flex items-center justify-center mx-auto mb-6"
+              initial={prefersReducedMotion ? {} : { scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, type: 'spring', stiffness: 300 }}
+            >
+              <CheckCircle size={48} className="text-lime-600" />
+            </motion.div>
+            <h2 className="text-3xl font-display font-bold text-charcoal-dark mb-3">
+              Thank You for Your Donation!
+            </h2>
+            <p className="text-gray-600 mb-2">
+              Your generous support means the world to us.
+            </p>
+            <p className="text-gray-600 mb-8">
+              A receipt has been sent to {donationData.donorEmail}.
+            </p>
+            <button
+              onClick={() => window.location.href = '/'}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl
+                bg-gradient-to-r from-coral to-teal text-white font-medium
+                hover:shadow-glow-coral transition-shadow"
+            >
+              Return Home
+            </button>
+          </motion.div>
+        </div>
+      </ScrollReveal>
+    )
+  }
+
+  return (
+    <ScrollReveal>
+      <div className="max-w-2xl mx-auto">
+        <div className="relative">
+          <div className="absolute -inset-1 bg-gradient-to-r from-coral via-teal to-lime rounded-3xl blur-sm opacity-20" />
+          <div className="relative bg-white rounded-3xl p-8 md:p-10 shadow-elevation-2">
+            <button
+              onClick={onBack}
+              className="text-sm text-gray-600 hover:text-gray-800 mb-6"
+            >
+              ← Back to donation details
+            </button>
+
+            <h2 className="text-2xl font-display font-bold text-charcoal-dark mb-6">
+              Complete Your Donation
+            </h2>
+
+            {error && (
+              <motion.div
+                className="bg-coral/10 text-coral p-4 rounded-xl text-sm mb-6 border border-coral/20"
+                initial={prefersReducedMotion ? {} : { opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                {error}
+              </motion.div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <PaymentElement />
+
+              <motion.button
+                type="submit"
+                disabled={!stripe || isProcessing}
+                className="w-full inline-flex items-center justify-center gap-2 px-6 py-4
+                  bg-gradient-to-r from-coral to-teal text-white font-bold text-lg rounded-xl
+                  hover:shadow-glow-coral transition-shadow disabled:opacity-50"
+                whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
+                whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
+              >
+                {isProcessing ? 'Processing...' : `Donate $${donationData.amount.toFixed(2)}`}
+              </motion.button>
+            </form>
+
+            <p className="text-xs text-gray-500 text-center mt-6">
+              Secure payment processing powered by Stripe.
+            </p>
+          </div>
+        </div>
+      </div>
+    </ScrollReveal>
   )
 }

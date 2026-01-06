@@ -84,3 +84,25 @@ model SiteSettings {
   primaryLocation String  @default("Paonia Town Park")
   aboutText       String? @db.Text
 }
+
+model Donation {
+  id                    String    @id @default(cuid())
+  donorName             String
+  donorEmail            String
+  donorPhone            String?
+  donorMessage          String?   @db.Text
+  donorAddress          String?
+  amount                Float
+  donationType          String    // 'one-time' or 'recurring'
+  frequency             String?   // 'monthly', 'yearly'
+  stripePaymentIntentId String?   @unique
+  stripeSubscriptionId  String?   @unique
+  stripeCustomerId      String?
+  status                String    @default("pending") // 'pending', 'completed', 'failed', 'cancelled'
+  paymentStatus         String    @default("incomplete") // 'incomplete', 'processing', 'succeeded', 'failed'
+  receiptUrl            String?
+  lastPaymentDate       DateTime?
+  nextPaymentDate       DateTime?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+}
