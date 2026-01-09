@@ -86,13 +86,18 @@ export async function POST(request: NextRequest) {
 }
 
 async function handlePaymentIntentSucceeded(paymentIntent: Stripe.PaymentIntent) {
+  // Accessing receipt_url via any cast since charges/latest_charge typing varies by version
+  const receiptUrl = (paymentIntent as any).latest_charge?.receipt_url || 
+                    (paymentIntent as any).charges?.data?.[0]?.receipt_url || 
+                    null;
+
   await prisma.donation.updateMany({
     where: { stripePaymentIntentId: paymentIntent.id },
     data: {
       status: 'completed',
       paymentStatus: 'succeeded',
       lastPaymentDate: new Date(),
-      receiptUrl: paymentIntent.charges.data[0]?.receipt_url || null,
+      receiptUrl,
     },
   })
 }
@@ -108,11 +113,10 @@ async function handlePaymentIntentFailed(paymentIntent: Stripe.PaymentIntent) {
 }
 
 async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
-  if (!invoice.subscription) return
+  const subscriptionId = (invoice as any).subscription as string
+  if (!subscriptionId) return
 
-  const subscription = await stripe.subscriptions.retrieve(
-    invoice.subscription as string
-  )
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId)
 
   await prisma.donation.updateMany({
     where: { stripeSubscriptionId: subscription.id },
@@ -120,8 +124,8 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
       status: 'completed',
       paymentStatus: 'succeeded',
       lastPaymentDate: new Date(invoice.status_transitions.paid_at! * 1000),
-      nextPaymentDate: subscription.current_period_end
-        ? new Date(subscription.current_period_end * 1000)
+      nextPaymentDate: (subscription as any).current_period_end
+        ? new Date((subscription as any).current_period_end * 1000)
         : null,
       receiptUrl: invoice.hosted_invoice_url || null,
     },
@@ -129,10 +133,11 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
 }
 
 async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
-  if (!invoice.subscription) return
+  const subscriptionId = (invoice as any).subscription as string
+  if (!subscriptionId) return
 
   await prisma.donation.updateMany({
-    where: { stripeSubscriptionId: invoice.subscription as string },
+    where: { stripeSubscriptionId: subscriptionId },
     data: {
       paymentStatus: 'failed',
     },

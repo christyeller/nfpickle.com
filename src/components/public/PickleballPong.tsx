@@ -60,10 +60,11 @@ export function PickleballPong({ className = '' }: PickleballPongProps) {
   const initGameState = useCallback((width: number, height: number): GameState => {
     // Court is 90% of container, centered
     const courtMargin = 0.05
+    const topMargin = 0.15 // Clear the header
     const courtX = width * courtMargin
-    const courtY = height * courtMargin
+    const courtY = height * topMargin
     const courtWidth = width * (1 - courtMargin * 2)
-    const courtHeight = height * (1 - courtMargin * 2)
+    const courtHeight = height * (1 - courtMargin - topMargin)
 
     // Smaller paddle size - more realistic
     const paddleHeight = courtHeight * 0.12
