@@ -15,6 +15,7 @@ model User {
   role           String   @default("admin")
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+  uploadedMedia  Media[]
 }
 
 model Event {
@@ -105,4 +106,36 @@ model Donation {
   nextPaymentDate       DateTime?
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @updatedAt
+}
+
+model Page {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     String   @db.Text
+  metaTitle   String?
+  metaDescription String?
+  status      String   @default("published")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Media {
+  id              String   @id @default(cuid())
+  cloudinaryId    String   @unique
+  url             String
+  secureUrl       String
+  format          String
+  width           Int
+  height          Int
+  bytes           Int
+  altText         String?
+  caption         String?
+  uploadedBy      String?
+  uploadedByUser  User?    @relation(fields: [uploadedBy], references: [id], onDelete: SetNull)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([cloudinaryId])
+  @@index([createdAt])
 }

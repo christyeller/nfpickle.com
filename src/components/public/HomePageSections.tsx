@@ -82,7 +82,7 @@ export default function HomePageSections({
       </section>
 
       {/* Features Section */}
-      <section className="section bg-gray-50 relative overflow-hidden">
+      <section className="section bg-[#FDF9F0] relative overflow-hidden">
         {/* Background decorations */}
         <div className="absolute inset-0 grid-pattern opacity-30" />
         <div className="absolute top-0 right-0 w-96 h-96 bg-lime/5 rounded-full blur-3xl" />
@@ -155,7 +155,7 @@ export default function HomePageSections({
       </section>
 
       {/* Upcoming Events */}
-      <section className="section bg-white relative overflow-hidden">
+      <section className="section bg-[#FDF9F0] relative overflow-hidden">
         {/* Background decoration */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-lime/10 via-teal/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-coral/10 via-sunset/10 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/3" />
@@ -205,7 +205,7 @@ export default function HomePageSections({
               ))}
             </motion.div>
           ) : (
-            <ScrollReveal className="text-center py-16 px-8 rounded-3xl bg-gray-50 border border-gray-100">
+            <ScrollReveal className="text-center py-16 px-8 rounded-3xl bg-[#FDF9F0] border border-[#E8E4DF]">
               <Calendar className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <h3 className="text-2xl font-display font-bold text-charcoal-dark mb-2">No Upcoming Events</h3>
               <p className="text-gray-500 mb-6">Check back soon for new events!</p>
@@ -274,7 +274,7 @@ export default function HomePageSections({
       </section>
 
       {/* Membership CTA */}
-      <section className="section bg-white relative overflow-hidden">
+      <section className="section bg-[#FDF9F0] relative overflow-hidden">
         {/* Background decorations */}
         <div className="absolute inset-0 dots-pattern opacity-30" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-lime/5 to-transparent rounded-full blur-3xl" />
@@ -311,7 +311,7 @@ export default function HomePageSections({
               className="group relative"
             >
               <motion.div
-                className="h-full p-8 rounded-3xl border-2 border-gray-200 bg-white
+                className="h-full p-8 rounded-3xl border-2 border-[#E8E4DF] bg-[#FDF9F0]
                   hover:border-lime/30 hover:shadow-elevation-3 transition-all duration-500"
                 whileHover={prefersReducedMotion ? {} : { y: -8 }}
               >
@@ -393,7 +393,7 @@ export default function HomePageSections({
                 <Link
                   href="/membership"
                   className="block w-full py-4 text-center font-bold rounded-xl bg-lime text-court-dark
-                    hover:bg-white hover:shadow-glow-lime transition-all"
+                    hover:bg-[#FDF9F0] hover:shadow-glow-lime transition-all"
                 >
                   Join Now
                 </Link>
@@ -406,7 +406,7 @@ export default function HomePageSections({
               className="group relative"
             >
               <motion.div
-                className="h-full p-8 rounded-3xl border-2 border-gray-200 bg-white
+                className="h-full p-8 rounded-3xl border-2 border-[#E8E4DF] bg-[#FDF9F0]
                   hover:border-purple/30 hover:shadow-elevation-3 transition-all duration-500"
                 whileHover={prefersReducedMotion ? {} : { y: -8 }}
               >
@@ -454,7 +454,7 @@ export default function HomePageSections({
 
       {/* News Preview */}
       {recentPosts.length > 0 && (
-        <section className="section bg-gray-50 relative overflow-hidden">
+        <section className="section bg-[#FDF9F0] relative overflow-hidden">
           <div className="absolute inset-0 grid-pattern opacity-20" />
 
           <div className="container-custom relative z-10">
@@ -569,7 +569,7 @@ export default function HomePageSections({
               <MagneticButton
                 as="a"
                 href="/play"
-                className="group px-10 py-5 bg-white text-court-dark font-bold text-lg rounded-xl
+                className="group px-10 py-5 bg-[#FDF9F0] text-court-dark font-bold text-lg rounded-xl
                   hover:shadow-glow-lime transition-shadow"
               >
                 <span className="flex items-center gap-2">
@@ -581,7 +581,7 @@ export default function HomePageSections({
                 as="a"
                 href="/contact"
                 className="px-10 py-5 glass-dark text-white font-bold text-lg rounded-xl
-                  hover:bg-white/20 transition-colors"
+                  hover:bg-[#FDF9F0]/20 transition-colors"
               >
                 Get in Touch
               </MagneticButton>

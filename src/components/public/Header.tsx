@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
@@ -47,35 +48,29 @@ export default function Header() {
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
           isScrolled
-            ? 'bg-charcoal-dark/95 backdrop-blur-xl shadow-elevation-3 py-3'
-            : 'bg-transparent py-5'
+            ? 'backdrop-blur-xl shadow-elevation-3 py-3'
+            : 'py-5'
         )}
+        style={{ backgroundColor: '#FDF9F0' }}
       >
         <div className="container-custom">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
+            <Link href="/" className="flex items-center group">
               <motion.div
-                className={cn(
-                  'w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-300',
-                  isScrolled ? 'bg-lime' : 'glass-lime'
-                )}
-                whileHover={prefersReducedMotion ? {} : { scale: 1.05, rotate: 5 }}
+                className="relative h-[100px] w-auto"
+                whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
-                <PickleballIcon className={cn(
-                  'w-6 h-6 transition-colors',
-                  isScrolled ? 'text-court-dark' : 'text-lime'
-                )} />
+                <Image
+                  src="/logo.png"
+                  alt="North Fork Pickleball"
+                  width={250}
+                  height={100}
+                  className="h-[100px] w-auto object-contain"
+                  priority
+                />
               </motion.div>
-              <span
-                className={cn(
-                  'text-lg md:text-xl font-display font-bold transition-colors hidden sm:block',
-                  isScrolled ? 'text-white' : 'text-white'
-                )}
-              >
-                North Fork <span className="text-lime">Pickleball</span>
-              </span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -176,10 +171,10 @@ export default function Header() {
                         href={link.href}
                         onClick={() => setIsMobileMenuOpen(false)}
                         className={cn(
-                          'block py-3 px-4 rounded-xl font-medium text-lg transition-colors',
+                          'block py-3 px-4 rounded-xl font-bold text-lg transition-colors',
                           pathname === link.href
-                            ? 'bg-lime/10 text-lime'
-                            : 'text-white/80 hover:text-white hover:bg-white/5'
+                            ? 'bg-[#1A5F7A]/20 text-[#5AAFD4] hover:bg-[#1A5F7A]/30'
+                            : 'text-[#5AAFD4]/80 hover:text-[#5AAFD4] hover:bg-white/5'
                         )}
                       >
                         {link.label}
@@ -227,40 +222,28 @@ function NavLink({ href, label, isActive, isScrolled }: NavLinkProps) {
     <Link
       href={href}
       className={cn(
-        'relative px-4 py-2 font-medium transition-colors rounded-lg',
+        'relative px-4 py-2 font-bold transition-colors rounded-lg',
         isActive
-          ? 'text-lime'
-          : isScrolled
-          ? 'text-white/80 hover:text-white hover:bg-white/5'
-          : 'text-white/80 hover:text-white hover:bg-white/10'
+          ? 'hover:opacity-80'
+          : 'hover:opacity-80'
       )}
+      style={{
+        color: isActive ? '#0D3D4D' : '#1A5F7A'
+      }}
     >
       {label}
       {isActive && !prefersReducedMotion && (
         <motion.div
           layoutId="activeNavIndicator"
-          className="absolute bottom-0 left-4 right-4 h-0.5 bg-lime rounded-full"
+          className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full"
+          style={{ backgroundColor: '#0D3D4D' }}
           transition={{ type: 'spring', stiffness: 400, damping: 30 }}
         />
       )}
       {isActive && prefersReducedMotion && (
-        <div className="absolute bottom-0 left-4 right-4 h-0.5 bg-lime rounded-full" />
+        <div className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full" style={{ backgroundColor: '#0D3D4D' }} />
       )}
     </Link>
   )
 }
 
-function PickleballIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor">
-      <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2" />
-      <circle cx="12" cy="12" r="1.5" fill="currentColor" />
-      <circle cx="8" cy="10" r="1" fill="currentColor" opacity="0.6" />
-      <circle cx="16" cy="10" r="1" fill="currentColor" opacity="0.6" />
-      <circle cx="8" cy="14" r="1" fill="currentColor" opacity="0.6" />
-      <circle cx="16" cy="14" r="1" fill="currentColor" opacity="0.6" />
-      <circle cx="12" cy="7" r="1" fill="currentColor" opacity="0.6" />
-      <circle cx="12" cy="17" r="1" fill="currentColor" opacity="0.6" />
-    </svg>
-  )
-}

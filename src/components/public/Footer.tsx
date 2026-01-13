@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Facebook, Instagram, Mail, MapPin, Heart, ArrowUpRight, Zap } from 'lucide-react'
 import { staggerContainer, staggerItem } from '@/lib/animations'
@@ -48,17 +49,20 @@ export default function Footer() {
         >
           {/* Brand Section */}
           <motion.div variants={staggerItem} className="lg:col-span-2">
-            <Link href="/" className="inline-flex items-center gap-3 group mb-6">
+            <Link href="/" className="inline-flex items-center group mb-6">
               <motion.div
-                className="w-12 h-12 rounded-xl bg-lime flex items-center justify-center"
-                whileHover={prefersReducedMotion ? {} : { scale: 1.05, rotate: 5 }}
+                className="relative h-[100px] w-auto"
+                whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
-                <PickleballIcon className="w-7 h-7 text-court-dark" />
+                <Image
+                  src="/logo.png"
+                  alt="North Fork Pickleball"
+                  width={250}
+                  height={100}
+                  className="h-[100px] w-auto object-contain"
+                />
               </motion.div>
-              <span className="text-2xl font-display font-bold">
-                North Fork <span className="text-lime">Pickleball</span>
-              </span>
             </Link>
 
             <p className="text-gray-400 mb-8 max-w-md leading-relaxed">
@@ -199,7 +203,7 @@ function WaveSVG() {
     >
       <path
         d="M0 120V60C240 20 480 0 720 20C960 40 1200 80 1440 60V120H0Z"
-        fill="white"
+        fill="#FDF9F0"
         className="dark:fill-gray-900"
       />
       <path
@@ -212,17 +216,3 @@ function WaveSVG() {
   )
 }
 
-function PickleballIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor">
-      <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2" />
-      <circle cx="12" cy="12" r="1.5" fill="currentColor" />
-      <circle cx="8" cy="10" r="1" fill="currentColor" opacity="0.6" />
-      <circle cx="16" cy="10" r="1" fill="currentColor" opacity="0.6" />
-      <circle cx="8" cy="14" r="1" fill="currentColor" opacity="0.6" />
-      <circle cx="16" cy="14" r="1" fill="currentColor" opacity="0.6" />
-      <circle cx="12" cy="7" r="1" fill="currentColor" opacity="0.6" />
-      <circle cx="12" cy="17" r="1" fill="currentColor" opacity="0.6" />
-    </svg>
-  )
-}

@@ -41,10 +41,10 @@ interface GameState {
 
 // Colors
 const COURT_BLUE = '#1a5f7a'
-const OUTSIDE_BLUE = '#0d3d4d'
+const OUTSIDE_BLUE = '#FDF9F0'
 const LINE_WHITE = 'rgba(255, 255, 255, 0.9)'
-const PLAYER_PADDLE_COLOR = '#BFFF00'
-const AI_PADDLE_COLOR = '#00BFA5'
+const PLAYER_PADDLE_COLOR = '#E49B0B'
+const AI_PADDLE_COLOR = '#275A6D'
 const BALL_COLOR = '#ffffff'
 
 export function PickleballPong({ className = '' }: PickleballPongProps) {
@@ -60,7 +60,7 @@ export function PickleballPong({ className = '' }: PickleballPongProps) {
   const initGameState = useCallback((width: number, height: number): GameState => {
     // Court is 90% of container, centered
     const courtMargin = 0.05
-    const topMargin = 0.15 // Clear the header
+    const topMargin = 0.08 // Smaller margin so court extends higher
     const courtX = width * courtMargin
     const courtY = height * topMargin
     const courtWidth = width * (1 - courtMargin * 2)

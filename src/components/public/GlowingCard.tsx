@@ -14,7 +14,7 @@ interface GlowingCardProps {
 export function GlowingCard({
   children,
   className = '',
-  glowColor = 'rgba(191, 255, 0, 0.4)',
+  glowColor = 'rgba(228, 155, 11, 0.3)',
   glowSize = 200,
   borderRadius = '1rem'
 }: GlowingCardProps) {
@@ -76,7 +76,7 @@ export function GradientBorderCard({
   children,
   className = '',
   borderWidth = 2,
-  colors = ['#BFFF00', '#00BFA5', '#7C4DFF', '#FF6B6B', '#BFFF00'],
+  colors = ['#E49B0B', '#275A6D', '#6B8E6F', '#5A7A8C', '#E49B0B'],
   animated = true
 }: GradientBorderCardProps) {
   const prefersReducedMotion = useReducedMotion()
@@ -113,7 +113,7 @@ interface SpotlightCardProps {
 export function SpotlightCard({
   children,
   className = '',
-  spotlightColor = '191, 255, 0',
+  spotlightColor = '228, 155, 11',
   spotlightSize = 400
 }: SpotlightCardProps) {
   const prefersReducedMotion = useReducedMotion()
@@ -182,9 +182,9 @@ export function PulsingGlowCard({
       className={`${className} ${!prefersReducedMotion ? glowColors[glowColor] || glowColors.lime : ''}`}
       animate={prefersReducedMotion ? {} : {
         boxShadow: [
-          `0 0 20px rgba(191, 255, 0, 0.3)`,
-          `0 0 40px rgba(191, 255, 0, 0.5)`,
-          `0 0 20px rgba(191, 255, 0, 0.3)`
+          `0 0 20px rgba(228, 155, 11, 0.3)`,
+          `0 0 40px rgba(228, 155, 11, 0.5)`,
+          `0 0 20px rgba(228, 155, 11, 0.3)`
         ]
       }}
       transition={{

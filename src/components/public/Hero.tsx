@@ -24,6 +24,7 @@ export default function Hero() {
       {/* Content */}
       <motion.div
         className="container-custom relative z-10 text-center text-white px-4"
+        style={{ marginTop: '50px' }}
         variants={heroContent}
         initial="hidden"
         animate="visible"
