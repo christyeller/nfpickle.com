@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
-import { deleteFromCloudinary } from '@/lib/cloudinary'
+import { deleteFromR2 } from '@/lib/r2'
 
 export async function GET(
   request: NextRequest,
@@ -87,8 +87,10 @@ export async function DELETE(
       return NextResponse.json({ error: 'Media not found' }, { status: 404 })
     }
 
-    // Delete from Cloudinary
-    await deleteFromCloudinary(media.cloudinaryId)
+    // Delete from R2
+    if (media.r2Key) {
+      await deleteFromR2(media.r2Key)
+    }
 
     // Delete from database
     await prisma.media.delete({ where: { id } })

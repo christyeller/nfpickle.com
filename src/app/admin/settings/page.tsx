@@ -1,10 +1,11 @@
 'use client'
 
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { settingsSchema, type SettingsFormData } from '@/lib/validations'
 import { useState, useEffect } from 'react'
 import AdminHeader from '@/components/admin/AdminHeader'
+import RichTextEditor from '@/components/admin/RichTextEditor/RichTextEditor'
 
 export default function SettingsPage() {
   const [isLoading, setIsLoading] = useState(true)
@@ -14,6 +15,7 @@ export default function SettingsPage() {
   const {
     register,
     handleSubmit,
+    control,
     reset,
     formState: { errors },
   } = useForm<SettingsFormData>({
@@ -159,11 +161,18 @@ export default function SettingsPage() {
 
             <div>
               <label className="label">About Text</label>
-              <textarea
-                {...register('aboutText')}
-                rows={6}
-                className="input"
-                placeholder="Tell visitors about your club..."
+              <Controller
+                name="aboutText"
+                control={control}
+                render={({ field }) => (
+                  <RichTextEditor
+                    value={field.value || ''}
+                    onChange={field.onChange}
+                    placeholder="Tell visitors about your club..."
+                    features={{ basic: true, lists: true, links: true, images: true, advanced: false }}
+                    minHeight="250px"
+                  />
+                )}
               />
             </div>
 

@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma'
 import { formatDate, formatTime } from '@/lib/utils'
 import { eventTypeLabels, type EventType } from '@/types'
 import { Calendar, Clock, MapPin, DollarSign, Users, ArrowLeft } from 'lucide-react'
+import DOMPurify from 'isomorphic-dompurify'
 
 interface EventPageProps {
   params: Promise<{ slug: string }>
@@ -80,11 +81,16 @@ export default async function EventPage({ params }: EventPageProps) {
             {/* Main Content */}
             <div className="lg:col-span-2">
               {event.description ? (
-                <div className="prose prose-lg max-w-none">
-                  {event.description.split('\n').map((paragraph, index) => (
-                    <p key={index}>{paragraph}</p>
-                  ))}
-                </div>
+                <div
+                  className="prose prose-lg max-w-none"
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(event.description, {
+                      ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 's', 'h1', 'h2', 'h3',
+                                     'ul', 'ol', 'li', 'blockquote', 'a'],
+                      ALLOWED_ATTR: ['href', 'target', 'rel', 'class', 'align']
+                    })
+                  }}
+                />
               ) : (
                 <p className="text-gray-600">
                   Join us for this event! More details coming soon.

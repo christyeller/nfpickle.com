@@ -39,16 +39,18 @@ model Event {
 }
 
 model Post {
-  id          String   @id @default(cuid())
-  title       String
-  slug        String   @unique
-  excerpt     String?
-  content     String   @db.Text
-  featuredImg String?
-  status      String   @default("published")
-  publishedAt DateTime @default(now())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  excerpt         String?
+  content         String   @db.Text
+  featuredImg     String?
+  featuredImageId String?
+  featuredImage   Media?   @relation("PostFeaturedImage", fields: [featuredImageId], references: [id], onDelete: SetNull)
+  status          String   @default("published")
+  publishedAt     DateTime @default(now())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model Member {
@@ -109,33 +111,76 @@ model Donation {
 }
 
 model Page {
-  id          String   @id @default(cuid())
-  title       String
-  slug        String   @unique
-  content     String   @db.Text
-  metaTitle   String?
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  content         String   @db.Text
+  metaTitle       String?
   metaDescription String?
-  status      String   @default("published")
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  featuredImageId String?
+  featuredImage   Media?   @relation("PageFeaturedImage", fields: [featuredImageId], references: [id], onDelete: SetNull)
+  status          String   @default("published")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model Media {
-  id              String   @id @default(cuid())
-  cloudinaryId    String   @unique
+  id              String         @id @default(cuid())
+  cloudinaryId    String?        @unique
+  r2Key           String?        @unique
   url             String
-  secureUrl       String
+  secureUrl       String?
   format          String
-  width           Int
-  height          Int
+  width           Int?
+  height          Int?
   bytes           Int
   altText         String?
   caption         String?
+  category        MediaCategory  @default(CONTENT)
+  tags            String[]
   uploadedBy      String?
-  uploadedByUser  User?    @relation(fields: [uploadedBy], references: [id], onDelete: SetNull)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  uploadedByUser  User?          @relation(fields: [uploadedBy], references: [id], onDelete: SetNull)
+  postFeaturedIn  Post[]         @relation("PostFeaturedImage")
+  pageFeaturedIn  Page[]         @relation("PageFeaturedImage")
+  galleryImages   GalleryImage[]
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
 
   @@index([cloudinaryId])
+  @@index([r2Key])
+  @@index([category])
   @@index([createdAt])
+}
+
+enum MediaCategory {
+  CONTENT
+  FEATURED
+  GALLERY
+}
+
+model Gallery {
+  id          String         @id @default(cuid())
+  title       String
+  slug        String         @unique
+  description String?        @db.Text
+  status      String         @default("published")
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  images      GalleryImage[]
+
+  @@index([slug])
+  @@index([status])
+}
+
+model GalleryImage {
+  id        String   @id @default(cuid())
+  galleryId String
+  mediaId   String
+  order     Int      @default(0)
+  gallery   Gallery  @relation(fields: [galleryId], references: [id], onDelete: Cascade)
+  media     Media    @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([galleryId, mediaId])
+  @@index([galleryId, order])
 }

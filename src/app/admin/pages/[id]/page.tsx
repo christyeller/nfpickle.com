@@ -1,18 +1,13 @@
 'use client'
 
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { pageSchema, type PageFormData } from '@/lib/validations'
 import { useRouter, useParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import AdminHeader from '@/components/admin/AdminHeader'
 import Link from 'next/link'
-
-interface PageFormData {
-  title: string
-  content: string
-  metaTitle?: string
-  metaDescription?: string
-  status: string
-}
+import RichTextEditor from '@/components/admin/RichTextEditor/RichTextEditor'
 
 export default function EditPagePage() {
   const router = useRouter()
@@ -25,9 +20,12 @@ export default function EditPagePage() {
   const {
     register,
     handleSubmit,
+    control,
     reset,
     formState: { errors },
-  } = useForm<PageFormData>()
+  } = useForm<PageFormData>({
+    resolver: zodResolver(pageSchema),
+  })
 
   useEffect(() => {
     fetchPage()
@@ -97,7 +95,7 @@ export default function EditPagePage() {
             <div>
               <label className="label">Title *</label>
               <input
-                {...register('title', { required: 'Title is required' })}
+                {...register('title')}
                 className="input"
               />
               {errors.title && (
@@ -107,11 +105,17 @@ export default function EditPagePage() {
 
             <div>
               <label className="label">Content *</label>
-              <textarea
-                {...register('content', { required: 'Content is required' })}
-                rows={12}
-                className="input font-mono text-sm"
-                placeholder="Write your page content here..."
+              <Controller
+                name="content"
+                control={control}
+                render={({ field }) => (
+                  <RichTextEditor
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder="Write your page content..."
+                    features={{ basic: true, lists: true, links: true, images: true, advanced: true }}
+                  />
+                )}
               />
               {errors.content && (
                 <p className="text-red-500 text-sm mt-1">{errors.content.message}</p>

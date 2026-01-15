@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
 import { formatDate } from '@/lib/utils'
 import { ArrowLeft } from 'lucide-react'
+import DOMPurify from 'isomorphic-dompurify'
 
 interface PostPageProps {
   params: Promise<{ slug: string }>
@@ -61,11 +62,17 @@ export default async function PostPage({ params }: PostPageProps) {
       <section className="section bg-white">
         <div className="container-custom">
           <article className="max-w-3xl mx-auto">
-            <div className="prose prose-lg max-w-none">
-              {post.content.split('\n').map((paragraph, index) =>
-                paragraph.trim() ? <p key={index}>{paragraph}</p> : <br key={index} />
-              )}
-            </div>
+            <div
+              className="prose prose-lg max-w-none"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(post.content, {
+                  ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 's', 'h1', 'h2', 'h3',
+                                 'ul', 'ol', 'li', 'blockquote', 'a', 'img', 'table',
+                                 'thead', 'tbody', 'tr', 'th', 'td', 'pre', 'code'],
+                  ALLOWED_ATTR: ['href', 'target', 'rel', 'src', 'alt', 'class', 'align', 'style']
+                })
+              }}
+            />
           </article>
         </div>
       </section>

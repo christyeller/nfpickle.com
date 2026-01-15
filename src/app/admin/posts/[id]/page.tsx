@@ -1,6 +1,6 @@
 'use client'
 
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { postSchema, type PostFormData } from '@/lib/validations'
 import { useRouter, useParams } from 'next/navigation'
@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react'
 import AdminHeader from '@/components/admin/AdminHeader'
 import Link from 'next/link'
 import type { Post } from '@prisma/client'
+import RichTextEditor from '@/components/admin/RichTextEditor/RichTextEditor'
 
 export default function EditPostPage() {
   const router = useRouter()
@@ -20,6 +21,7 @@ export default function EditPostPage() {
   const {
     register,
     handleSubmit,
+    control,
     reset,
     formState: { errors },
   } = useForm<PostFormData>({
@@ -134,10 +136,17 @@ export default function EditPostPage() {
 
             <div>
               <label className="label">Content *</label>
-              <textarea
-                {...register('content')}
-                rows={12}
-                className="input font-mono text-sm"
+              <Controller
+                name="content"
+                control={control}
+                render={({ field }) => (
+                  <RichTextEditor
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder="Write your post content..."
+                    features={{ basic: true, lists: true, links: true, images: true, advanced: true }}
+                  />
+                )}
               />
               {errors.content && (
                 <p className="text-red-500 text-sm mt-1">{errors.content.message}</p>

@@ -1,12 +1,13 @@
 'use client'
 
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { eventSchema, type EventFormData } from '@/lib/validations'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import AdminHeader from '@/components/admin/AdminHeader'
 import Link from 'next/link'
+import RichTextEditor from '@/components/admin/RichTextEditor/RichTextEditor'
 
 export default function NewEventPage() {
   const router = useRouter()
@@ -16,6 +17,7 @@ export default function NewEventPage() {
   const {
     register,
     handleSubmit,
+    control,
     watch,
     formState: { errors },
   } = useForm<EventFormData>({
@@ -27,6 +29,7 @@ export default function NewEventPage() {
       status: 'published',
       registrationRequired: false,
       isRecurring: false,
+      description: '',
     },
   })
 
@@ -117,7 +120,19 @@ export default function NewEventPage() {
 
             <div>
               <label className="label">Description</label>
-              <textarea {...register('description')} rows={4} className="input" />
+              <Controller
+                name="description"
+                control={control}
+                render={({ field }) => (
+                  <RichTextEditor
+                    value={field.value || ''}
+                    onChange={field.onChange}
+                    placeholder="Describe the event..."
+                    features={{ basic: true, lists: true, links: true, images: false, advanced: false }}
+                    minHeight="200px"
+                  />
+                )}
+              />
             </div>
 
             <div className="grid grid-cols-2 gap-4">

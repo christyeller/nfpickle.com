@@ -1,6 +1,6 @@
 'use client'
 
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { eventSchema, type EventFormData } from '@/lib/validations'
 import { useRouter, useParams } from 'next/navigation'
@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react'
 import AdminHeader from '@/components/admin/AdminHeader'
 import Link from 'next/link'
 import type { Event } from '@prisma/client'
+import RichTextEditor from '@/components/admin/RichTextEditor/RichTextEditor'
 
 export default function EditEventPage() {
   const router = useRouter()
@@ -20,6 +21,7 @@ export default function EditEventPage() {
   const {
     register,
     handleSubmit,
+    control,
     watch,
     reset,
     formState: { errors },
@@ -174,7 +176,19 @@ export default function EditEventPage() {
 
             <div>
               <label className="label">Description</label>
-              <textarea {...register('description')} rows={4} className="input" />
+              <Controller
+                name="description"
+                control={control}
+                render={({ field }) => (
+                  <RichTextEditor
+                    value={field.value || ''}
+                    onChange={field.onChange}
+                    placeholder="Describe the event..."
+                    features={{ basic: true, lists: true, links: true, images: false, advanced: false }}
+                    minHeight="200px"
+                  />
+                )}
+              />
             </div>
 
             <div className="grid grid-cols-2 gap-4">

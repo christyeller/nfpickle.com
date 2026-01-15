@@ -23,6 +23,14 @@ export const postSchema = z.object({
   status: z.enum(['published', 'draft']).default('published'),
 })
 
+export const pageSchema = z.object({
+  title: z.string().min(1, 'Title is required'),
+  content: z.string().min(1, 'Content is required'),
+  metaTitle: z.string().optional(),
+  metaDescription: z.string().optional(),
+  status: z.enum(['published', 'draft']).default('published'),
+})
+
 export const contactSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   email: z.string().email('Invalid email'),
@@ -62,6 +70,7 @@ export const donationSchema = z.object({
 
 export type EventFormData = z.infer<typeof eventSchema>
 export type PostFormData = z.infer<typeof postSchema>
+export type PageFormData = z.infer<typeof pageSchema>
 export type ContactFormData = z.infer<typeof contactSchema>
 export type MemberFormData = z.infer<typeof memberSchema>
 export type SettingsFormData = z.infer<typeof settingsSchema>
