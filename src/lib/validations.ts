@@ -13,6 +13,7 @@ export const eventSchema = z.object({
   registrationRequired: z.boolean().default(false),
   isRecurring: z.boolean().default(false),
   recurringPattern: z.string().optional().nullable(),
+  featuredImageId: z.string().optional().nullable(),
   status: z.enum(['published', 'draft']).default('published'),
 })
 
@@ -20,6 +21,7 @@ export const postSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   content: z.string().min(1, 'Content is required'),
   excerpt: z.string().optional(),
+  featuredImageId: z.string().optional().nullable(),
   status: z.enum(['published', 'draft']).default('published'),
 })
 

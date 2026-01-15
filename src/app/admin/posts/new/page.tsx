@@ -8,6 +8,7 @@ import { useState } from 'react'
 import AdminHeader from '@/components/admin/AdminHeader'
 import Link from 'next/link'
 import RichTextEditor from '@/components/admin/RichTextEditor/RichTextEditor'
+import FeaturedImagePicker from '@/components/admin/FeaturedImagePicker'
 
 export default function NewPostPage() {
   const router = useRouter()
@@ -81,6 +82,17 @@ export default function NewPostPage() {
                 placeholder="A short summary of the post (optional)"
               />
             </div>
+
+            <Controller
+              name="featuredImageId"
+              control={control}
+              render={({ field }) => (
+                <FeaturedImagePicker
+                  value={field.value}
+                  onChange={field.onChange}
+                />
+              )}
+            />
 
             <div>
               <label className="label">Content *</label>

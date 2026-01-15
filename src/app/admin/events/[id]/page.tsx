@@ -9,6 +9,7 @@ import AdminHeader from '@/components/admin/AdminHeader'
 import Link from 'next/link'
 import type { Event } from '@prisma/client'
 import RichTextEditor from '@/components/admin/RichTextEditor/RichTextEditor'
+import FeaturedImagePicker from '@/components/admin/FeaturedImagePicker'
 
 export default function EditEventPage() {
   const router = useRouter()
@@ -52,6 +53,7 @@ export default function EditEventPage() {
             registrationRequired: event.registrationRequired,
             isRecurring: event.isRecurring,
             recurringPattern: event.recurringPattern || undefined,
+            featuredImageId: event.featuredImageId || null,
             status: event.status as EventFormData['status'],
           })
         }
@@ -135,6 +137,17 @@ export default function EditEventPage() {
                 <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
               )}
             </div>
+
+            <Controller
+              name="featuredImageId"
+              control={control}
+              render={({ field }) => (
+                <FeaturedImagePicker
+                  value={field.value}
+                  onChange={field.onChange}
+                />
+              )}
+            />
 
             <div>
               <label className="label">Event Type *</label>

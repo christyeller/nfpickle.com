@@ -33,6 +33,8 @@ model Event {
   registrationRequired Boolean  @default(false)
   isRecurring          Boolean  @default(false)
   recurringPattern     String?
+  featuredImageId      String?
+  featuredImage        Media?   @relation("EventFeaturedImage", fields: [featuredImageId], references: [id], onDelete: SetNull)
   status               String   @default("published")
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
@@ -139,10 +141,11 @@ model Media {
   category        MediaCategory  @default(CONTENT)
   tags            String[]
   uploadedBy      String?
-  uploadedByUser  User?          @relation(fields: [uploadedBy], references: [id], onDelete: SetNull)
-  postFeaturedIn  Post[]         @relation("PostFeaturedImage")
-  pageFeaturedIn  Page[]         @relation("PageFeaturedImage")
-  galleryImages   GalleryImage[]
+  uploadedByUser   User?          @relation(fields: [uploadedBy], references: [id], onDelete: SetNull)
+  postFeaturedIn   Post[]         @relation("PostFeaturedImage")
+  pageFeaturedIn   Page[]         @relation("PageFeaturedImage")
+  eventFeaturedIn  Event[]        @relation("EventFeaturedImage")
+  galleryImages    GalleryImage[]
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
 

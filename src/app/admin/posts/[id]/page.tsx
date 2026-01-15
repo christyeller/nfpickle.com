@@ -9,6 +9,7 @@ import AdminHeader from '@/components/admin/AdminHeader'
 import Link from 'next/link'
 import type { Post } from '@prisma/client'
 import RichTextEditor from '@/components/admin/RichTextEditor/RichTextEditor'
+import FeaturedImagePicker from '@/components/admin/FeaturedImagePicker'
 
 export default function EditPostPage() {
   const router = useRouter()
@@ -40,6 +41,7 @@ export default function EditPostPage() {
             title: post.title,
             excerpt: post.excerpt || '',
             content: post.content,
+            featuredImageId: post.featuredImageId || null,
             status: post.status as PostFormData['status'],
           })
         }
@@ -133,6 +135,17 @@ export default function EditPostPage() {
                 placeholder="A short summary of the post (optional)"
               />
             </div>
+
+            <Controller
+              name="featuredImageId"
+              control={control}
+              render={({ field }) => (
+                <FeaturedImagePicker
+                  value={field.value}
+                  onChange={field.onChange}
+                />
+              )}
+            />
 
             <div>
               <label className="label">Content *</label>
