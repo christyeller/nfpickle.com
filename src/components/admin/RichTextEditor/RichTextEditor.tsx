@@ -1,6 +1,6 @@
 'use client'
 
-import { useEditor, EditorContent } from '@tiptap/react'
+import { useEditor, EditorContent, AnyExtension } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import TextAlign from '@tiptap/extension-text-align'
@@ -41,12 +41,12 @@ export default function RichTextEditor({
   features = { basic: true, lists: true, links: true, images: true, advanced: true },
   minHeight = '300px',
 }: RichTextEditorProps) {
-  const extensions = [
+  const extensions: AnyExtension[] = [
     StarterKit.configure({
       heading: features.basic ? { levels: [1, 2, 3] } : false,
-      bulletList: features.lists,
-      orderedList: features.lists,
-      blockquote: features.lists,
+      bulletList: features.lists ? {} : false,
+      orderedList: features.lists ? {} : false,
+      blockquote: features.lists ? {} : false,
       codeBlock: false, // We'll use CodeBlockLowlight instead
     }),
   ]
