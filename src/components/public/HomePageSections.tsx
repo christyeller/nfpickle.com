@@ -423,36 +423,15 @@ export default function HomePageSections({
 
       {/* Final CTA */}
       <section className="relative py-32 overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-court via-court-dark to-purple" />
-        <div className="absolute inset-0 mesh-background opacity-30" />
-
-        {/* Animated orbs */}
+        {/* Background Image */}
         <div className="absolute inset-0">
-          <motion.div
-            className="absolute top-1/4 left-1/4 w-64 h-64 bg-lime/20 rounded-full blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
+          <Image
+            src="/images/ready-to-play-bg.jpg"
+            alt="Pickleball court background"
+            fill
+            className="object-cover"
           />
-          <motion.div
-            className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-coral/20 rounded-full blur-3xl"
-            animate={{
-              scale: [1.2, 1, 1.2],
-              opacity: [0.5, 0.3, 0.5],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          />
+          <div className="absolute inset-0 bg-black/60" />
         </div>
 
         <div className="container-custom relative z-10 text-center">
@@ -495,8 +474,8 @@ export default function HomePageSections({
               <MagneticButton
                 as="a"
                 href="/contact"
-                className="px-10 py-5 glass-dark text-white font-bold text-lg rounded-xl
-                  hover:bg-[#FDF9F0]/20 transition-colors"
+                className="px-10 py-5 bg-[#E49B0B] text-white font-bold text-lg rounded-xl
+                  hover:bg-[#E49B0B]/90 transition-colors"
               >
                 Get in Touch
               </MagneticButton>
