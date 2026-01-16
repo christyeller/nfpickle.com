@@ -10,20 +10,37 @@ import { staggerContainer, staggerItem } from '@/lib/animations'
 
 const courts = [
   {
-    name: 'Paonia Town Park',
-    address: '214 Grand Ave, Paonia, CO 81428',
-    courts: 4,
-    surface: 'Concrete',
-    notes: 'Main playing location. Lights available.',
+    name: 'Crawford',
+    locations: [
+      { name: 'Crawford Town Hall', url: 'https://townofcrawford.colorado.gov/', type: 'outdoor', courts: 1 },
+      { name: 'Crawford Montessori School', url: 'https://nfmc.deltaschools.com/en-US', type: 'indoor', courts: 1 },
+    ],
+    schedule: 'Currently playing indoors: Wednesdays at 4pm and Saturdays at 9am.',
     color: 'lime' as const,
   },
   {
-    name: 'Hotchkiss Town Park',
-    address: 'Hotchkiss, CO 81419',
-    courts: 2,
-    surface: 'Concrete',
-    notes: 'Additional courts available.',
+    name: 'Paonia',
+    locations: [
+      { name: 'Apple Valley Park', url: 'https://townofpaonia.colorado.gov/departments/parks-recreation', type: 'outdoor', courts: 3 },
+    ],
+    schedule: 'Play happens on Tuesdays, Thursdays and Saturdays. Start times are anywhere from 11am - 1pm and vary according to weather.',
     color: 'teal' as const,
+  },
+  {
+    name: 'Delta',
+    locations: [
+      { name: 'Bill Heddles Recreation Center', url: 'https://www.cityofdelta.net/parksrecgolf/page/recreation-center', type: 'both', courts: null },
+    ],
+    schedule: 'Outdoor tennis courts are lined for pickleball. Indoor rec pickleball is offered on the basketball court at scheduled times listed on their website.',
+    color: 'coral' as const,
+  },
+  {
+    name: 'Cedaredge',
+    locations: [
+      { name: 'Grand Mesa Pickleball Club', url: 'https://www.grandmesapickleball.org/', type: 'outdoor', courts: null },
+    ],
+    schedule: 'Play is limited to members only. They have their own organization and are also raising money to build more courts.',
+    color: 'purple' as const,
   },
 ]
 
@@ -115,7 +132,7 @@ export default function PlayPage() {
       />
 
       {/* Court Locations */}
-      <section className="section bg-white relative overflow-hidden">
+      <section className="section bg-cream relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-lime/5 rounded-full blur-3xl" />
 
         <div className="container-custom relative z-10">
@@ -132,7 +149,7 @@ export default function PlayPage() {
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
-            className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+            className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"
           >
             {courts.map((court) => {
               const colors = colorMap[court.color]
@@ -144,28 +161,43 @@ export default function PlayPage() {
                     shadow-elevation-1 hover:shadow-elevation-3 transition-all duration-300 overflow-hidden`}
                   whileHover={prefersReducedMotion ? {} : { y: -4 }}
                 >
-                  <div className={`absolute top-0 right-0 w-32 h-32 ${colors.bg} rounded-bl-full`} />
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#FDF9F0] rounded-bl-full" />
 
                   <div className="flex items-start gap-4 relative z-10">
-                    <div className={`p-3 rounded-xl ${colors.icon} shadow-lg`}>
+                    <div className={`p-3 rounded-xl ${colors.icon} shadow-lg flex-shrink-0`}>
                       <MapPin size={24} />
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <h3 className="text-xl font-display font-semibold text-charcoal-dark">
                         {court.name}
                       </h3>
-                      <p className="text-gray-600 mt-1">{court.address}</p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${colors.badge}`}>
-                          {court.courts} Courts
-                        </span>
-                        <span className="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-600">
-                          {court.surface}
-                        </span>
+
+                      <div className="mt-3 space-y-2">
+                        {court.locations.map((location) => (
+                          <div key={location.name} className="flex flex-wrap items-center gap-2">
+                            <a
+                              href={location.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-court hover:text-court-dark font-medium underline underline-offset-2"
+                            >
+                              {location.name}
+                            </a>
+                            <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${colors.badge}`}>
+                              {location.type === 'both' ? 'Indoor & Outdoor' : location.type}
+                            </span>
+                            {location.courts && (
+                              <span className="px-2 py-0.5 bg-gray-100 rounded-full text-xs text-gray-600">
+                                {location.courts} {location.courts === 1 ? 'court' : 'courts'}
+                              </span>
+                            )}
+                          </div>
+                        ))}
                       </div>
-                      {court.notes && (
-                        <p className="mt-3 text-sm text-gray-500">{court.notes}</p>
-                      )}
+
+                      <p className="mt-4 text-sm text-gray-600">
+                        {court.schedule}
+                      </p>
                     </div>
                   </div>
                 </motion.div>
@@ -235,7 +267,7 @@ export default function PlayPage() {
       </section>
 
       {/* Skill Levels */}
-      <section className="section bg-white relative overflow-hidden">
+      <section className="section bg-cream relative overflow-hidden">
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl" />
 
         <div className="container-custom relative z-10">

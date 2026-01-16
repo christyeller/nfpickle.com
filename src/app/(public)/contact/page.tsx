@@ -60,7 +60,7 @@ export default function ContactPage() {
       />
 
       {/* Contact Form & Info */}
-      <section className="section bg-white relative overflow-hidden">
+      <section className="section bg-cream relative overflow-hidden">
         <div className="absolute top-0 left-0 w-96 h-96 bg-coral/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-teal/5 rounded-full blur-3xl" />
 

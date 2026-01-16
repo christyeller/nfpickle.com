@@ -27,8 +27,8 @@
   --color-charcoal: #2C2C2C;
   --color-charcoal-dark: #1A1A1A;
   --color-charcoal-light: #3D3D3D;
-  --color-cream: #FCF9F0;
-  --color-cream-light: #FDFAF1;
+  --color-cream: #FDF9F0;
+  --color-cream-light: #FDF9F0;
   --color-cream-dark: #F9F5EC;
 
   /* Gradients */
@@ -86,7 +86,7 @@
   }
 
   .btn-primary {
-    @apply bg-lime text-court-dark hover:shadow-glow-lime
+    @apply bg-lime text-white hover:shadow-glow-lime
            hover:scale-105 focus:ring-lime;
   }
 

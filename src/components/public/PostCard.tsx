@@ -5,10 +5,14 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Calendar, ArrowRight, Clock } from 'lucide-react'
 import { formatDate } from '@/lib/utils'
 import { staggerItem } from '@/lib/animations'
-import type { Post } from '@prisma/client'
+import type { Post, Media } from '@prisma/client'
+
+type PostWithImage = Post & {
+  featuredImage?: Media | null
+}
 
 interface PostCardProps {
-  post: Post
+  post: PostWithImage
   variant?: 'default' | 'featured' | 'compact'
 }
 
@@ -27,37 +31,49 @@ export default function PostCard({ post, variant = 'default' }: PostCardProps) {
     <motion.article variants={staggerItem}>
       <Link href={`/news/${post.slug}`} className="group block h-full">
         <motion.div
-          className="relative h-full p-6 rounded-2xl bg-white border border-gray-100
+          className="relative h-full rounded-2xl bg-cream border border-gray-100
             shadow-elevation-1 hover:shadow-elevation-3 transition-all duration-300 overflow-hidden"
           whileHover={prefersReducedMotion ? {} : { y: -4 }}
           transition={{ duration: 0.2 }}
         >
-          {/* Decorative gradient corner */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple/5 to-coral/5 rounded-bl-[100px]" />
-
-          {/* Date badge */}
-          <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
-            <Calendar className="w-4 h-4 text-purple" />
-            <time>{formatDate(post.publishedAt)}</time>
-          </div>
-
-          {/* Title */}
-          <h3 className="text-xl font-display font-semibold text-charcoal-dark mb-3
-            group-hover:text-court transition-colors line-clamp-2">
-            {post.title}
-          </h3>
-
-          {/* Excerpt */}
-          {post.excerpt && (
-            <p className="text-gray-600 line-clamp-3 mb-4 leading-relaxed">
-              {post.excerpt}
-            </p>
+          {/* Featured Image */}
+          {post.featuredImage ? (
+            <div className="aspect-video overflow-hidden">
+              <img
+                src={post.featuredImage.secureUrl || post.featuredImage.url}
+                alt={post.featuredImage.altText || post.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+          ) : (
+            <div className="aspect-video bg-gradient-to-br from-purple/10 to-coral/10" />
           )}
 
-          {/* Read more link */}
-          <div className="flex items-center gap-2 text-court font-medium group-hover:text-court-dark transition-colors mt-auto">
-            <span>Read more</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <div className="p-6">
+            {/* Date badge */}
+            <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
+              <Calendar className="w-4 h-4 text-purple" />
+              <time>{formatDate(post.publishedAt)}</time>
+            </div>
+
+            {/* Title */}
+            <h3 className="text-xl font-display font-semibold text-charcoal-dark mb-3
+              group-hover:text-court transition-colors line-clamp-2">
+              {post.title}
+            </h3>
+
+            {/* Excerpt */}
+            {post.excerpt && (
+              <p className="text-gray-600 line-clamp-3 mb-4 leading-relaxed">
+                {post.excerpt}
+              </p>
+            )}
+
+            {/* Read more link */}
+            <div className="flex items-center gap-2 text-court font-medium group-hover:text-court-dark transition-colors mt-auto">
+              <span>Read more</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </div>
           </div>
 
           {/* Bottom accent line */}
@@ -69,7 +85,7 @@ export default function PostCard({ post, variant = 'default' }: PostCardProps) {
   )
 }
 
-function FeaturedPostCard({ post }: { post: Post }) {
+function FeaturedPostCard({ post }: { post: PostWithImage }) {
   const prefersReducedMotion = useReducedMotion()
 
   return (

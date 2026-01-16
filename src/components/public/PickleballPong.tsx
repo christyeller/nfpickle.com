@@ -44,7 +44,7 @@ const COURT_BLUE = '#1a5f7a'
 const OUTSIDE_BLUE = '#FDF9F0'
 const LINE_WHITE = 'rgba(255, 255, 255, 0.9)'
 const PLAYER_PADDLE_COLOR = '#E49B0B'
-const AI_PADDLE_COLOR = '#275A6D'
+const AI_PADDLE_COLOR = '#ffffff'
 const BALL_COLOR = '#ffffff'
 
 export function PickleballPong({ className = '' }: PickleballPongProps) {
@@ -75,8 +75,8 @@ export function PickleballPong({ className = '' }: PickleballPongProps) {
       ball: {
         x: width / 2,
         y: height / 2,
-        vx: courtWidth * 0.0025 * (Math.random() > 0.5 ? 1 : -1),
-        vy: courtHeight * 0.0015 * (Math.random() > 0.5 ? 1 : -1),
+        vx: courtWidth * 0.004 * (Math.random() > 0.5 ? 1 : -1),
+        vy: courtHeight * 0.0025 * (Math.random() > 0.5 ? 1 : -1),
         radius: ballRadius,
       },
       playerPaddle: {
@@ -108,8 +108,8 @@ export function PickleballPong({ className = '' }: PickleballPongProps) {
   const resetBall = useCallback((state: GameState, width: number, height: number) => {
     state.ball.x = width / 2
     state.ball.y = height / 2
-    state.ball.vx = state.court.width * 0.003 * (Math.random() > 0.5 ? 1 : -1)
-    state.ball.vy = state.court.height * 0.002 * (Math.random() - 0.5) * 2
+    state.ball.vx = state.court.width * 0.005 * (Math.random() > 0.5 ? 1 : -1)
+    state.ball.vy = state.court.height * 0.003 * (Math.random() - 0.5) * 2
   }, [])
 
   // Draw pickleball (ball with holes)

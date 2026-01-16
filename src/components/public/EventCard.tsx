@@ -42,7 +42,7 @@ export default function EventCard({ event, variant = 'default' }: EventCardProps
     <motion.div variants={staggerItem}>
       <Link href={`/events/${event.slug}`} className="group block">
         <motion.div
-          className="relative overflow-hidden rounded-2xl bg-white border border-gray-100
+          className="relative overflow-hidden rounded-2xl bg-cream border border-gray-100
             shadow-elevation-1 hover:shadow-elevation-3 transition-all duration-300"
           whileHover={prefersReducedMotion ? {} : { y: -4 }}
           transition={{ duration: 0.2 }}

@@ -49,7 +49,7 @@ export default function PageHero({
   const colors = accentColors[accentColor]
 
   return (
-    <section className="relative pt-32 pb-20 bg-charcoal-dark overflow-hidden">
+    <section className="relative pb-20 bg-charcoal-dark overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-court via-court-dark to-purple" />
 

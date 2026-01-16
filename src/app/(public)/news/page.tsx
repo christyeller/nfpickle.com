@@ -11,12 +11,15 @@ export default async function NewsPage() {
   const posts = await prisma.post.findMany({
     where: { status: 'published' },
     orderBy: { publishedAt: 'desc' },
+    include: {
+      featuredImage: true,
+    },
   })
 
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-16 bg-gradient-to-br from-primary-dark via-primary to-dark-blue">
+      <section className="pb-16 bg-gradient-to-br from-primary-dark via-primary to-dark-blue">
         <div className="container-custom text-center text-white">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">News</h1>
           <p className="text-xl text-white/90">
@@ -26,7 +29,7 @@ export default async function NewsPage() {
       </section>
 
       {/* Posts */}
-      <section className="section bg-white">
+      <section className="section bg-cream">
         <div className="container-custom">
           {posts.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

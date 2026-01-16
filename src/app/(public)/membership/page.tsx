@@ -149,7 +149,7 @@ export default function MembershipPage() {
       />
 
       {/* Pricing Tiers */}
-      <section className="section bg-white relative overflow-hidden">
+      <section className="section bg-cream relative overflow-hidden">
         <div className="absolute inset-0 dots-pattern opacity-30" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-lime/5 to-transparent rounded-full blur-3xl" />
 

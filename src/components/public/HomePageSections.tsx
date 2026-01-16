@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import {
   Calendar,
@@ -11,6 +12,7 @@ import {
   Sparkles,
   Award,
   Star,
+  MapPin,
 } from 'lucide-react'
 import { staggerContainer, staggerItem, fadeInUp } from '@/lib/animations'
 import EventCard from './EventCard'
@@ -24,6 +26,66 @@ import type { Event, Post } from '@prisma/client'
 
 // Color rotation for features
 const featureColors = ['lime', 'coral', 'teal', 'purple', 'lime', 'coral'] as const
+
+// Court location data
+const courtLocations = [
+  {
+    name: 'Crawford',
+    locations: [
+      { name: 'Crawford Town Hall', url: 'https://townofcrawford.colorado.gov/', type: 'outdoor', courts: 1 },
+      { name: 'Crawford Montessori School', url: 'https://nfmc.deltaschools.com/en-US', type: 'indoor', courts: 1 },
+    ],
+    schedule: 'Currently playing indoors: Wednesdays at 4pm and Saturdays at 9am.',
+    color: 'lime' as const,
+  },
+  {
+    name: 'Paonia',
+    locations: [
+      { name: 'Apple Valley Park', url: 'https://townofpaonia.colorado.gov/departments/parks-recreation', type: 'outdoor', courts: 3 },
+    ],
+    schedule: 'Play happens on Tuesdays, Thursdays and Saturdays. Start times are anywhere from 11am - 1pm and vary according to weather.',
+    color: 'teal' as const,
+  },
+  {
+    name: 'Delta',
+    locations: [
+      { name: 'Bill Heddles Recreation Center', url: 'https://www.cityofdelta.net/parksrecgolf/page/recreation-center', type: 'both', courts: null },
+    ],
+    schedule: 'Outdoor tennis courts are lined for pickleball. Indoor rec pickleball is offered on the basketball court at scheduled times listed on their website.',
+    color: 'coral' as const,
+  },
+  {
+    name: 'Cedaredge',
+    locations: [
+      { name: 'Grand Mesa Pickleball Club', url: 'https://www.grandmesapickleball.org/', type: 'members', courts: null },
+    ],
+    schedule: 'Play is limited to members only. They have their own organization and are also raising money to build more courts.',
+    color: 'purple' as const,
+  },
+]
+
+const courtColorMap = {
+  lime: {
+    border: 'border-lime/30',
+    icon: 'bg-lime text-court-dark',
+    badge: 'bg-lime/10 text-lime-700',
+  },
+  teal: {
+    border: 'border-teal/30',
+    icon: 'bg-teal text-white',
+    badge: 'bg-teal/10 text-teal',
+  },
+  coral: {
+    border: 'border-coral/30',
+    icon: 'bg-coral text-white',
+    badge: 'bg-coral/10 text-coral',
+  },
+  purple: {
+    border: 'border-purple/30',
+    icon: 'bg-purple text-white',
+    badge: 'bg-purple/10 text-purple',
+  },
+}
 
 interface HomePageSectionsProps {
   upcomingEvents: Event[]
@@ -40,47 +102,6 @@ export default function HomePageSections({
 
   return (
     <>
-      {/* Stats Section - Overlapping Hero */}
-      <section className="relative -mt-24 z-20">
-        <div className="container-custom">
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
-          >
-            <StatCard
-              value={membersCount > 0 ? membersCount : 50}
-              suffix="+"
-              label="Active Members"
-              icon="Users"
-              color="lime"
-            />
-            <StatCard
-              value={4}
-              label="Courts Available"
-              icon="MapPin"
-              color="teal"
-            />
-            <StatCard
-              value={10}
-              suffix="+"
-              label="Weekly Sessions"
-              icon="Calendar"
-              color="coral"
-            />
-            <StatCard
-              value={100}
-              suffix="%"
-              label="Welcome Rate"
-              icon="Heart"
-              color="purple"
-            />
-          </motion.div>
-        </div>
-      </section>
-
       {/* Features Section */}
       <section className="section bg-[#FDF9F0] relative overflow-hidden">
         {/* Background decorations */}
@@ -97,13 +118,13 @@ export default function HomePageSections({
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-lime/10 text-lime-700 text-sm font-medium mb-4"
             >
               <Sparkles className="w-4 h-4" />
-              Why Choose Us
+              A Community Effort
             </motion.span>
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-charcoal-dark">
-              More Than Just a <span className="gradient-text">Game</span>
+              Growing the Sport of Pickleball in our Valley
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Join a community where everyone belongs. From beginners to pros, we&apos;re here to play, learn, and grow together.
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              We&apos;re excited to announce a new community effort to bring <strong>dedicated pickleball courts</strong> to the North Fork Valley! To make this dream a reality, we have formed a 501(c)(3) nonprofit organization which will allow us to receive State and Federal grants; a vital step in securing resources for our project. We are currently working with the Delta County Commissioners, the Delta County School District and the North Fork Pool Park and Recreation District to strategize creation of both tennis courts and dedicated pickleball courts in the Hotchkiss area.
             </p>
           </ScrollReveal>
 
@@ -115,115 +136,188 @@ export default function HomePageSections({
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             <FeatureCard
-              icon="Users"
-              title="Welcoming Community"
-              description="New to pickleball? No problem! Our members love helping newcomers learn the game in a friendly, supportive environment."
+              icon="PickleballPaddle"
+              title="Fastest Growing Sport"
+              description="Pickleball is the fastest-growing sport in the United States. More people play every year, so the North Fork Valley needs more access to the sport."
               color="lime"
             />
             <FeatureCard
-              icon="Calendar"
-              title="Regular Open Play"
-              description="Multiple weekly sessions mean you can always find a time that works. Morning, afternoon, or weekend - we've got you covered."
+              icon="AllAges"
+              title="All Ages"
+              description="Pickleball is enjoyed by people of all ages, which is very rare for a sport. That increases participation and promotes intergenerational relationships."
               color="coral"
             />
             <FeatureCard
-              icon="Target"
-              title="All Skill Levels"
-              description="Whether you're picking up a paddle for the first time or you're a tournament player, you'll find games at your level."
+              icon="FunPaddle"
+              title="Fun & Affordable"
+              description="Pickleball is fun, easy to learn, and highly social. No previous experience is necessary and a paddle and a ball are all that is needed. That is important in Delta County."
               color="teal"
             />
             <FeatureCard
-              icon="Award"
-              title="Tournaments & Events"
-              description="Compete in friendly tournaments, attend clinics with certified instructors, and join social events throughout the year."
+              icon="MentalHealth"
+              title="Improves Mental Health"
+              description="Physical activity releases endorphins, while the social interaction boosts mood, leading to reduced depression, stress, and improved life satisfaction, say researchers."
               color="purple"
             />
             <FeatureCard
-              icon="MapPin"
-              title="Prime Location"
-              description="Play at beautiful courts in Paonia Town Park with lights for evening games and stunning mountain views."
+              icon="Community"
+              title="Builds Community"
+              description="Pickleball fosters a strong sense of belonging. It's an easy way to meet new people and form lasting bonds."
               color="lime"
             />
             <FeatureCard
-              icon="Heart"
-              title="Health & Wellness"
-              description="Pickleball is a fantastic full-body workout that's easy on the joints. Stay fit while having fun!"
+              icon="PhysicalHealth"
+              title="Improves Physical Health"
+              description="Pickleball improves cardiovascular fitness, joint health, balance, coordination, strength, and weight management."
               color="coral"
             />
           </motion.div>
         </div>
       </section>
 
-      {/* Upcoming Events */}
-      <section className="section bg-[#FDF9F0] relative overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-lime/10 via-teal/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-coral/10 via-sunset/10 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/3" />
+      {/* Image Gallery Section - Overlapping */}
+      <section className="relative z-20 -mb-24">
+        <div className="container-custom">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
+          >
+            {[
+              { id: 1, alt: 'Outdoor pickleball group photo' },
+              { id: 2, alt: 'Indoor pickleball action shot' },
+              { id: 3, alt: 'Crawford pickleball players' },
+              { id: 4, alt: 'Pickleball game in progress' },
+            ].map((image) => (
+              <motion.div
+                key={image.id}
+                variants={staggerItem}
+                className="group relative aspect-square overflow-hidden rounded-2xl shadow-elevation-2 hover:shadow-elevation-3 transition-shadow duration-300"
+              >
+                <Image
+                  src={`/images/gallery-${image.id}.jpg`}
+                  alt={image.alt}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Court Locations */}
+      <section className="section bg-[#1A5F7A] relative overflow-hidden pt-32">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-lime/10 rounded-full blur-3xl" />
 
         <div className="container-custom relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
-            <ScrollReveal>
-              <motion.span
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-coral/10 text-coral text-sm font-medium mb-4"
-              >
-                <Calendar className="w-4 h-4" />
-                What&apos;s Coming Up
-              </motion.span>
-              <h2 className="text-4xl md:text-5xl font-display font-bold text-charcoal-dark">
-                Upcoming <span className="text-coral">Events</span>
-              </h2>
-            </ScrollReveal>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+          <ScrollReveal className="text-center mb-16">
+            <motion.span
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white text-sm font-medium mb-4"
             >
-              <Link
-                href="/events"
-                className="group inline-flex items-center gap-2 text-court font-semibold mt-4 md:mt-0 hover:text-court-dark transition-colors"
-              >
-                View all events
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </motion.div>
-          </div>
+              <MapPin className="w-4 h-4" />
+              Where to Play
+            </motion.span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">
+              Court Locations
+            </h2>
+            <p className="text-xl text-white max-w-3xl mx-auto">
+              You can find a court in the North Fork Valley and surrounding areas... but not in the most centrally located town of Hotchkiss! Help us get pickleball courts built in Hotchkiss!
+            </p>
+          </ScrollReveal>
 
-          {upcomingEvents.length > 0 ? (
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              className="grid gap-6 max-w-4xl"
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"
+          >
+            {courtLocations.map((court) => {
+              const colors = courtColorMap[court.color]
+              return (
+                <motion.div
+                  key={court.name}
+                  variants={staggerItem}
+                  className={`group relative p-6 rounded-2xl bg-[#FDF9F0] border ${colors.border}
+                    shadow-elevation-1 hover:shadow-elevation-3 transition-all duration-300 overflow-hidden`}
+                  whileHover={prefersReducedMotion ? {} : { y: -4 }}
+                >
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-bl-full" />
+
+                  <div className="flex items-start gap-4 relative z-10">
+                    <div className={`p-3 rounded-xl ${colors.icon} shadow-lg flex-shrink-0`}>
+                      <MapPin size={24} />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-display font-semibold text-charcoal-dark">
+                        {court.name}
+                      </h3>
+
+                      <div className="mt-3 space-y-2">
+                        {court.locations.map((location) => (
+                          <div key={location.name} className="flex flex-wrap items-center gap-2">
+                            <a
+                              href={location.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-court hover:text-court-dark font-medium underline underline-offset-2"
+                            >
+                              {location.name}
+                            </a>
+                            <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${colors.badge}`}>
+                              {location.type === 'both' ? 'Indoor & Outdoor' : location.type === 'members' ? 'Members Only' : location.type}
+                            </span>
+                            {location.courts && (
+                              <span className="px-2 py-0.5 bg-white rounded-full text-xs text-gray-600">
+                                {location.courts} {location.courts === 1 ? 'court' : 'courts'}
+                              </span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+
+                      <p className="mt-4 text-sm text-gray-600">
+                        {court.schedule}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )
+            })}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="text-center mt-12"
+          >
+            <Link
+              href="/play"
+              className="group inline-flex items-center gap-2 text-lime font-semibold hover:text-white transition-colors"
             >
-              {upcomingEvents.map((event, index) => (
-                <EventCard key={event.id} event={event} />
-              ))}
-            </motion.div>
-          ) : (
-            <ScrollReveal className="text-center py-16 px-8 rounded-3xl bg-[#FDF9F0] border border-[#E8E4DF]">
-              <Calendar className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-2xl font-display font-bold text-charcoal-dark mb-2">No Upcoming Events</h3>
-              <p className="text-gray-500 mb-6">Check back soon for new events!</p>
-              <Link href="/play" className="btn btn-primary">
-                View Open Play Schedule
-              </Link>
-            </ScrollReveal>
-          )}
+              View full play schedule
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="section bg-charcoal-dark relative overflow-hidden">
+      <section className="section bg-[#6A8D6E] relative overflow-hidden">
         {/* Animated background */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-64 h-64 bg-lime/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-80 h-80 bg-purple/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-teal/5 rounded-full blur-3xl" />
+          <div className="absolute top-20 left-10 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-20 right-10 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
         </div>
         <div className="absolute inset-0 grid-pattern opacity-10" />
 
@@ -233,13 +327,13 @@ export default function HomePageSections({
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-dark text-white text-sm font-medium mb-4"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white text-sm font-medium mb-4"
             >
-              <Heart className="w-4 h-4 text-coral" />
+              <Heart className="w-4 h-4 text-white" />
               What Our Members Say
             </motion.span>
             <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-              Loved by <span className="text-lime">Players</span>
+              Loved by Our Community
             </h2>
           </ScrollReveal>
 
@@ -251,203 +345,24 @@ export default function HomePageSections({
             className="grid md:grid-cols-3 gap-8"
           >
             <TestimonialCard
-              quote="I joined last summer knowing nothing about pickleball. Now I play three times a week! The community here is incredibly welcoming."
-              author="Sarah M."
+              quote="Great group of people at NF Pickleball Club lots of fun and laughs. I am enjoying the sport with this group."
+              author="Randy Wilmore"
               role="Club Member"
               accentColor="lime"
             />
             <TestimonialCard
-              quote="Best decision I made for my health and social life. The courts are great, the people are friendly, and the games are competitive but fun."
-              author="Mike T."
-              role="Lifetime Member"
+              quote="It has been so much fun learning how to play pickleball. I have enjoyed being more active and it's a great way to connect and meet new people."
+              author="Karen Kropp"
+              role="Club Member"
               variant="featured"
               accentColor="teal"
             />
             <TestimonialCard
-              quote="My wife and I play together every weekend. It's become our favorite way to stay active and make new friends."
-              author="David & Linda"
-              role="Annual Members"
+              quote="I've had so much fun playing with the crew at the North Fork Pickleball Club! Everyone is kind and patient with me as a new player and I always feel welcome."
+              author="Jenny Eyler"
+              role="Club Member"
               accentColor="coral"
             />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Membership CTA */}
-      <section className="section bg-[#FDF9F0] relative overflow-hidden">
-        {/* Background decorations */}
-        <div className="absolute inset-0 dots-pattern opacity-30" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-lime/5 to-transparent rounded-full blur-3xl" />
-
-        <div className="container-custom relative z-10">
-          <ScrollReveal className="text-center mb-16">
-            <motion.span
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal/10 text-teal text-sm font-medium mb-4"
-            >
-              <Award className="w-4 h-4" />
-              Membership Options
-            </motion.span>
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-charcoal-dark">
-              Join Our <span className="gradient-text">Community</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Choose the membership that works for you. All levels welcome!
-            </p>
-          </ScrollReveal>
-
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto"
-          >
-            {/* Free Tier */}
-            <motion.div
-              variants={staggerItem}
-              className="group relative"
-            >
-              <motion.div
-                className="h-full p-8 rounded-3xl border-2 border-[#E8E4DF] bg-[#FDF9F0]
-                  hover:border-lime/30 hover:shadow-elevation-3 transition-all duration-500"
-                whileHover={prefersReducedMotion ? {} : { y: -8 }}
-              >
-                <div className="mb-6">
-                  <h3 className="text-2xl font-display font-bold mb-2 text-charcoal-dark">Community</h3>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-5xl font-display font-bold">Free</span>
-                  </div>
-                </div>
-                <ul className="space-y-4 mb-8">
-                  {['Newsletter updates', 'Event notifications', 'Open play info', 'Community access'].map((feature, i) => (
-                    <motion.li
-                      key={feature}
-                      className="flex items-center gap-3"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                    >
-                      <div className="w-5 h-5 rounded-full bg-lime/20 flex items-center justify-center">
-                        <Check className="w-3 h-3 text-lime-700" />
-                      </div>
-                      <span className="text-gray-600">{feature}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-                <Link
-                  href="/membership"
-                  className="block w-full py-4 text-center font-semibold rounded-xl border-2 border-court
-                    text-court hover:bg-court hover:text-white transition-all"
-                >
-                  Sign Up Free
-                </Link>
-              </motion.div>
-            </motion.div>
-
-            {/* Annual Tier - Featured */}
-            <motion.div
-              variants={staggerItem}
-              className="group relative z-10"
-            >
-              <div className="absolute -inset-1 bg-gradient-to-r from-lime via-teal to-purple rounded-[28px] blur-sm opacity-70" />
-              <motion.div
-                className="relative h-full p-8 rounded-3xl bg-gradient-to-br from-court via-court-dark to-purple
-                  text-white shadow-elevation-3"
-                whileHover={prefersReducedMotion ? {} : { y: -8, scale: 1.02 }}
-              >
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="px-4 py-1.5 bg-lime text-court-dark text-sm font-bold rounded-full shadow-lg
-                    flex items-center gap-1">
-                    <Star className="w-3 h-3 fill-current" />
-                    MOST POPULAR
-                  </span>
-                </div>
-                <div className="mb-6">
-                  <h3 className="text-2xl font-display font-bold mb-2">Annual Member</h3>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-5xl font-display font-bold">$25</span>
-                    <span className="text-white/70">/year</span>
-                  </div>
-                </div>
-                <ul className="space-y-4 mb-8">
-                  {['All Community benefits', 'Voting rights', 'Member discounts', 'Priority registration', 'Member directory'].map((feature, i) => (
-                    <motion.li
-                      key={feature}
-                      className="flex items-center gap-3"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                    >
-                      <div className="w-5 h-5 rounded-full bg-lime/30 flex items-center justify-center">
-                        <Check className="w-3 h-3 text-lime" />
-                      </div>
-                      <span className="text-white/90">{feature}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-                <Link
-                  href="/membership"
-                  className="block w-full py-4 text-center font-bold rounded-xl bg-lime text-court-dark
-                    hover:bg-[#FDF9F0] hover:shadow-glow-lime transition-all"
-                >
-                  Join Now
-                </Link>
-              </motion.div>
-            </motion.div>
-
-            {/* Lifetime Tier */}
-            <motion.div
-              variants={staggerItem}
-              className="group relative"
-            >
-              <motion.div
-                className="h-full p-8 rounded-3xl border-2 border-[#E8E4DF] bg-[#FDF9F0]
-                  hover:border-purple/30 hover:shadow-elevation-3 transition-all duration-500"
-                whileHover={prefersReducedMotion ? {} : { y: -8 }}
-              >
-                <div className="absolute -top-3 right-6">
-                  <span className="px-3 py-1 bg-purple/10 text-purple text-xs font-bold rounded-full">
-                    BEST VALUE
-                  </span>
-                </div>
-                <div className="mb-6">
-                  <h3 className="text-2xl font-display font-bold mb-2 text-charcoal-dark">Lifetime</h3>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-5xl font-display font-bold">$200</span>
-                    <span className="text-gray-500 text-sm">one-time</span>
-                  </div>
-                </div>
-                <ul className="space-y-4 mb-8">
-                  {['All Annual benefits', 'Never pay again', 'Founding member', 'Special recognition', 'Lifetime access'].map((feature, i) => (
-                    <motion.li
-                      key={feature}
-                      className="flex items-center gap-3"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                    >
-                      <div className="w-5 h-5 rounded-full bg-purple/20 flex items-center justify-center">
-                        <Check className="w-3 h-3 text-purple" />
-                      </div>
-                      <span className="text-gray-600">{feature}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-                <Link
-                  href="/membership"
-                  className="block w-full py-4 text-center font-semibold rounded-xl border-2 border-purple
-                    text-purple hover:bg-purple hover:text-white transition-all"
-                >
-                  Go Lifetime
-                </Link>
-              </motion.div>
-            </motion.div>
           </motion.div>
         </div>
       </section>

@@ -2,24 +2,25 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ChevronDown, Zap, Trophy, Users, Sparkles } from 'lucide-react'
+import { ChevronDown, Heart, Users, Sparkles } from 'lucide-react'
 import {
   heroContent,
   heroBadge,
   heroTitle,
   heroSubtitle,
   heroCTA,
-  staggerContainer,
-  staggerItem
 } from '@/lib/animations'
 import { MagneticButton } from './MagneticButton'
 import { PickleballPong } from './PickleballPong'
+import { CountUp } from './CountUp'
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Pickleball Pong Game Background */}
-      <PickleballPong className="absolute inset-0" />
+      <div className="absolute inset-0" style={{ top: '-50px' }}>
+        <PickleballPong className="w-full h-full" />
+      </div>
 
       {/* Content */}
       <motion.div
@@ -48,43 +49,39 @@ export default function Hero() {
           variants={heroTitle}
           className="font-display font-black mb-6 leading-[0.9]"
         >
-          <span className="block text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-white drop-shadow-lg">
-            Pickleball is for
-          </span>
           <span className="block text-5xl sm:text-6xl md:text-8xl lg:text-9xl text-lime drop-shadow-lg">
-            Everyone
+            North Fork <span className="text-white">Pickleball</span>
           </span>
         </motion.h1>
 
-        {/* Subtitle */}
         <motion.p
           variants={heroSubtitle}
-          className="text-lg md:text-xl lg:text-2xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-md"
+          className="text-xl sm:text-2xl md:text-2xl lg:text-3xl text-white font-semibold mb-8 drop-shadow-lg leading-tight"
         >
-          Join the North Fork Valley&apos;s fastest-growing sports community.
-          <span className="block sm:inline text-lime font-semibold"> Paonia • Hotchkiss • Crawford</span>
+          Bringing dedicated pickleball courts<br className="hidden sm:block" />
+          to Colorado&apos;s North Fork Valley
         </motion.p>
 
         {/* CTA Buttons */}
         <motion.div
           variants={heroCTA}
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
+          className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
         >
           <MagneticButton as="div" strength={0.3}>
             <Link
-              href="/membership"
+              href="/donate"
               className="group relative flex items-center justify-center gap-2 px-8 py-4 bg-lime text-court-dark font-bold text-lg rounded-xl overflow-hidden transition-all duration-300 hover:shadow-glow-lime hover:scale-105"
             >
-              <Zap className="w-5 h-5" />
-              <span>Join the Club</span>
+              <Heart className="w-5 h-5" />
+              <span>Donate Now</span>
             </Link>
           </MagneticButton>
           <MagneticButton as="div" strength={0.3}>
             <Link
-              href="/events"
+              href="/play"
               className="group flex items-center justify-center gap-2 px-8 py-4 bg-black/30 backdrop-blur-sm border border-white/20 text-white font-bold text-lg rounded-xl transition-all duration-300 hover:bg-white/20 hover:shadow-lg hover:scale-105"
             >
-              <span>View Events</span>
+              <span>Court Locations</span>
               <motion.span
                 className="inline-block"
                 initial={{ x: 0 }}
@@ -97,44 +94,34 @@ export default function Hero() {
           </MagneticButton>
         </motion.div>
 
-        {/* Quick stats */}
+        {/* Stat Counters */}
         <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-wrap justify-center gap-6 md:gap-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+          className="flex flex-col items-center"
         >
-          {[
-            { icon: Users, label: 'Active Members', value: '50+', color: 'lime' },
-            { icon: Trophy, label: 'Weekly Sessions', value: '10+', color: 'teal' },
-            { icon: Zap, label: 'All Skill Levels', value: 'Welcome', color: 'coral' },
-          ].map((stat) => (
-            <motion.div
-              key={stat.label}
-              variants={staggerItem}
-              className="flex items-center gap-3 group"
-            >
-              <motion.div
-                className={`p-3 rounded-xl bg-black/30 backdrop-blur-sm border border-white/10 ${
-                  stat.color === 'lime' ? 'group-hover:bg-lime/20' :
-                  stat.color === 'teal' ? 'group-hover:bg-teal/20' :
-                  'group-hover:bg-coral/20'
-                } transition-colors`}
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+            {[
+              { count: 228, label: 'Delta' },
+              { count: 107, label: 'Cedaredge' },
+              { count: 66, label: 'Paonia' },
+              { count: 48, label: 'Crawford' },
+            ].map((stat) => (
+              <div
+                key={stat.label}
+                className="flex items-center gap-3 px-5 py-3 rounded-xl bg-black/30 backdrop-blur-sm border border-white/10"
               >
-                <stat.icon className={`w-5 h-5 ${
-                  stat.color === 'lime' ? 'text-lime' :
-                  stat.color === 'teal' ? 'text-teal' :
-                  'text-coral'
-                }`} />
-              </motion.div>
-              <div className="text-left">
-                <p className="text-2xl font-bold font-display drop-shadow-md">{stat.value}</p>
-                <p className="text-xs text-white/70 uppercase tracking-wider">{stat.label}</p>
+                <div className="text-center">
+                  <CountUp end={stat.count} duration={2} className="text-3xl font-bold font-display text-white drop-shadow-md" />
+                  <p className="text-xs text-white/70 uppercase tracking-wider">{stat.label}</p>
+                </div>
               </div>
-            </motion.div>
-          ))}
+            ))}
+          </div>
+          <p className="text-sm text-white mt-3 uppercase tracking-wider">
+            Registered Players by Town
+          </p>
         </motion.div>
       </motion.div>
 
@@ -150,7 +137,6 @@ export default function Hero() {
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <span className="text-xs uppercase tracking-widest font-medium">Scroll</span>
           <ChevronDown className="w-5 h-5" />
         </motion.div>
       </motion.div>

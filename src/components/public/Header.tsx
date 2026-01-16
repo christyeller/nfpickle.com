@@ -5,17 +5,15 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
-import { Menu, X, Zap } from 'lucide-react'
+import { Menu, X, Heart } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { menuContainer, menuItem } from '@/lib/animations'
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/play', label: 'Play' },
+  { href: '/about', label: 'About' },
   { href: '/events', label: 'Events' },
   { href: '/news', label: 'News' },
-  { href: '/donate', label: 'Donate' },
-  { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ]
 
@@ -46,10 +44,8 @@ export default function Header() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
-          isScrolled
-            ? 'backdrop-blur-xl shadow-elevation-3 py-3'
-            : 'py-5'
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-[10px]',
+          isScrolled && 'backdrop-blur-xl shadow-elevation-3'
         )}
         style={{ backgroundColor: '#FDF9F0' }}
       >
@@ -90,11 +86,11 @@ export default function Header() {
                 whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
               >
                 <Link
-                  href="/membership"
+                  href="/donate"
                   className="btn btn-primary flex items-center gap-2"
                 >
-                  <Zap className="w-4 h-4" />
-                  Join Club
+                  <Heart className="w-4 h-4" />
+                  Donate Now
                 </Link>
               </motion.div>
             </nav>
@@ -191,12 +187,12 @@ export default function Header() {
                   className="mt-auto"
                 >
                   <Link
-                    href="/membership"
+                    href="/donate"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="btn btn-primary w-full justify-center flex items-center gap-2"
                   >
-                    <Zap className="w-4 h-4" />
-                    Join Club
+                    <Heart className="w-4 h-4" />
+                    Donate Now
                   </Link>
                 </motion.div>
               </div>

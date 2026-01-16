@@ -15,8 +15,12 @@ import {
 } from 'lucide-react'
 import { MotionTiltCard } from './TiltCard'
 import { staggerItem } from '@/lib/animations'
+import {
+  pickleballIconMap,
+  type PickleballIconName,
+} from './PickleballIcons'
 
-const iconMap: Record<string, LucideIcon> = {
+const lucideIconMap: Record<string, LucideIcon> = {
   Users,
   Calendar,
   Target,
@@ -26,6 +30,14 @@ const iconMap: Record<string, LucideIcon> = {
   Zap,
   Trophy,
   Star,
+}
+
+// Combined icon map - check pickleball icons first, then lucide
+const getIcon = (iconName: string) => {
+  if (iconName in pickleballIconMap) {
+    return pickleballIconMap[iconName as PickleballIconName]
+  }
+  return lucideIconMap[iconName] || Users
 }
 
 const colorVariants = {
@@ -76,7 +88,7 @@ export default function FeatureCard({
   color = 'lime',
   href,
 }: FeatureCardProps) {
-  const Icon = iconMap[icon] || Users
+  const Icon = getIcon(icon)
   const prefersReducedMotion = useReducedMotion()
   const colors = colorVariants[color]
 
@@ -152,8 +164,8 @@ export default function FeatureCard({
 
         {/* Decorative corner */}
         <div
-          className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br ${colors.gradient}
-            opacity-5 rounded-bl-[100px] rounded-tr-2xl`}
+          className="absolute top-0 right-0 w-20 h-20 bg-[#FDF9F0]
+            rounded-bl-[100px] rounded-tr-2xl"
         />
       </CardWrapper>
     </motion.div>
@@ -174,7 +186,7 @@ export function FeatureCardCompact({
   description,
   color = 'lime',
 }: FeatureCardCompactProps) {
-  const Icon = iconMap[icon] || Users
+  const Icon = getIcon(icon)
   const prefersReducedMotion = useReducedMotion()
   const colors = colorVariants[color]
 

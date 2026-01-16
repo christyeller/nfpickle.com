@@ -31,7 +31,7 @@ export default function EventsPageClient({
       />
 
       {/* Upcoming Events */}
-      <section className="section bg-white relative overflow-hidden">
+      <section className="section bg-cream relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-lime/10 via-teal/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
 
         <div className="container-custom relative z-10">

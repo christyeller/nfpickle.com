@@ -155,7 +155,7 @@ function FeaturedTestimonialCard({
         rounded-3xl blur-3xl opacity-50" />
 
       <motion.div
-        className="relative p-10 rounded-3xl bg-charcoal-dark border border-white/10 overflow-hidden"
+        className="relative p-10 rounded-3xl bg-[#1A5F7A] border border-white/10 overflow-hidden"
         whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
         transition={{ duration: 0.3 }}
       >
