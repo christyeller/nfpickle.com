@@ -200,6 +200,7 @@ export default function HomePageSections({
                   src={`/images/gallery-${image.id}.jpg`}
                   alt={image.alt}
                   fill
+                  unoptimized
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </motion.div>
@@ -429,6 +430,7 @@ export default function HomePageSections({
             src="/images/ready-to-play-bg.jpg"
             alt="Pickleball court background"
             fill
+            unoptimized
             className="object-cover"
           />
           <div className="absolute inset-0 bg-black/60" />
