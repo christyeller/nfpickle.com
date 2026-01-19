@@ -3,15 +3,20 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
-import { Menu, X, Heart } from 'lucide-react'
+import { Menu, X, Heart, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { menuContainer, menuItem } from '@/lib/animations'
 
+const aboutDropdownLinks = [
+  { href: '/about', label: 'About Us' },
+  { href: '/history', label: 'History' },
+  { href: '/board-of-directors', label: 'Board of Directors' },
+]
+
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/history', label: 'History' },
   { href: '/events', label: 'Events' },
   { href: '/news', label: 'News' },
   { href: '/contact', label: 'Contact' },
@@ -20,8 +25,11 @@ const navLinks = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false)
+  const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false)
   const pathname = usePathname()
   const prefersReducedMotion = useReducedMotion()
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,10 +40,25 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsAboutDropdownOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false)
+    setIsAboutDropdownOpen(false)
   }, [pathname])
+
+  const isAboutActive = aboutDropdownLinks.some(link => pathname === link.href)
 
   return (
     <>
@@ -71,7 +94,76 @@ export default function Header() {
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-1">
-              {navLinks.map((link) => (
+              <NavLink
+                href="/"
+                label="Home"
+                isActive={pathname === '/'}
+                isScrolled={isScrolled}
+              />
+
+              {/* About Dropdown */}
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => setIsAboutDropdownOpen(!isAboutDropdownOpen)}
+                  className={cn(
+                    'relative px-4 py-2 font-bold transition-colors rounded-lg flex items-center gap-1',
+                    isAboutActive ? 'hover:opacity-80' : 'hover:opacity-80'
+                  )}
+                  style={{
+                    color: isAboutActive ? '#0D3D4D' : '#1A5F7A'
+                  }}
+                >
+                  About
+                  <ChevronDown
+                    size={16}
+                    className={cn(
+                      'transition-transform duration-200',
+                      isAboutDropdownOpen && 'rotate-180'
+                    )}
+                  />
+                  {isAboutActive && !prefersReducedMotion && (
+                    <motion.div
+                      layoutId="activeNavIndicator"
+                      className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full"
+                      style={{ backgroundColor: '#0D3D4D' }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                  {isAboutActive && prefersReducedMotion && (
+                    <div className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full" style={{ backgroundColor: '#0D3D4D' }} />
+                  )}
+                </button>
+
+                <AnimatePresence>
+                  {isAboutDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden"
+                    >
+                      {aboutDropdownLinks.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          className={cn(
+                            'block px-4 py-3 text-sm font-semibold transition-colors',
+                            pathname === link.href
+                              ? 'bg-[#1A5F7A]/10 text-[#0D3D4D]'
+                              : 'text-[#1A5F7A] hover:bg-gray-50'
+                          )}
+                          onClick={() => setIsAboutDropdownOpen(false)}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {navLinks.slice(1).map((link) => (
                 <NavLink
                   key={link.href}
                   href={link.href}
@@ -161,7 +253,75 @@ export default function Header() {
                   animate="visible"
                   className="flex flex-col gap-2"
                 >
-                  {navLinks.map((link) => (
+                  {/* Home */}
+                  <motion.div variants={menuItem}>
+                    <Link
+                      href="/"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={cn(
+                        'block py-3 px-4 rounded-xl font-bold text-lg transition-colors',
+                        pathname === '/'
+                          ? 'bg-[#1A5F7A]/20 text-[#5AAFD4] hover:bg-[#1A5F7A]/30'
+                          : 'text-[#5AAFD4]/80 hover:text-[#5AAFD4] hover:bg-white/5'
+                      )}
+                    >
+                      Home
+                    </Link>
+                  </motion.div>
+
+                  {/* About Accordion */}
+                  <motion.div variants={menuItem}>
+                    <button
+                      onClick={() => setIsMobileAboutOpen(!isMobileAboutOpen)}
+                      className={cn(
+                        'w-full flex items-center justify-between py-3 px-4 rounded-xl font-bold text-lg transition-colors',
+                        isAboutActive
+                          ? 'bg-[#1A5F7A]/20 text-[#5AAFD4] hover:bg-[#1A5F7A]/30'
+                          : 'text-[#5AAFD4]/80 hover:text-[#5AAFD4] hover:bg-white/5'
+                      )}
+                    >
+                      About
+                      <ChevronDown
+                        size={20}
+                        className={cn(
+                          'transition-transform duration-200',
+                          isMobileAboutOpen && 'rotate-180'
+                        )}
+                      />
+                    </button>
+                    <AnimatePresence>
+                      {isMobileAboutOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pl-4 py-2 space-y-1">
+                            {aboutDropdownLinks.map((link) => (
+                              <Link
+                                key={link.href}
+                                href={link.href}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className={cn(
+                                  'block py-2 px-4 rounded-lg font-medium text-base transition-colors',
+                                  pathname === link.href
+                                    ? 'bg-[#1A5F7A]/10 text-[#5AAFD4]'
+                                    : 'text-[#5AAFD4]/60 hover:text-[#5AAFD4] hover:bg-white/5'
+                                )}
+                              >
+                                {link.label}
+                              </Link>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+
+                  {/* Other nav links */}
+                  {navLinks.slice(1).map((link) => (
                     <motion.div key={link.href} variants={menuItem}>
                       <Link
                         href={link.href}
@@ -242,4 +402,3 @@ function NavLink({ href, label, isActive, isScrolled }: NavLinkProps) {
     </Link>
   )
 }
-

@@ -11,7 +11,9 @@ const quickLinks = [
   { href: '/events', label: 'Events' },
   { href: '/membership', label: 'Membership' },
   { href: '/news', label: 'News' },
+  { href: '/about', label: 'About Us' },
   { href: '/history', label: 'History' },
+  { href: '/board-of-directors', label: 'Board of Directors' },
   { href: '/contact', label: 'Contact' },
 ]
 
