@@ -11,7 +11,7 @@ import { menuContainer, menuItem } from '@/lib/animations'
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
+  { href: '/history', label: 'History' },
   { href: '/events', label: 'Events' },
   { href: '/news', label: 'News' },
   { href: '/contact', label: 'Contact' },

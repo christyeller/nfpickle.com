@@ -2,8 +2,7 @@
 
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Users, Target, Heart, MapPin, Zap, ArrowRight } from 'lucide-react'
-import PageHero from '@/components/public/PageHero'
+import { Users, Target, Heart, ArrowRight } from 'lucide-react'
 import SectionHeader from '@/components/public/SectionHeader'
 import { ScrollReveal } from '@/components/public/ScrollReveal'
 import { staggerContainer, staggerItem } from '@/lib/animations'
@@ -52,28 +51,20 @@ export default function AboutPage() {
 
   return (
     <>
-      <PageHero
-        title="About Us"
-        subtitle="The story of pickleball in the North Fork Valley"
-        badge="Our Story"
-        badgeIcon={Heart}
-        accentColor="teal"
-      />
-
-      {/* Story Section */}
-      <section className="section bg-cream relative overflow-hidden">
+      {/* Mission Section */}
+      <section className="section bg-cream relative overflow-hidden pt-32">
         <div className="absolute top-0 left-0 w-96 h-96 bg-teal/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-lime/5 rounded-full blur-3xl" />
 
         <div className="container-custom relative z-10">
           <div className="max-w-3xl mx-auto">
             <SectionHeader
-              title="Our Story"
-              subtitle="How pickleball came to the North Fork Valley"
-              badge="The Beginning"
-              badgeIcon={Zap}
+              title="About Us"
+              subtitle="The North Fork Pickleball Club"
+              badge="Who We Are"
+              badgeIcon={Heart}
               badgeColor="teal"
-              highlightWord="Story"
+              highlightWord="Us"
               highlightColor="teal"
             />
 
@@ -86,27 +77,18 @@ export default function AboutPage() {
               <div className="space-y-6 text-gray-600 leading-relaxed">
                 <ScrollReveal delay={0.1}>
                   <p>
-                    North Fork Pickleball Club was founded by a group of enthusiastic players who
-                    discovered the joy of pickleball and wanted to share it with their community.
-                    What started as a few informal games at the local park has grown into a thriving
-                    community of players across Paonia, Hotchkiss, and Crawford.
+                    The North Fork Pickleball Club (NFPC) exists to provide a fun, healthy,
+                    recreational activity for our rural North Fork Community while promoting
+                    exercise, development of skills and camaraderie through the enjoyment of pickleball.
                   </p>
                 </ScrollReveal>
 
                 <ScrollReveal delay={0.2}>
                   <p>
-                    Our mission is simple: make pickleball accessible to everyone in the North Fork
-                    Valley. Whether you&apos;re picking up a paddle for the first time or you&apos;re a
+                    Whether you&apos;re picking up a paddle for the first time or you&apos;re a
                     seasoned tournament player, you&apos;ll find a welcoming community here.
-                  </p>
-                </ScrollReveal>
-
-                <ScrollReveal delay={0.3}>
-                  <p>
                     We organize regular open play sessions, host tournaments and clinics, and work
-                    with local officials to improve and expand court facilities. As the sport continues
-                    to grow nationally, we&apos;re proud to be part of bringing pickleball to our
-                    beautiful corner of Colorado.
+                    with local officials to improve and expand court facilities.
                   </p>
                 </ScrollReveal>
               </div>
@@ -161,85 +143,6 @@ export default function AboutPage() {
               )
             })}
           </motion.div>
-        </div>
-      </section>
-
-      {/* Location Section */}
-      <section className="section bg-cream relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl" />
-
-        <div className="container-custom relative z-10">
-          <SectionHeader
-            title="Our Location"
-            subtitle="Playing in the beautiful North Fork Valley"
-            badge="Find Us"
-            badgeIcon={MapPin}
-            badgeColor="purple"
-            highlightWord="Location"
-            highlightColor="purple"
-          />
-
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              className="grid md:grid-cols-2 gap-8 items-center"
-              initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div>
-                <motion.div
-                  className="flex items-start gap-4 mb-6 p-4 rounded-2xl bg-purple/5 border border-purple/20"
-                  whileHover={prefersReducedMotion ? {} : { x: 4 }}
-                >
-                  <div className="p-3 rounded-xl bg-purple text-white shadow-lg">
-                    <MapPin size={24} />
-                  </div>
-                  <div>
-                    <h3 className="font-display font-semibold text-lg text-charcoal-dark">
-                      Paonia Town Park
-                    </h3>
-                    <p className="text-gray-600">214 Grand Ave, Paonia, CO 81428</p>
-                  </div>
-                </motion.div>
-
-                <div className="space-y-4 text-gray-600">
-                  <ScrollReveal delay={0.1}>
-                    <p>
-                      Our primary courts are located at Paonia Town Park, featuring 4 dedicated
-                      pickleball courts with lights for evening play. The park offers parking,
-                      restrooms, and shaded areas for spectators.
-                    </p>
-                  </ScrollReveal>
-                  <ScrollReveal delay={0.2}>
-                    <p>
-                      Additional courts are available at Hotchkiss Town Park, and we&apos;re
-                      working to expand facilities throughout the valley.
-                    </p>
-                  </ScrollReveal>
-                </div>
-              </div>
-
-              <ScrollReveal>
-                <div className="relative">
-                  <div className="absolute -inset-2 bg-gradient-to-r from-purple via-teal to-lime rounded-3xl blur-lg opacity-30" />
-                  <div className="relative bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl aspect-video
-                    flex items-center justify-center border border-gray-200 overflow-hidden">
-                    <div className="text-center text-gray-400">
-                      <motion.div
-                        animate={prefersReducedMotion ? {} : { y: [0, -5, 0] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                      >
-                        <MapPin size={48} className="mx-auto mb-2" />
-                      </motion.div>
-                      <p className="font-medium">Interactive map coming soon</p>
-                    </div>
-                    {/* Grid pattern overlay */}
-                    <div className="absolute inset-0 grid-pattern opacity-20" />
-                  </div>
-                </div>
-              </ScrollReveal>
-            </motion.div>
-          </div>
         </div>
       </section>
 
