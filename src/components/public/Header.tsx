@@ -54,16 +54,16 @@ export default function Header() {
             {/* Logo */}
             <Link href="/" className="flex items-center group">
               <motion.div
-                className="relative h-[100px] w-auto"
+                className="relative h-[120px] w-auto"
                 whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
                 <Image
                   src="/logo.png"
                   alt="North Fork Pickleball"
-                  width={250}
-                  height={100}
-                  className="h-[100px] w-auto object-contain"
+                  width={300}
+                  height={120}
+                  className="h-[120px] w-auto object-contain"
                   priority
                 />
               </motion.div>
