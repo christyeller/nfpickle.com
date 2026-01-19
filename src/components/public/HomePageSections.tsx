@@ -229,7 +229,7 @@ export default function HomePageSections({
               Court Locations
             </h2>
             <p className="text-xl text-white max-w-3xl mx-auto">
-              You can find a court in the North Fork Valley and surrounding areas... but not in the most centrally located town of Hotchkiss! Help us get pickleball courts built in Hotchkiss!
+              You can find a court in the North Fork Valley and surrounding areas... but not in the most centrally located town of Hotchkiss! <span className="text-[#E49B0B]">Help us get pickleball courts built in Hotchkiss!</span>
             </p>
           </ScrollReveal>
 
