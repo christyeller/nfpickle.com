@@ -186,7 +186,7 @@ export default function HomePageSections({
             className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
           >
             {[
-              { src: 'https://media.nfpickle.com/site-assets/gallery-1.jpg', alt: 'Outdoor pickleball group photo' },
+              { src: 'https://media.nfpickle.com/site-assets/820092531-img_3458.jpeg', alt: 'Outdoor pickleball group photo' },
               { src: 'https://media.nfpickle.com/site-assets/gallery-2.jpg', alt: 'Indoor pickleball action shot' },
               { src: 'https://media.nfpickle.com/site-assets/gallery-3.jpg', alt: 'Crawford pickleball players' },
               { src: 'https://media.nfpickle.com/site-assets/gallery-4.jpg', alt: 'Pickleball game in progress' },
