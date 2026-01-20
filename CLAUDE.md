@@ -77,6 +77,14 @@ Tailwind CSS with custom design tokens in `tailwind.config.mjs`:
 - Shadows: `shadow-elevation-1` through `shadow-elevation-4`, `shadow-glow-lime`
 - Typography: DM Sans font family
 
+## After Making Changes
+
+**Always commit, push, and verify deployment:**
+1. `git add . && git commit -m "description" && git push`
+2. Wait ~1 minute, then check deployment: `vercel ls | head -10`
+3. If status is "Error", check logs: `vercel inspect <deployment-url> --logs | tail -50`
+4. Fix any errors and repeat
+
 ## Environment Variables
 
 Required in `.env`:
