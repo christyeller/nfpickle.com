@@ -6,8 +6,13 @@ import { contactSchema } from '@/lib/validations'
 import { randomUUID } from 'crypto'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'lynngraunke@gmail.com'
+
+// Lazy initialize Resend only when needed (avoids build-time errors)
+function getResend() {
+  if (!process.env.RESEND_API_KEY) return null
+  return new Resend(process.env.RESEND_API_KEY)
+}
 
 export async function GET() {
   try {
@@ -41,7 +46,8 @@ export async function POST(request: NextRequest) {
     })
 
     // Send email notification
-    if (process.env.RESEND_API_KEY) {
+    const resend = getResend()
+    if (resend) {
       await resend.emails.send({
         from: 'North Fork Pickleball <noreply@northforkpickleball.com>',
         to: CONTACT_EMAIL,
