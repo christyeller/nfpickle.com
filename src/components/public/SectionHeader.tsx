@@ -12,6 +12,7 @@ interface SectionHeaderProps {
   badgeColor?: 'lime' | 'coral' | 'teal' | 'purple'
   highlightWord?: string
   highlightColor?: 'lime' | 'coral' | 'teal' | 'purple' | 'gradient'
+  darkMode?: boolean
 }
 
 const badgeColors = {
@@ -38,6 +39,7 @@ export default function SectionHeader({
   badgeColor = 'lime',
   highlightWord,
   highlightColor = 'gradient',
+  darkMode = false,
 }: SectionHeaderProps) {
   const prefersReducedMotion = useReducedMotion()
 
@@ -74,20 +76,22 @@ export default function SectionHeader({
           initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-4 ${badgeColors[badgeColor]}`}
+          className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-4 ${
+            darkMode ? 'bg-white/20 text-white' : badgeColors[badgeColor]
+          }`}
         >
           {BadgeIcon && <BadgeIcon className="w-4 h-4" />}
           {badge}
         </motion.span>
       )}
 
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-charcoal-dark">
+      <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display font-bold ${darkMode ? 'text-white' : 'text-charcoal-dark'}`}>
         {renderTitle()}
       </h2>
 
       {subtitle && (
         <motion.p
-          className={`mt-4 text-lg text-gray-600 ${centered ? 'max-w-2xl mx-auto' : ''}`}
+          className={`mt-4 text-lg ${darkMode ? 'text-white/80' : 'text-gray-600'} ${centered ? 'max-w-2xl mx-auto' : ''}`}
           initial={prefersReducedMotion ? {} : { opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
