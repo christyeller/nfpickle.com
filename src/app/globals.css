@@ -12,14 +12,14 @@
   --color-court: #275A6D;
   --color-court-light: #3A7A92;
   --color-court-dark: #1A3D4A;
-  --color-coral: #6B8E6F;
+  --color-coral: #207349;
   --color-coral-light: #8FAF93;
   --color-coral-dark: #4A6B4E;
 
   /* Secondary Colors */
   --color-teal: #275A6D;
   --color-teal-light: #4A8BA3;
-  --color-sunset: #6B8E6F;
+  --color-sunset: #207349;
   --color-purple: #5A7A8C;
   --color-purple-light: #7A9AAC;
 
@@ -32,9 +32,9 @@
   --color-cream-dark: #F9F5EC;
 
   /* Gradients */
-  --gradient-hero: linear-gradient(135deg, #275A6D 0%, #E49B0B 50%, #6B8E6F 100%);
+  --gradient-hero: linear-gradient(135deg, #275A6D 0%, #E49B0B 50%, #207349 100%);
   --gradient-cta: linear-gradient(90deg, #E49B0B 0%, #275A6D 100%);
-  --gradient-accent: linear-gradient(180deg, #6B8E6F 0%, #E49B0B 100%);
+  --gradient-accent: linear-gradient(180deg, #207349 0%, #E49B0B 100%);
 
   /* Shadows */
   --shadow-glow-lime: 0 0 30px rgba(228, 155, 11, 0.3);

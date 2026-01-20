@@ -76,7 +76,7 @@ export function GradientBorderCard({
   children,
   className = '',
   borderWidth = 2,
-  colors = ['#E49B0B', '#275A6D', '#6B8E6F', '#5A7A8C', '#E49B0B'],
+  colors = ['#E49B0B', '#275A6D', '#207349', '#5A7A8C', '#E49B0B'],
   animated = true
 }: GradientBorderCardProps) {
   const prefersReducedMotion = useReducedMotion()

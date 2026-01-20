@@ -28,7 +28,7 @@ export default {
           dark: '#1A3D4A',
         },
         coral: {
-          DEFAULT: '#6B8E6F',
+          DEFAULT: '#207349',
           light: '#8FAF93',
           dark: '#4A6B4E',
         },
@@ -39,7 +39,7 @@ export default {
           dark: '#1A3D4A',
         },
         sunset: {
-          DEFAULT: '#6B8E6F',
+          DEFAULT: '#207349',
           light: '#8FAF93',
           dark: '#4A6B4E',
         },
@@ -65,7 +65,7 @@ export default {
           light: '#4A8BA3',
           dark: '#1A3D4A',
         },
-        secondary: '#6B8E6F',
+        secondary: '#207349',
         accent: '#E49B0B',
         dark: {
           DEFAULT: '#1A1A1A',
@@ -140,9 +140,9 @@ export default {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'hero-gradient': 'linear-gradient(135deg, #275A6D 0%, #E49B0B 50%, #6B8E6F 100%)',
+        'hero-gradient': 'linear-gradient(135deg, #275A6D 0%, #E49B0B 50%, #207349 100%)',
         'cta-gradient': 'linear-gradient(90deg, #E49B0B 0%, #275A6D 100%)',
-        'accent-gradient': 'linear-gradient(180deg, #6B8E6F 0%, #E49B0B 100%)',
+        'accent-gradient': 'linear-gradient(180deg, #207349 0%, #E49B0B 100%)',
         'dark-gradient': 'linear-gradient(180deg, #1A1A1A 0%, #275A6D 100%)',
         'mesh-gradient': `
           radial-gradient(at 40% 20%, rgba(90, 122, 140, 0.2) 0px, transparent 50%),
