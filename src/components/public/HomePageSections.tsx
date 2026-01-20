@@ -188,8 +188,8 @@ export default function HomePageSections({
             {[
               { src: 'https://media.nfpickle.com/site-assets/820092531-img_3458.jpeg', alt: 'Outdoor pickleball group photo' },
               { src: 'https://media.nfpickle.com/site-assets/gallery-2.jpg', alt: 'Indoor pickleball action shot' },
-              { src: 'https://media.nfpickle.com/site-assets/gallery-3.jpg', alt: 'Crawford pickleball players' },
-              { src: 'https://media.nfpickle.com/site-assets/gallery-4.jpg', alt: 'Pickleball game in progress' },
+              { src: 'https://media.nfpickle.com/site-assets/820092539-img_3002.jpeg', alt: 'Crawford pickleball players' },
+              { src: 'https://media.nfpickle.com/site-assets/820092544-img_2992.jpeg', alt: 'Pickleball game in progress' },
             ].map((image, index) => (
               <motion.div
                 key={index}
