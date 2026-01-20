@@ -4,6 +4,10 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { contactSchema } from '@/lib/validations'
 import { randomUUID } from 'crypto'
+import { Resend } from 'resend'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'lynngraunke@gmail.com'
 
 export async function GET() {
   try {
@@ -35,6 +39,24 @@ export async function POST(request: NextRequest) {
         ...validatedData,
       },
     })
+
+    // Send email notification
+    if (process.env.RESEND_API_KEY) {
+      await resend.emails.send({
+        from: 'North Fork Pickleball <noreply@northforkpickleball.com>',
+        to: CONTACT_EMAIL,
+        replyTo: validatedData.email,
+        subject: validatedData.subject || `New Contact Form Message from ${validatedData.name}`,
+        html: `
+          <h2>New Contact Form Submission</h2>
+          <p><strong>Name:</strong> ${validatedData.name}</p>
+          <p><strong>Email:</strong> ${validatedData.email}</p>
+          ${validatedData.subject ? `<p><strong>Subject:</strong> ${validatedData.subject}</p>` : ''}
+          <p><strong>Message:</strong></p>
+          <p>${validatedData.message.replace(/\n/g, '<br>')}</p>
+        `,
+      })
+    }
 
     return NextResponse.json({ message }, { status: 201 })
   } catch (error) {
