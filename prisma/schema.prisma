@@ -7,23 +7,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id             String   @id @default(cuid())
-  email          String   @unique
-  hashedPassword String
-  name           String?
-  role           String   @default("admin")
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  uploadedMedia  Media[]
+model ContactSubmission {
+  id        String   @id
+  name      String
+  email     String
+  subject   String?
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Donation {
+  id                    String    @id
+  donorName             String
+  donorEmail            String
+  donorPhone            String?
+  donorMessage          String?
+  donorAddress          String?
+  amount                Float
+  donationType          String
+  frequency             String?
+  stripePaymentIntentId String?   @unique
+  stripeSubscriptionId  String?   @unique
+  stripeCustomerId      String?
+  status                String    @default("pending")
+  paymentStatus         String    @default("incomplete")
+  receiptUrl            String?
+  lastPaymentDate       DateTime?
+  nextPaymentDate       DateTime?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime
 }
 
 model Event {
-  id                   String   @id @default(cuid())
+  id                   String   @id
   title                String
   slug                 String   @unique
   eventType            String   @default("open-play")
-  description          String?  @db.Text
+  description          String?
   startDate            DateTime
   endDate              DateTime
   locationName         String   @default("Paonia Town Park")
@@ -33,30 +54,71 @@ model Event {
   registrationRequired Boolean  @default(false)
   isRecurring          Boolean  @default(false)
   recurringPattern     String?
-  featuredImageId      String?
-  featuredImage        Media?   @relation("EventFeaturedImage", fields: [featuredImageId], references: [id], onDelete: SetNull)
   status               String   @default("published")
   createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
+  updatedAt            DateTime
+  featuredImageId      String?
+  Media                Media?   @relation(fields: [featuredImageId], references: [id])
 }
 
-model Post {
-  id              String   @id @default(cuid())
-  title           String
-  slug            String   @unique
-  excerpt         String?
-  content         String   @db.Text
-  featuredImg     String?
-  featuredImageId String?
-  featuredImage   Media?   @relation("PostFeaturedImage", fields: [featuredImageId], references: [id], onDelete: SetNull)
-  status          String   @default("published")
-  publishedAt     DateTime @default(now())
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+model Gallery {
+  id           String         @id
+  title        String
+  slug         String         @unique
+  description  String?
+  status       String         @default("published")
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime
+  GalleryImage GalleryImage[]
+
+  @@index([slug])
+  @@index([status])
+}
+
+model GalleryImage {
+  id        String   @id
+  galleryId String
+  mediaId   String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  Gallery   Gallery  @relation(fields: [galleryId], references: [id], onDelete: Cascade)
+  Media     Media    @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  @@unique([galleryId, mediaId])
+  @@index([galleryId, order])
+}
+
+model Media {
+  id           String         @id
+  cloudinaryId String?        @unique
+  url          String
+  secureUrl    String?
+  format       String
+  width        Int?
+  height       Int?
+  bytes        Int
+  altText      String?
+  caption      String?
+  uploadedBy   String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime
+  category     MediaCategory  @default(CONTENT)
+  r2Key        String?        @unique
+  tags         String[]
+  Event        Event[]
+  GalleryImage GalleryImage[]
+  User         User?          @relation(fields: [uploadedBy], references: [id])
+  Page         Page[]
+  Post         Post[]
+
+  @@index([category])
+  @@index([cloudinaryId])
+  @@index([createdAt])
+  @@index([r2Key])
 }
 
 model Member {
-  id               String   @id @default(cuid())
+  id               String   @id
   email            String   @unique
   firstName        String
   lastName         String
@@ -66,17 +128,36 @@ model Member {
   membershipStatus String   @default("active")
   joinedAt         DateTime @default(now())
   createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  updatedAt        DateTime
 }
 
-model ContactSubmission {
-  id        String   @id @default(cuid())
-  name      String
-  email     String
-  subject   String?
-  message   String   @db.Text
-  read      Boolean  @default(false)
-  createdAt DateTime @default(now())
+model Page {
+  id              String   @id
+  title           String
+  slug            String   @unique
+  content         String
+  metaTitle       String?
+  metaDescription String?
+  status          String   @default("published")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime
+  featuredImageId String?
+  Media           Media?   @relation(fields: [featuredImageId], references: [id])
+}
+
+model Post {
+  id              String   @id
+  title           String
+  slug            String   @unique
+  excerpt         String?
+  content         String
+  featuredImg     String?
+  status          String   @default("published")
+  publishedAt     DateTime @default(now())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime
+  featuredImageId String?
+  Media           Media?   @relation(fields: [featuredImageId], references: [id])
 }
 
 model SiteSettings {
@@ -87,103 +168,22 @@ model SiteSettings {
   facebookUrl     String?
   instagramUrl    String?
   primaryLocation String  @default("Paonia Town Park")
-  aboutText       String? @db.Text
+  aboutText       String?
 }
 
-model Donation {
-  id                    String    @id @default(cuid())
-  donorName             String
-  donorEmail            String
-  donorPhone            String?
-  donorMessage          String?   @db.Text
-  donorAddress          String?
-  amount                Float
-  donationType          String    // 'one-time' or 'recurring'
-  frequency             String?   // 'monthly', 'yearly'
-  stripePaymentIntentId String?   @unique
-  stripeSubscriptionId  String?   @unique
-  stripeCustomerId      String?
-  status                String    @default("pending") // 'pending', 'completed', 'failed', 'cancelled'
-  paymentStatus         String    @default("incomplete") // 'incomplete', 'processing', 'succeeded', 'failed'
-  receiptUrl            String?
-  lastPaymentDate       DateTime?
-  nextPaymentDate       DateTime?
-  createdAt             DateTime  @default(now())
-  updatedAt             DateTime  @updatedAt
-}
-
-model Page {
-  id              String   @id @default(cuid())
-  title           String
-  slug            String   @unique
-  content         String   @db.Text
-  metaTitle       String?
-  metaDescription String?
-  featuredImageId String?
-  featuredImage   Media?   @relation("PageFeaturedImage", fields: [featuredImageId], references: [id], onDelete: SetNull)
-  status          String   @default("published")
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-}
-
-model Media {
-  id              String         @id @default(cuid())
-  cloudinaryId    String?        @unique
-  r2Key           String?        @unique
-  url             String
-  secureUrl       String?
-  format          String
-  width           Int?
-  height          Int?
-  bytes           Int
-  altText         String?
-  caption         String?
-  category        MediaCategory  @default(CONTENT)
-  tags            String[]
-  uploadedBy      String?
-  uploadedByUser   User?          @relation(fields: [uploadedBy], references: [id], onDelete: SetNull)
-  postFeaturedIn   Post[]         @relation("PostFeaturedImage")
-  pageFeaturedIn   Page[]         @relation("PageFeaturedImage")
-  eventFeaturedIn  Event[]        @relation("EventFeaturedImage")
-  galleryImages    GalleryImage[]
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
-
-  @@index([cloudinaryId])
-  @@index([r2Key])
-  @@index([category])
-  @@index([createdAt])
+model User {
+  id             String   @id
+  email          String   @unique
+  hashedPassword String
+  name           String?
+  role           String   @default("admin")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime
+  Media          Media[]
 }
 
 enum MediaCategory {
   CONTENT
   FEATURED
   GALLERY
-}
-
-model Gallery {
-  id          String         @id @default(cuid())
-  title       String
-  slug        String         @unique
-  description String?        @db.Text
-  status      String         @default("published")
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
-  images      GalleryImage[]
-
-  @@index([slug])
-  @@index([status])
-}
-
-model GalleryImage {
-  id        String   @id @default(cuid())
-  galleryId String
-  mediaId   String
-  order     Int      @default(0)
-  gallery   Gallery  @relation(fields: [galleryId], references: [id], onDelete: Cascade)
-  media     Media    @relation(fields: [mediaId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-
-  @@unique([galleryId, mediaId])
-  @@index([galleryId, order])
 }
