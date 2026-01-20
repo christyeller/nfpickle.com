@@ -1,12 +1,24 @@
 import Stripe from 'stripe'
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('STRIPE_SECRET_KEY is not defined in environment variables')
+function getStripeClient() {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error('STRIPE_SECRET_KEY is not defined in environment variables')
+  }
+  return new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2025-12-15.clover',
+    typescript: true,
+  })
 }
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2025-12-15.clover',
-  typescript: true,
+// Lazy-load stripe client to avoid build-time errors
+let _stripe: Stripe | null = null
+export const stripe = new Proxy({} as Stripe, {
+  get(_, prop) {
+    if (!_stripe) {
+      _stripe = getStripeClient()
+    }
+    return (_stripe as unknown as Record<string | symbol, unknown>)[prop]
+  }
 })
 
 /**

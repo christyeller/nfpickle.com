@@ -4,15 +4,8 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { contactSchema } from '@/lib/validations'
 import { randomUUID } from 'crypto'
-import { Resend } from 'resend'
 
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'lynngraunke@gmail.com'
-
-// Lazy initialize Resend only when needed (avoids build-time errors)
-function getResend() {
-  if (!process.env.RESEND_API_KEY) return null
-  return new Resend(process.env.RESEND_API_KEY)
-}
 
 export async function GET() {
   try {
@@ -45,9 +38,10 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    // Send email notification
-    const resend = getResend()
-    if (resend) {
+    // Send email notification (lazy-load Resend to avoid build-time errors)
+    if (process.env.RESEND_API_KEY) {
+      const { Resend } = await import('resend')
+      const resend = new Resend(process.env.RESEND_API_KEY)
       await resend.emails.send({
         from: 'North Fork Pickleball <noreply@northforkpickleball.com>',
         to: CONTACT_EMAIL,
