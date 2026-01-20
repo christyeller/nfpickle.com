@@ -38,3 +38,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# images for R2 upload (not committed to repo)
+/media
+!/media/.gitkeep

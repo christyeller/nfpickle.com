@@ -153,10 +153,10 @@ export default function AboutPage() {
             className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
           >
             {[
-              { src: '/attachments/crawford-court.jpg', alt: 'Crawford pickleball court opening' },
-              { src: '/attachments/gallery-2.jpg', alt: 'Club members at community event' },
-              { src: '/attachments/kim-bev.jpg', alt: 'Kim and Bev at the courts' },
-              { src: '/attachments/play.jpg', alt: 'Pickleball game in action' },
+              { src: 'https://media.nfpickle.com/site-assets/about/crawford-court.jpg', alt: 'Crawford pickleball court opening' },
+              { src: 'https://media.nfpickle.com/site-assets/about/gallery-2.jpg', alt: 'Club members at community event' },
+              { src: 'https://media.nfpickle.com/site-assets/about/kim-bev.jpg', alt: 'Kim and Bev at the courts' },
+              { src: 'https://media.nfpickle.com/site-assets/about/play.jpg', alt: 'Pickleball game in action' },
             ].map((image, index) => (
               <motion.div
                 key={index}

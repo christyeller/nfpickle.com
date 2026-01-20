@@ -1,0 +1,2 @@
+# Upload any new images in media/ to R2 before committing
+node scripts/upload-media.js
