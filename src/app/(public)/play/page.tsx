@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
 import { MapPin, Clock, Star, Zap, ArrowRight, Info } from 'lucide-react'
-import PageHero from '@/components/public/PageHero'
 import SectionHeader from '@/components/public/SectionHeader'
 import { ScrollReveal } from '@/components/public/ScrollReveal'
 import { staggerContainer, staggerItem } from '@/lib/animations'
@@ -123,13 +122,87 @@ export default function PlayPage() {
 
   return (
     <>
-      <PageHero
-        title="Play Pickleball"
-        subtitle="Courts, schedules, and everything you need to get playing"
-        badge="Find Your Game"
-        badgeIcon={Zap}
-        accentColor="lime"
-      />
+      {/* Hero Section */}
+      <section className="section bg-gradient-to-br from-court via-court-dark to-purple text-white relative overflow-hidden pt-32">
+        <div className="absolute inset-0 mesh-background opacity-20" />
+        <motion.div
+          className="absolute top-1/4 right-1/4 w-96 h-96 bg-lime/20 rounded-full blur-3xl"
+          animate={prefersReducedMotion ? {} : { scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
+          transition={{ duration: 6, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute bottom-0 left-1/4 w-80 h-80 bg-teal/20 rounded-full blur-3xl"
+          animate={prefersReducedMotion ? {} : { scale: [1.2, 1, 1.2], opacity: [0.3, 0.2, 0.3] }}
+          transition={{ duration: 5, repeat: Infinity }}
+        />
+
+        <div className="container-custom relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <ScrollReveal>
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-lime text-sm font-medium mb-6">
+                <Zap className="w-4 h-4" />
+                Find Your Game
+              </span>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.1}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
+                Play{' '}
+                <span className="text-lime">Pickleball</span>
+              </h1>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.2}>
+              <p className="text-xl md:text-2xl text-white/80 leading-relaxed max-w-3xl mx-auto">
+                Courts, schedules, and everything you need to get playing
+              </p>
+            </ScrollReveal>
+          </div>
+
+          {/* Stats Bar */}
+          <motion.div
+            className="grid grid-cols-3 gap-4 md:gap-8 mt-16 max-w-3xl mx-auto"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.div variants={staggerItem} className="text-center">
+              <div className="text-3xl md:text-5xl font-display font-bold text-lime mb-1">
+                <MapPin className="w-8 h-8 md:w-12 md:h-12 mx-auto" />
+              </div>
+              <div className="text-sm md:text-base font-medium text-white">
+                Our Courts
+              </div>
+              <div className="text-xs md:text-sm text-white/60">
+                Multiple locations
+              </div>
+            </motion.div>
+            <motion.div variants={staggerItem} className="text-center">
+              <div className="text-3xl md:text-5xl font-display font-bold text-lime mb-1">
+                <Clock className="w-8 h-8 md:w-12 md:h-12 mx-auto" />
+              </div>
+              <div className="text-sm md:text-base font-medium text-white">
+                Court Locations
+              </div>
+              <div className="text-xs md:text-sm text-white/60">
+                Open play schedules
+              </div>
+            </motion.div>
+            <motion.div variants={staggerItem} className="text-center">
+              <div className="text-3xl md:text-5xl font-display font-bold text-lime mb-1">
+                <Star className="w-8 h-8 md:w-12 md:h-12 mx-auto" />
+              </div>
+              <div className="text-sm md:text-base font-medium text-white">
+                Find a Court
+              </div>
+              <div className="text-xs md:text-sm text-white/60">
+                Near you in the North Fork Valley
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Court Locations */}
       <section className="section bg-cream relative overflow-hidden">

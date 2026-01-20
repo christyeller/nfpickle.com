@@ -17,6 +17,7 @@ const aboutDropdownLinks = [
 
 const navLinks = [
   { href: '/', label: 'Home' },
+  { href: '/play', label: 'Play' },
   { href: '/events', label: 'Events' },
   { href: '/news', label: 'News' },
   { href: '/contact', label: 'Contact' },

@@ -186,18 +186,18 @@ export default function HomePageSections({
             className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
           >
             {[
-              { id: 1, alt: 'Outdoor pickleball group photo' },
-              { id: 2, alt: 'Indoor pickleball action shot' },
-              { id: 3, alt: 'Crawford pickleball players' },
-              { id: 4, alt: 'Pickleball game in progress' },
-            ].map((image) => (
+              { src: 'https://media.nfpickle.com/site-assets/gallery-1.jpg', alt: 'Outdoor pickleball group photo' },
+              { src: 'https://media.nfpickle.com/site-assets/gallery-2.jpg', alt: 'Indoor pickleball action shot' },
+              { src: 'https://media.nfpickle.com/site-assets/gallery-3.jpg', alt: 'Crawford pickleball players' },
+              { src: 'https://media.nfpickle.com/site-assets/gallery-4.jpg', alt: 'Pickleball game in progress' },
+            ].map((image, index) => (
               <motion.div
-                key={image.id}
+                key={index}
                 variants={staggerItem}
                 className="group relative aspect-square overflow-hidden rounded-2xl shadow-elevation-2 hover:shadow-elevation-3 transition-shadow duration-300"
               >
                 <Image
-                  src={`/images/gallery-${image.id}.jpg`}
+                  src={image.src}
                   alt={image.alt}
                   fill
                   unoptimized
