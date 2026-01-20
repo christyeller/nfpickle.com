@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Users, Target, Heart, ArrowRight, MapPin, GraduationCap, TrendingUp, Handshake } from 'lucide-react'
 import SectionHeader from '@/components/public/SectionHeader'
@@ -141,8 +142,42 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Image Gallery Section - Overlapping */}
+      <section className="relative z-20 -mt-16 mb-0">
+        <div className="container-custom">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
+          >
+            {[
+              { src: '/attachments/crawford-court.jpg', alt: 'Crawford pickleball court opening' },
+              { src: '/attachments/gallery-2.jpg', alt: 'Club members at community event' },
+              { src: '/attachments/kim-bev.jpg', alt: 'Kim and Bev at the courts' },
+              { src: '/attachments/play.jpg', alt: 'Pickleball game in action' },
+            ].map((image, index) => (
+              <motion.div
+                key={index}
+                variants={staggerItem}
+                className="group relative aspect-square overflow-hidden rounded-2xl shadow-elevation-2 hover:shadow-elevation-3 transition-shadow duration-300"
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  unoptimized
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* The Challenge Section */}
-      <section className="section bg-cream relative overflow-hidden">
+      <section className="section bg-cream relative overflow-hidden pt-16">
         <div className="absolute top-0 right-0 w-96 h-96 bg-coral/5 rounded-full blur-3xl" />
 
         <div className="container-custom relative z-10">
