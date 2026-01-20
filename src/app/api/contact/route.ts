@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { contactSchema } from '@/lib/validations'
+import { randomUUID } from 'crypto'
 
 export async function GET() {
   try {
@@ -29,7 +30,10 @@ export async function POST(request: NextRequest) {
     const validatedData = contactSchema.parse(body)
 
     const message = await prisma.contactSubmission.create({
-      data: validatedData,
+      data: {
+        id: randomUUID(),
+        ...validatedData,
+      },
     })
 
     return NextResponse.json({ message }, { status: 201 })

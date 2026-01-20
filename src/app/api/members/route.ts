@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { memberSchema } from '@/lib/validations'
+import { randomUUID } from 'crypto'
 
 export async function GET() {
   try {
@@ -41,7 +42,11 @@ export async function POST(request: NextRequest) {
     }
 
     const member = await prisma.member.create({
-      data: validatedData,
+      data: {
+        id: randomUUID(),
+        ...validatedData,
+        updatedAt: new Date(),
+      },
     })
 
     return NextResponse.json({ member }, { status: 201 })

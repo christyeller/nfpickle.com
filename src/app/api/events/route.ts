@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { eventSchema } from '@/lib/validations'
 import { generateSlug } from '@/lib/utils'
+import { randomUUID } from 'crypto'
 
 export async function GET(request: NextRequest) {
   try {
@@ -53,12 +54,17 @@ export async function POST(request: NextRequest) {
     const existingEvent = await prisma.event.findUnique({ where: { slug } })
     const finalSlug = existingEvent ? `${slug}-${Date.now()}` : slug
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { featuredImageId, ...restData } = validatedData
     const event = await prisma.event.create({
       data: {
-        ...validatedData,
+        id: randomUUID(),
+        ...restData,
         slug: finalSlug,
         startDate: new Date(validatedData.startDate),
         endDate: new Date(validatedData.endDate),
+        updatedAt: new Date(),
+        ...(featuredImageId && { featuredImageId }),
       },
     })
 

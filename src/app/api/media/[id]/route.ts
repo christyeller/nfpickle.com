@@ -19,7 +19,7 @@ export async function GET(
     const media = await prisma.media.findUnique({
       where: { id },
       include: {
-        uploadedByUser: {
+        User: {
           select: {
             name: true,
             email: true,

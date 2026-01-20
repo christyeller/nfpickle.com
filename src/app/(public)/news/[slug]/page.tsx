@@ -28,7 +28,7 @@ export default async function PostPage({ params }: PostPageProps) {
   const post = await prisma.post.findUnique({
     where: { slug },
     include: {
-      featuredImage: true,
+      Media: true,
     },
   })
 
@@ -36,7 +36,7 @@ export default async function PostPage({ params }: PostPageProps) {
     notFound()
   }
 
-  const featuredImageUrl = post.featuredImage?.secureUrl || post.featuredImage?.url
+  const featuredImageUrl = post.Media?.secureUrl || post.Media?.url || post.featuredImg
 
   return (
     <>

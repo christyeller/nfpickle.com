@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { generateSlug } from '@/lib/utils'
+import { randomUUID } from 'crypto'
 
 export async function GET(request: NextRequest) {
   try {
@@ -49,12 +50,14 @@ export async function POST(request: NextRequest) {
 
     const page = await prisma.page.create({
       data: {
+        id: randomUUID(),
         title,
         slug: finalSlug,
         content,
         metaTitle,
         metaDescription,
         status,
+        updatedAt: new Date(),
       },
     })
 

@@ -8,7 +8,7 @@ import { staggerItem } from '@/lib/animations'
 import type { Post, Media } from '@prisma/client'
 
 type PostWithImage = Post & {
-  featuredImage?: Media | null
+  Media?: Media | null
 }
 
 interface PostCardProps {
@@ -37,11 +37,11 @@ export default function PostCard({ post, variant = 'default' }: PostCardProps) {
           transition={{ duration: 0.2 }}
         >
           {/* Featured Image */}
-          {post.featuredImage ? (
+          {(post.Media || post.featuredImg) ? (
             <div className="aspect-video overflow-hidden">
               <img
-                src={post.featuredImage.secureUrl || post.featuredImage.url}
-                alt={post.featuredImage.altText || post.title}
+                src={post.Media?.secureUrl || post.Media?.url || post.featuredImg || ''}
+                alt={post.Media?.altText || post.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
             </div>

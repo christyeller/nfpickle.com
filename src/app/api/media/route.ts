@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
         skip,
         take: limit,
         include: {
-          uploadedByUser: {
+          User: {
             select: {
               name: true,
               email: true,

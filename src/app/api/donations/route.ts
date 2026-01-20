@@ -10,6 +10,7 @@ import {
   getOrCreatePrice,
   createSubscription
 } from '@/lib/stripe'
+import { randomUUID } from 'crypto'
 
 /**
  * GET /api/donations
@@ -107,6 +108,7 @@ export async function POST(request: NextRequest) {
     // Create donation record in database
     const donation = await prisma.donation.create({
       data: {
+        id: randomUUID(),
         donorName: validatedData.donorName,
         donorEmail: validatedData.donorEmail,
         donorPhone: validatedData.donorPhone || null,
@@ -120,6 +122,7 @@ export async function POST(request: NextRequest) {
         stripeCustomerId,
         status: 'pending',
         paymentStatus: 'incomplete',
+        updatedAt: new Date(),
       },
     })
 

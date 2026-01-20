@@ -12,7 +12,7 @@ export default async function NewsPage() {
     where: { status: 'published' },
     orderBy: { publishedAt: 'desc' },
     include: {
-      featuredImage: true,
+      Media: true,
     },
   })
 

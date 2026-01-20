@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { uploadToR2, getR2Key, generateUniqueFilename } from '@/lib/r2'
+import { randomUUID } from 'crypto'
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/avif']
@@ -60,12 +61,14 @@ export async function POST(request: NextRequest) {
     // Save to database
     const media = await prisma.media.create({
       data: {
+        id: randomUUID(),
         r2Key,
         url,
         secureUrl: url,
         format,
         bytes: file.size,
-        uploadedBy: user?.id,
+        updatedAt: new Date(),
+        ...(user?.id && { uploadedBy: user.id }),
       },
     })
 
