@@ -77,6 +77,25 @@ Tailwind CSS with custom design tokens in `tailwind.config.mjs`:
 - Shadows: `shadow-elevation-1` through `shadow-elevation-4`, `shadow-glow-lime`
 - Typography: DM Sans font family
 
+## Git Branching Workflow
+
+**IMPORTANT: Always work on the ETHAN branch, not main.**
+
+- The `ETHAN` branch is the development branch for making changes
+- The `main` branch is for production deployments only
+- After merging to main, ALWAYS switch back to ETHAN
+
+**Commit and deploy workflow:**
+```bash
+# 1. Commit and push to ETHAN
+git add -A && git commit -m "description" && git push origin ETHAN
+
+# 2. Merge to main and push (then return to ETHAN)
+git checkout main && git pull origin main && git merge ETHAN && git push origin main && git checkout ETHAN
+```
+
+**Never make direct edits on main.** If you find yourself on main, switch to ETHAN first: `git checkout ETHAN`
+
 ## After Making Changes
 
 **Always commit, push, and verify deployment:**
