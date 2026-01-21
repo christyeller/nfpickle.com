@@ -51,8 +51,8 @@ export default function HistoryPage() {
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative pt-20 pb-32 bg-charcoal-dark overflow-hidden">
+      {/* Custom Creative Hero */}
+      <section className="relative pt-28 pb-40 bg-charcoal-dark overflow-hidden">
         {/* Animated background gradient */}
         <motion.div
           className="absolute inset-0"
@@ -80,18 +80,18 @@ export default function HistoryPage() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl mx-auto"
           >
-            {/* Badge */}
+            {/* Playful badge */}
             <motion.div
               initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-teal/20 border-teal/30 text-teal mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-lime/20 border-lime/30 text-lime mb-6"
             >
-              <Calendar className="w-4 h-4" />
+              <Calendar size={16} />
               <span className="text-sm font-medium">Timeline</span>
             </motion.div>
 
-            {/* Main title */}
+            {/* Main title with animated words */}
             <motion.h1
               className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6"
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
@@ -99,7 +99,16 @@ export default function HistoryPage() {
               transition={{ delay: 0.3, duration: 0.6 }}
             >
               Our{' '}
-              <span className="text-teal">History</span>
+              <span className="relative inline-block">
+                <span className="relative z-10 text-lime">History</span>
+                <motion.span
+                  className="absolute -inset-1 bg-lime/20 rounded-lg -z-0"
+                  initial={prefersReducedMotion ? {} : { scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 0.8, duration: 0.4 }}
+                  style={{ originX: 0 }}
+                />
+              </span>
             </motion.h1>
 
             {/* Subtitle */}
