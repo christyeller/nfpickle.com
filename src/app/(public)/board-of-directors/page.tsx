@@ -5,7 +5,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
 import { Users, ArrowRight, ChevronDown } from 'lucide-react'
-import SectionHeader from '@/components/public/SectionHeader'
 import { ScrollReveal } from '@/components/public/ScrollReveal'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 
@@ -124,22 +123,101 @@ export default function BoardOfDirectorsPage() {
 
   return (
     <>
+      {/* Custom Creative Hero */}
+      <section className="relative pt-28 pb-40 bg-charcoal-dark overflow-hidden">
+        {/* Animated background gradient */}
+        <motion.div
+          className="absolute inset-0"
+          animate={prefersReducedMotion ? {} : {
+            background: [
+              'linear-gradient(135deg, #275A6D 0%, #1A3D4A 35%, #1A3D4A 65%, #3A5A6C 100%)',
+              'linear-gradient(135deg, #3A5A6C 0%, #1A3D4A 35%, #1A3D4A 65%, #275A6D 100%)',
+              'linear-gradient(135deg, #207349 0%, #1A3D4A 30%, #1A3D4A 70%, #3A5A6C 100%)',
+              'linear-gradient(135deg, #3A5A6C 0%, #1A3D4A 35%, #1A3D4A 65%, #207349 100%)',
+              'linear-gradient(135deg, #275A6D 0%, #1A3D4A 35%, #1A3D4A 65%, #3A5A6C 100%)',
+            ]
+          }}
+          transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ background: 'linear-gradient(135deg, #275A6D 0%, #1A3D4A 35%, #1A3D4A 65%, #3A5A6C 100%)' }}
+        />
+
+        {/* Mesh overlay */}
+        <div className="absolute inset-0 mesh-background opacity-20" />
+
+        {/* Content */}
+        <div className="container-custom relative z-10 text-center">
+          <motion.div
+            initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl mx-auto"
+          >
+            {/* Playful badge */}
+            <motion.div
+              initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-lime/20 border-lime/30 text-lime mb-6"
+            >
+              <Users size={16} />
+              <span className="text-sm font-medium">Leadership</span>
+            </motion.div>
+
+            {/* Main title with animated words */}
+            <motion.h1
+              className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6"
+              initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+            >
+              Meet Our{' '}
+              <span className="relative inline-block">
+                <span className="relative z-10 text-lime">Board</span>
+                <motion.span
+                  className="absolute -inset-1 bg-lime/20 rounded-lg -z-0"
+                  initial={prefersReducedMotion ? {} : { scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 0.8, duration: 0.4 }}
+                  style={{ originX: 0 }}
+                />
+              </span>
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p
+              className="text-xl text-white/70 max-w-xl mx-auto"
+              initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+            >
+              The dedicated volunteers leading our club
+            </motion.p>
+          </motion.div>
+        </div>
+
+        {/* Bottom wave */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg
+            viewBox="0 0 1440 60"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-auto"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0 60V30C240 10 480 0 720 10C960 20 1200 40 1440 30V60H0Z"
+              fill="#FCF9F0"
+            />
+          </svg>
+        </div>
+      </section>
+
       {/* Board Section */}
-      <section className="section bg-cream relative overflow-hidden pt-32">
+      <section className="section bg-cream relative overflow-hidden">
         <div className="absolute top-0 left-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-teal/5 rounded-full blur-3xl" />
 
         <div className="container-custom relative z-10">
-          <SectionHeader
-            title="Board of Directors"
-            subtitle="Meet the people leading our club"
-            badge="Leadership"
-            badgeIcon={Users}
-            badgeColor="purple"
-            highlightWord="Directors"
-            highlightColor="purple"
-          />
-
           <motion.div
             variants={staggerContainer}
             initial="hidden"
