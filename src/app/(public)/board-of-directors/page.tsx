@@ -123,8 +123,8 @@ export default function BoardOfDirectorsPage() {
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative pt-20 pb-32 bg-charcoal-dark overflow-hidden">
+      {/* Custom Creative Hero */}
+      <section className="relative pt-28 pb-40 bg-charcoal-dark overflow-hidden">
         {/* Animated background gradient */}
         <motion.div
           className="absolute inset-0"
@@ -132,8 +132,8 @@ export default function BoardOfDirectorsPage() {
             background: [
               'linear-gradient(135deg, #275A6D 0%, #1A3D4A 35%, #1A3D4A 65%, #3A5A6C 100%)',
               'linear-gradient(135deg, #3A5A6C 0%, #1A3D4A 35%, #1A3D4A 65%, #275A6D 100%)',
-              'linear-gradient(135deg, #5E3A7D 0%, #1A3D4A 30%, #1A3D4A 70%, #3A5A6C 100%)',
-              'linear-gradient(135deg, #3A5A6C 0%, #1A3D4A 35%, #1A3D4A 65%, #5E3A7D 100%)',
+              'linear-gradient(135deg, #207349 0%, #1A3D4A 30%, #1A3D4A 70%, #3A5A6C 100%)',
+              'linear-gradient(135deg, #3A5A6C 0%, #1A3D4A 35%, #1A3D4A 65%, #207349 100%)',
               'linear-gradient(135deg, #275A6D 0%, #1A3D4A 35%, #1A3D4A 65%, #3A5A6C 100%)',
             ]
           }}
@@ -152,26 +152,35 @@ export default function BoardOfDirectorsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl mx-auto"
           >
-            {/* Badge */}
+            {/* Playful badge */}
             <motion.div
               initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-purple/20 border-purple/30 text-purple-300 mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-lime/20 border-lime/30 text-lime mb-6"
             >
-              <Users className="w-4 h-4" />
+              <Users size={16} />
               <span className="text-sm font-medium">Leadership</span>
             </motion.div>
 
-            {/* Main title */}
+            {/* Main title with animated words */}
             <motion.h1
               className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6"
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
             >
-              Board of{' '}
-              <span className="text-purple-300">Directors</span>
+              Meet Our{' '}
+              <span className="relative inline-block">
+                <span className="relative z-10 text-lime">Board</span>
+                <motion.span
+                  className="absolute -inset-1 bg-lime/20 rounded-lg -z-0"
+                  initial={prefersReducedMotion ? {} : { scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 0.8, duration: 0.4 }}
+                  style={{ originX: 0 }}
+                />
+              </span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -181,7 +190,7 @@ export default function BoardOfDirectorsPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
             >
-              Meet the people leading our club
+              The dedicated volunteers leading our club
             </motion.p>
           </motion.div>
         </div>
@@ -209,7 +218,6 @@ export default function BoardOfDirectorsPage() {
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-teal/5 rounded-full blur-3xl" />
 
         <div className="container-custom relative z-10">
-
           <motion.div
             variants={staggerContainer}
             initial="hidden"
