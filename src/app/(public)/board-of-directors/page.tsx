@@ -17,16 +17,28 @@ const boardMembers = [
     bio: 'I moved to the North Fork Valley from South Florida 30 years ago and I am still amazed at the rich, vibrant quality of life this small rural community has to offer its residents. I graduated from the University of Florida and subsequently worked for Turner Construction Company in Miami as an estimator and project coordinator on many multi-million dollar construction projects. After moving to Crawford, building a house and having a son, I joined with a group of like-minded parents to help create the North Fork Community Montessori School (NFCMS) in Hotchkiss and I joyfully served on that board for 10 years. Because I have become an avid pickleball enthusiast, I am excited once again to give back to our wonderful community by serving on the North Fork Pickleball Club (NFPC) Board and helping to implement its vision of making pickleball easily accessible to the residents of Hotchkiss and surrounding communities in the North Fork Valley.',
   },
   {
-    name: 'Board Member 2',
+    name: 'Therese McGraw',
     role: 'Vice President',
-    image: null,
-    bio: 'Board member bio coming soon.',
+    image: '/images/board/therese.jpeg',
+    bio: "I was born in Chicago, IL and lived in Southwestern Michigan before moving to Colorado in 1996. I competed in Division 1 Softball and graduated from Illinois State University with a Bachelors in Psychology, and stayed on to complete a Master's Degree in Special Education, while working as an Assistant Softball Coach for Illinois State. Upon completion of my Master's Degree, I worked at a high school in SW Michigan for three years, teaching students with Learning and Behavioral Disabilities. When I moved to Colorado, I worked in Summit County, CO for 21 years as a Day Treatment and Special Education Teacher, before retiring in 2016. My husband and I married in 2000, and moved from Leadville, CO to Grand Lake, CO in 2014, where we were small business owners until our move to Crawford in 2022. I learned to play Pickleball in Grand Lake, and continue to enjoy the accessibility of a competitive and fun sport that accommodates the aging process, while also providing social opportunities. I am excited about bringing Pickleball and Tennis courts to Hotchkiss and the North Fork Valley, so the folks in our communities, spanning all age groups, can stay active, have fun, and make new friends.",
   },
   {
-    name: 'Board Member 3',
+    name: 'Lynn Graunke',
     role: 'Secretary',
-    image: null,
-    bio: 'Board member bio coming soon.',
+    image: '/images/board/lynn.jpeg',
+    bio: "Lynn Graunke has called the North Fork Valley home for the past three years and loves being part of a community that values health, connection, and time outdoors. With a professional background in project management and many years of service on a variety of volunteer committees, Lynn has developed strong skills in listening, collaborating, and helping move ideas into action. She cares deeply about keeping people active at every age and is excited about supporting the continued growth of the pickleball program. When she's not volunteering, Lynn enjoys ranching, hiking, snowshoeing, and spending time with her husband and their two Labrador retrievers.",
+  },
+  {
+    name: 'Tony Vervloet',
+    role: 'Treasurer',
+    image: '/images/board/tony.jpeg',
+    bio: "My name is Tony Vervloet, and I'm an avid pickleball player with a current 4.0 club rating and more than eight years of playing experience. Over the years, I've also enjoyed teaching pickleball classes to a wide range of players—from beginners (2.0) through intermediate levels (3.5). I am currently in my second year as Tournament Director for the Kokopelli Klassic, an event that welcomes approximately 350–400 players from throughout the greater Phoenix area, with skill levels ranging from 3.0 to 4.5. Prior to my pickleball journey, I worked for Union Oil Company of California (UNOCAL) and Chevron Corporation as an oil and gas drilling engineer. I retired in 2014 after serving as Drilling Manager for Western Venezuela and Trinidad.",
+  },
+  {
+    name: 'Bev Wilmore',
+    role: 'Member at Large',
+    image: '/images/board/bev.jpeg',
+    bio: "I've lived in the North Fork Valley for 30+ years enjoying many outdoor activities with my family. As a former tennis player I found pickleball 5+ years ago and enjoy the game, the friendships and the fun and will love to see more opportunities for pickleball in our communities.",
   },
 ]
 
@@ -53,18 +65,18 @@ function BoardMemberCard({ member }: { member: typeof boardMembers[0] }) {
       >
         {/* Avatar */}
         {member.image ? (
-          <div className="w-28 h-28 mx-auto mb-4 rounded-full overflow-hidden border-4 border-purple/20">
+          <div className="w-44 h-44 mx-auto mb-4 rounded-full overflow-hidden border-4 border-purple/20">
             <Image
               src={member.image}
               alt={member.name}
-              width={112}
-              height={112}
+              width={176}
+              height={176}
               className="w-full h-full object-cover"
             />
           </div>
         ) : (
-          <div className="w-28 h-28 mx-auto mb-4 rounded-full bg-gradient-to-br from-teal to-purple flex items-center justify-center">
-            <Users size={44} className="text-white" />
+          <div className="w-44 h-44 mx-auto mb-4 rounded-full bg-gradient-to-br from-teal to-purple flex items-center justify-center">
+            <Users size={64} className="text-white" />
           </div>
         )}
 
