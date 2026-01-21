@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Users, Target, Heart, MapPin, Zap, ArrowRight, Calendar } from 'lucide-react'
 import { ScrollReveal } from '@/components/public/ScrollReveal'
+import SectionHeader from '@/components/public/SectionHeader'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 
 const values = [
