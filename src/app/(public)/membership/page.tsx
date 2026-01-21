@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { motion, useReducedMotion } from 'framer-motion'
 import { memberSchema, type MemberFormData } from '@/lib/validations'
 import { Check, CheckCircle, Star, Zap, Award, Crown } from 'lucide-react'
-import PageHero from '@/components/public/PageHero'
 import SectionHeader from '@/components/public/SectionHeader'
 import { ScrollReveal } from '@/components/public/ScrollReveal'
 import { staggerContainer, staggerItem } from '@/lib/animations'
@@ -140,13 +139,84 @@ export default function MembershipPage() {
 
   return (
     <>
-      <PageHero
-        title="Membership"
-        subtitle="Join the North Fork Pickleball community"
-        badge="Join Us"
-        badgeIcon={Award}
-        accentColor="lime"
-      />
+      {/* Hero Section */}
+      <section className="relative pt-20 pb-32 bg-charcoal-dark overflow-hidden">
+        {/* Animated background gradient */}
+        <motion.div
+          className="absolute inset-0"
+          animate={prefersReducedMotion ? {} : {
+            background: [
+              'linear-gradient(135deg, #275A6D 0%, #1A3D4A 35%, #1A3D4A 65%, #3A5A6C 100%)',
+              'linear-gradient(135deg, #3A5A6C 0%, #1A3D4A 35%, #1A3D4A 65%, #275A6D 100%)',
+              'linear-gradient(135deg, #A3E635 0%, #1A3D4A 30%, #1A3D4A 70%, #3A5A6C 100%)',
+              'linear-gradient(135deg, #3A5A6C 0%, #1A3D4A 35%, #1A3D4A 65%, #A3E635 100%)',
+              'linear-gradient(135deg, #275A6D 0%, #1A3D4A 35%, #1A3D4A 65%, #3A5A6C 100%)',
+            ]
+          }}
+          transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ background: 'linear-gradient(135deg, #275A6D 0%, #1A3D4A 35%, #1A3D4A 65%, #3A5A6C 100%)' }}
+        />
+
+        {/* Mesh overlay */}
+        <div className="absolute inset-0 mesh-background opacity-20" />
+
+        {/* Content */}
+        <div className="container-custom relative z-10 text-center">
+          <motion.div
+            initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl mx-auto"
+          >
+            {/* Badge */}
+            <motion.div
+              initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-lime/20 border-lime/30 text-lime mb-6"
+            >
+              <Award className="w-4 h-4" />
+              <span className="text-sm font-medium">Join Us</span>
+            </motion.div>
+
+            {/* Main title */}
+            <motion.h1
+              className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6"
+              initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+            >
+              <span className="text-lime">Membership</span>
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p
+              className="text-xl text-white/70 max-w-xl mx-auto"
+              initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+            >
+              Join the North Fork Pickleball community
+            </motion.p>
+          </motion.div>
+        </div>
+
+        {/* Bottom wave */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg
+            viewBox="0 0 1440 60"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-auto"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0 60V30C240 10 480 0 720 10C960 20 1200 40 1440 30V60H0Z"
+              fill="#FCF9F0"
+            />
+          </svg>
+        </div>
+      </section>
 
       {/* Pricing Tiers */}
       <section className="section bg-cream relative overflow-hidden">

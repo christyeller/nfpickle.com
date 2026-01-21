@@ -140,6 +140,22 @@ export default function AboutPage() {
             ))}
           </motion.div>
         </div>
+
+        {/* Bottom wave */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg
+            viewBox="0 0 1440 60"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-auto"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0 60V30C240 10 480 0 720 10C960 20 1200 40 1440 30V60H0Z"
+              fill="#FCF9F0"
+            />
+          </svg>
+        </div>
       </section>
 
       {/* Image Gallery Section - Overlapping */}
