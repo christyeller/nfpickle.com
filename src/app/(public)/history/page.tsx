@@ -399,19 +399,18 @@ export default function HistoryPage() {
               <ScrollReveal>
                 <div className="relative">
                   <div className="absolute -inset-2 bg-gradient-to-r from-purple via-teal to-lime rounded-3xl blur-lg opacity-30" />
-                  <div className="relative bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl aspect-video
-                    flex items-center justify-center border border-gray-200 overflow-hidden">
-                    <div className="text-center text-gray-400">
-                      <motion.div
-                        animate={prefersReducedMotion ? {} : { y: [0, -5, 0] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                      >
-                        <MapPin size={48} className="mx-auto mb-2" />
-                      </motion.div>
-                      <p className="font-medium">Interactive map coming soon</p>
-                    </div>
-                    {/* Grid pattern overlay */}
-                    <div className="absolute inset-0 grid-pattern opacity-20" />
+                  <div className="relative rounded-2xl aspect-video border border-gray-200 overflow-hidden">
+                    <iframe
+                      src="https://maps.google.com/maps?q=Paonia+Town+Park,+214+Grand+Ave,+Paonia,+CO+81428&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Paonia Town Park Location"
+                      className="absolute inset-0"
+                    />
                   </div>
                 </div>
               </ScrollReveal>
