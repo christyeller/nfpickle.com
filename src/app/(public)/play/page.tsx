@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
-import { MapPin, Clock, Star, Zap, ArrowRight, Info } from 'lucide-react'
+import { MapPin, Clock, Star, Zap, ArrowRight, Info, Mail } from 'lucide-react'
 import SectionHeader from '@/components/public/SectionHeader'
 import { ScrollReveal } from '@/components/public/ScrollReveal'
 import { staggerContainer, staggerItem } from '@/lib/animations'
@@ -39,34 +39,6 @@ const courts = [
       { name: 'Grand Mesa Pickleball Club', url: 'https://www.grandmesapickleball.org/', type: 'outdoor', courts: null },
     ],
     schedule: 'Play is limited to members only. They have their own organization and are also raising money to build more courts.',
-    color: 'purple' as const,
-  },
-]
-
-const schedule = [
-  { day: 'Monday', time: '9:00 AM - 12:00 PM', location: 'Paonia Town Park', level: 'All Levels' },
-  { day: 'Wednesday', time: '9:00 AM - 12:00 PM', location: 'Paonia Town Park', level: 'All Levels' },
-  { day: 'Friday', time: '9:00 AM - 12:00 PM', location: 'Paonia Town Park', level: 'All Levels' },
-  { day: 'Saturday', time: '10:00 AM - 1:00 PM', location: 'Paonia Town Park', level: 'All Levels' },
-]
-
-const skillLevels = [
-  {
-    level: 'Beginner',
-    rating: '2.0 - 2.5',
-    description: 'New to pickleball or still learning the basics. Can sustain a short rally with players of similar ability.',
-    color: 'lime' as const,
-  },
-  {
-    level: 'Intermediate',
-    rating: '3.0 - 3.5',
-    description: 'Understands court positioning and basic strategy. Can execute common shots with moderate consistency.',
-    color: 'teal' as const,
-  },
-  {
-    level: 'Advanced',
-    rating: '4.0+',
-    description: 'Strong shot variety, excellent court coverage, and strategic play. Competitive tournament-level player.',
     color: 'purple' as const,
   },
 ]
@@ -178,28 +150,32 @@ export default function PlayPage() {
                 Multiple locations
               </div>
             </motion.div>
-            <motion.div variants={staggerItem} className="text-center">
-              <div className="text-3xl md:text-5xl font-display font-bold text-lime mb-1">
-                <Clock className="w-8 h-8 md:w-12 md:h-12 mx-auto" />
-              </div>
-              <div className="text-sm md:text-base font-medium text-white">
-                Court Locations
-              </div>
-              <div className="text-xs md:text-sm text-white/60">
-                Open play schedules
-              </div>
-            </motion.div>
-            <motion.div variants={staggerItem} className="text-center">
-              <div className="text-3xl md:text-5xl font-display font-bold text-lime mb-1">
-                <Star className="w-8 h-8 md:w-12 md:h-12 mx-auto" />
-              </div>
-              <div className="text-sm md:text-base font-medium text-white">
-                Find a Court
-              </div>
-              <div className="text-xs md:text-sm text-white/60">
-                Near you in the North Fork Valley
-              </div>
-            </motion.div>
+            <Link href="#basic-rules" className="text-center group">
+              <motion.div variants={staggerItem}>
+                <div className="text-3xl md:text-5xl font-display font-bold text-lime mb-1">
+                  <Info className="w-8 h-8 md:w-12 md:h-12 mx-auto group-hover:scale-110 transition-transform" />
+                </div>
+                <div className="text-sm md:text-base font-medium text-white group-hover:text-lime transition-colors">
+                  Basic Rules
+                </div>
+                <div className="text-xs md:text-sm text-white/60">
+                  Learn the game
+                </div>
+              </motion.div>
+            </Link>
+            <Link href="/contact" className="text-center group">
+              <motion.div variants={staggerItem}>
+                <div className="text-3xl md:text-5xl font-display font-bold text-lime mb-1">
+                  <Mail className="w-8 h-8 md:w-12 md:h-12 mx-auto group-hover:scale-110 transition-transform" />
+                </div>
+                <div className="text-sm md:text-base font-medium text-white group-hover:text-lime transition-colors">
+                  Contact Us
+                </div>
+                <div className="text-xs md:text-sm text-white/60">
+                  Get in touch
+                </div>
+              </motion.div>
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -216,6 +192,7 @@ export default function PlayPage() {
             badgeIcon={MapPin}
             badgeColor="lime"
             highlightWord="Locations"
+            highlightColor="coral"
           />
 
           <motion.div
@@ -280,118 +257,9 @@ export default function PlayPage() {
         </div>
       </section>
 
-      {/* Open Play Schedule */}
-      <section className="section bg-gray-50 relative overflow-hidden">
-        <div className="absolute inset-0 grid-pattern opacity-30" />
-
-        <div className="container-custom relative z-10">
-          <SectionHeader
-            title="Open Play Schedule"
-            subtitle="Join us for free open play sessions"
-            badge="Weekly Sessions"
-            badgeIcon={Clock}
-            badgeColor="teal"
-            highlightWord="Schedule"
-            highlightColor="teal"
-          />
-
-          <ScrollReveal className="max-w-3xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-elevation-2 overflow-hidden">
-              <div className="bg-gradient-to-r from-court to-court-dark text-white px-6 py-4">
-                <div className="grid grid-cols-4 gap-4 font-medium">
-                  <span>Day</span>
-                  <span>Time</span>
-                  <span className="hidden md:block">Location</span>
-                  <span className="hidden md:block">Level</span>
-                </div>
-              </div>
-              <div className="divide-y divide-gray-100">
-                {schedule.map((session, index) => (
-                  <motion.div
-                    key={index}
-                    className="grid grid-cols-4 gap-4 px-6 py-4 hover:bg-gray-50 transition-colors"
-                    initial={prefersReducedMotion ? {} : { opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <span className="font-medium text-charcoal-dark">{session.day}</span>
-                    <span className="text-gray-600">{session.time}</span>
-                    <span className="hidden md:block text-gray-600">{session.location}</span>
-                    <span className="hidden md:block">
-                      <span className="px-2 py-1 bg-lime/10 text-lime-700 text-sm rounded-full">
-                        {session.level}
-                      </span>
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            <p className="text-center text-gray-500 mt-6">
-              Schedule subject to change. Check our{' '}
-              <Link href="/events" className="text-court hover:text-court-dark font-medium">
-                events page
-              </Link>{' '}
-              for the latest updates.
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* Skill Levels */}
-      <section className="section bg-cream relative overflow-hidden">
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl" />
-
-        <div className="container-custom relative z-10">
-          <SectionHeader
-            title="Skill Levels"
-            subtitle="Find your level and play with others at similar skill"
-            badge="All Levels Welcome"
-            badgeIcon={Star}
-            badgeColor="coral"
-            highlightWord="Levels"
-            highlightColor="coral"
-          />
-
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto"
-          >
-            {skillLevels.map((level) => {
-              const colors = colorMap[level.color]
-              return (
-                <motion.div
-                  key={level.level}
-                  variants={staggerItem}
-                  className={`relative p-6 rounded-2xl bg-white border ${colors.border}
-                    shadow-elevation-1 hover:shadow-elevation-2 transition-all duration-300 text-center`}
-                  whileHover={prefersReducedMotion ? {} : { y: -4 }}
-                >
-                  <div className={`w-16 h-16 rounded-2xl ${colors.icon} mx-auto mb-4
-                    flex items-center justify-center shadow-lg`}>
-                    <Star size={28} />
-                  </div>
-                  <h3 className="font-display font-semibold text-xl text-charcoal-dark mb-2">
-                    {level.level}
-                  </h3>
-                  <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium mb-4 ${colors.badge}`}>
-                    {level.rating}
-                  </span>
-                  <p className="text-gray-600">{level.description}</p>
-                </motion.div>
-              )
-            })}
-          </motion.div>
-        </div>
-      </section>
-
       {/* Basic Rules */}
-      <section className="section bg-gray-50 relative overflow-hidden">
-        <div className="absolute inset-0 dots-pattern opacity-30" />
+      <section id="basic-rules" className="section bg-lime relative overflow-hidden">
+        <div className="absolute inset-0 dots-pattern opacity-10" />
 
         <div className="container-custom relative z-10">
           <SectionHeader
@@ -399,9 +267,10 @@ export default function PlayPage() {
             subtitle="Quick overview of pickleball rules"
             badge="Getting Started"
             badgeIcon={Info}
-            badgeColor="purple"
+            badgeColor="lime"
             highlightWord="Rules"
-            highlightColor="purple"
+            highlightColor="lime"
+            darkMode
           />
 
           <motion.div
@@ -415,13 +284,13 @@ export default function PlayPage() {
               <motion.div
                 key={rule.title}
                 variants={staggerItem}
-                className="bg-white rounded-2xl p-6 shadow-elevation-1 hover:shadow-elevation-2
-                  transition-all duration-300 border border-gray-100"
+                className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-elevation-2 hover:shadow-elevation-3
+                  transition-all duration-300 border border-white/50"
                 whileHover={prefersReducedMotion ? {} : { x: 4 }}
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 rounded-full bg-purple/10 flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-purple font-bold text-sm">{index + 1}</span>
+                  <div className="w-8 h-8 rounded-full bg-lime flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-court-dark font-bold text-sm">{index + 1}</span>
                   </div>
                   <div>
                     <h3 className="font-display font-semibold text-lg text-charcoal-dark mb-2">
