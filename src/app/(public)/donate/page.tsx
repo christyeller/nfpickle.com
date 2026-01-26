@@ -5,10 +5,9 @@ import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Heart, Target, Users, Award, Sparkles, CreditCard, CheckCircle, DollarSign } from 'lucide-react'
+import { Heart, CreditCard, CheckCircle, DollarSign } from 'lucide-react'
 import SectionHeader from '@/components/public/SectionHeader'
 import { ScrollReveal } from '@/components/public/ScrollReveal'
-import { staggerContainer, staggerItem } from '@/lib/animations'
 import { donationSchema, type DonationFormData } from '@/lib/validations'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
@@ -17,45 +16,6 @@ import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
 const presetAmounts = [10, 25, 50, 100]
-
-const impactAreas = [
-  {
-    icon: Target,
-    title: 'Court Improvements',
-    description: 'Help us maintain and improve court surfaces, nets, and lines.',
-    color: 'lime' as const,
-  },
-  {
-    icon: Users,
-    title: 'Youth Programs',
-    description: 'Support introductory clinics and equipment for young players.',
-    color: 'coral' as const,
-  },
-  {
-    icon: Award,
-    title: 'Tournaments',
-    description: 'Fund prizes and supplies for community tournaments.',
-    color: 'purple' as const,
-  },
-]
-
-const colorMap = {
-  lime: {
-    bg: 'bg-lime/10',
-    icon: 'bg-lime text-court-dark',
-    ring: 'ring-lime/20',
-  },
-  coral: {
-    bg: 'bg-coral/10',
-    icon: 'bg-coral text-white',
-    ring: 'ring-coral/20',
-  },
-  purple: {
-    bg: 'bg-purple/10',
-    icon: 'bg-purple text-white',
-    ring: 'ring-purple/20',
-  },
-}
 
 export default function DonatePage() {
   const prefersReducedMotion = useReducedMotion()
@@ -120,7 +80,7 @@ export default function DonatePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
             >
-              Help grow pickleball in the North Fork Valley
+              Help grow pickleball in the North Fork Valley and get courts built in Hotchkiss!
             </motion.p>
           </motion.div>
         </div>
@@ -166,57 +126,6 @@ export default function DonatePage() {
               provide equipment, host events, and keep pickleball accessible to everyone.
             </p>
           </ScrollReveal>
-        </div>
-      </section>
-
-      {/* Impact Areas */}
-      <section className="section bg-gray-50 relative overflow-hidden">
-        <div className="absolute inset-0 dots-pattern opacity-30" />
-
-        <div className="container-custom relative z-10">
-          <SectionHeader
-            title="Where Your Donation Goes"
-            subtitle="Every contribution makes a difference"
-            badge="Your Impact"
-            badgeIcon={Sparkles}
-            badgeColor="coral"
-            highlightWord="Donation"
-            highlightColor="coral"
-          />
-
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto"
-          >
-            {impactAreas.map((area) => {
-              const colors = colorMap[area.color]
-              return (
-                <motion.div
-                  key={area.title}
-                  variants={staggerItem}
-                  className="relative p-8 rounded-3xl bg-white border border-gray-100 shadow-elevation-1
-                    hover:shadow-elevation-2 transition-all text-center"
-                  whileHover={prefersReducedMotion ? {} : { y: -4 }}
-                >
-                  <motion.div
-                    className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl ${colors.icon}
-                      shadow-lg mb-6 ring-8 ${colors.ring}`}
-                    whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: 5 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                  >
-                    <area.icon size={36} />
-                  </motion.div>
-                  <h3 className="text-xl font-display font-bold text-charcoal-dark mb-3">
-                    {area.title}
-                  </h3>
-                  <p className="text-gray-600">{area.description}</p>
-                </motion.div>
-              )
-            })}
-          </motion.div>
         </div>
       </section>
 
