@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
-import { MapPin, Clock, Star, Zap, ArrowRight, Info, Mail } from 'lucide-react'
+import { MapPin, Clock, Star, Zap, ArrowRight, Info, Mail, Smartphone } from 'lucide-react'
 import SectionHeader from '@/components/public/SectionHeader'
 import { ScrollReveal } from '@/components/public/ScrollReveal'
 import { staggerContainer, staggerItem } from '@/lib/animations'
@@ -60,6 +60,14 @@ const rules = [
     title: 'Serving',
     description: 'Serves must be underhand, made below waist level, and diagonal to the opponent\'s court. The ball must clear the net and land in the correct service court.',
   },
+]
+
+const teamReachCodes = [
+  { location: 'Crawford', code: 'RMPicklers', color: 'lime' as const },
+  { location: 'Paonia', code: 'AVPBall', color: 'teal' as const },
+  { location: 'Delta', code: 'PBDelta', color: 'teal' as const },
+  { location: 'Cedaredge', code: 'GMP2024', color: 'coral' as const },
+  { location: 'Montrose', code: 'Montrose', color: 'lime' as const },
 ]
 
 const colorMap = {
@@ -259,6 +267,91 @@ export default function PlayPage() {
                 </motion.div>
               )
             })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* TeamReach App Section */}
+      <section id="open-play" className="section bg-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-teal/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-lime/5 rounded-full blur-3xl" />
+
+        <div className="container-custom relative z-10">
+          <SectionHeader
+            title="Find Open Play"
+            subtitle="Download TeamReach to see when and where people are playing"
+            badge="Stay Connected"
+            badgeIcon={Smartphone}
+            badgeColor="teal"
+            highlightWord="Play"
+            highlightColor="teal"
+          />
+
+          {/* App Download Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+          >
+            <a
+              href="https://apps.apple.com/us/app/teamreach-team-management/id1101253705"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-4 bg-coral text-white font-semibold rounded-xl hover:bg-coral/90 transition-colors"
+            >
+              <div className="text-center">
+                <div className="text-xs text-white/80">Download on the</div>
+                <div className="text-lg leading-tight">App Store</div>
+              </div>
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.teamreach.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-4 bg-coral text-white font-semibold rounded-xl hover:bg-coral/90 transition-colors"
+            >
+              <div className="text-center">
+                <div className="text-xs text-white/80">Get it on</div>
+                <div className="text-lg leading-tight">Google Play</div>
+              </div>
+            </a>
+          </motion.div>
+
+          {/* Group Codes */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="max-w-3xl mx-auto"
+          >
+            <h3 className="text-xl font-display font-semibold text-charcoal-dark text-center mb-6">
+              Enter your group code to join:
+            </h3>
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4"
+            >
+              {teamReachCodes.map((item) => {
+                const colors = colorMap[item.color]
+                return (
+                  <motion.div
+                    key={item.location}
+                    variants={staggerItem}
+                    className={`p-4 rounded-xl bg-gray-50 border ${colors.border} text-center hover:shadow-elevation-1 transition-shadow`}
+                  >
+                    <div className="text-sm text-gray-600 mb-1">{item.location}</div>
+                    <div className={`font-mono font-bold text-lg ${colors.badge.split(' ')[1]}`}>
+                      {item.code}
+                    </div>
+                  </motion.div>
+                )
+              })}
+            </motion.div>
           </motion.div>
         </div>
       </section>

@@ -129,6 +129,21 @@ export default function HomePageSections({
           </ScrollReveal>
 
           <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <Link
+              href="#"
+              className="group inline-flex items-center gap-2 px-8 py-4 bg-lime text-white font-bold text-lg rounded-xl hover:bg-lime/90 transition-colors"
+            >
+              Learn More About Our Proposed New Courts in Hotchkiss
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
+
+          <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
@@ -302,10 +317,10 @@ export default function HomePageSections({
             className="text-center mt-12"
           >
             <Link
-              href="/play"
-              className="group inline-flex items-center gap-2 text-lime font-semibold hover:text-white transition-colors"
+              href="/play#open-play"
+              className="group inline-flex items-center gap-2 px-8 py-4 bg-lime text-white font-bold text-lg rounded-xl hover:bg-lime/90 transition-colors"
             >
-              View full play schedule
+              Join Us For Open Play
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
