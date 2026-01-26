@@ -313,7 +313,7 @@ export default function HomePageSections({
       </section>
 
       {/* Testimonials */}
-      <section className="section bg-[#6A8D6E] relative overflow-hidden">
+      <section className="section bg-[#70AD1C] relative overflow-hidden">
         {/* Animated background */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />

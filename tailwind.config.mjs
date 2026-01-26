@@ -10,27 +10,32 @@ export default {
       colors: {
         // Primary Colors - "Natural Pickleball" palette (from logo)
         lime: {
-          DEFAULT: '#E49B0B',
-          50: '#F5F7F3',
-          100: '#E8EDE3',
-          200: '#D4DCC9',
-          300: '#B8C5A8',
-          400: '#8FA07A',
-          500: '#E49B0B',
-          600: '#364228',
-          700: '#2D3721',
-          800: '#232B1A',
-          900: '#1A1F13',
+          DEFAULT: '#F38D09',
+          50: '#FEF6E8',
+          100: '#FDECD1',
+          200: '#FAD9A3',
+          300: '#F8C676',
+          400: '#F5A948',
+          500: '#F38D09',
+          600: '#C97107',
+          700: '#9F5906',
+          800: '#764204',
+          900: '#4C2B03',
         },
         court: {
           DEFAULT: '#3893A4',
           light: '#5AABB8',
           dark: '#2A7080',
         },
-        coral: {
-          DEFAULT: '#207349',
-          light: '#8FAF93',
-          dark: '#4A6B4E',
+        green: {
+          DEFAULT: '#70AD1C',
+          light: '#8FC442',
+          dark: '#568514',
+        },
+        orange: {
+          DEFAULT: '#F38D09',
+          light: '#F5A63D',
+          dark: '#C97107',
         },
         // Secondary Colors
         teal: {
@@ -39,9 +44,9 @@ export default {
           dark: '#2A7080',
         },
         sunset: {
-          DEFAULT: '#207349',
-          light: '#8FAF93',
-          dark: '#4A6B4E',
+          DEFAULT: '#F38D09',
+          light: '#F5A63D',
+          dark: '#C97107',
         },
         purple: {
           DEFAULT: '#5A7A8C',
@@ -65,7 +70,7 @@ export default {
           light: '#5AABB8',
           dark: '#2A7080',
         },
-        secondary: '#207349',
+        secondary: '#70AD1C',
         accent: '#E49B0B',
         dark: {
           DEFAULT: '#1A1A1A',
@@ -140,9 +145,9 @@ export default {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'hero-gradient': 'linear-gradient(135deg, #275A6D 0%, #E49B0B 50%, #207349 100%)',
+        'hero-gradient': 'linear-gradient(135deg, #275A6D 0%, #E49B0B 50%, #70AD1C 100%)',
         'cta-gradient': 'linear-gradient(90deg, #E49B0B 0%, #275A6D 100%)',
-        'accent-gradient': 'linear-gradient(180deg, #207349 0%, #E49B0B 100%)',
+        'accent-gradient': 'linear-gradient(180deg, #70AD1C 0%, #E49B0B 100%)',
         'dark-gradient': 'linear-gradient(180deg, #1A1A1A 0%, #275A6D 100%)',
         'mesh-gradient': `
           radial-gradient(at 40% 20%, rgba(90, 122, 140, 0.2) 0px, transparent 50%),
@@ -153,8 +158,9 @@ export default {
         `,
       },
       boxShadow: {
-        'glow-lime': '0 0 30px rgba(228, 155, 11, 0.3)',
-        'glow-coral': '0 0 30px rgba(107, 142, 111, 0.3)',
+        'glow-lime': '0 0 30px rgba(243, 141, 9, 0.3)',
+        'glow-green': '0 0 30px rgba(112, 173, 28, 0.3)',
+        'glow-orange': '0 0 30px rgba(243, 141, 9, 0.3)',
         'glow-teal': '0 0 30px rgba(39, 90, 109, 0.3)',
         'glow-purple': '0 0 30px rgba(90, 122, 140, 0.3)',
         'inner-glow': 'inset 0 0 30px rgba(228, 155, 11, 0.15)',

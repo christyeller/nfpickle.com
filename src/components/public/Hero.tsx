@@ -40,8 +40,8 @@ export default function Hero() {
             animate={{ scale: [1, 1.2, 1], opacity: [1, 0.8, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
-          <span className="text-sm font-medium text-lime">Open Play Every Week</span>
-          <Sparkles className="w-4 h-4 text-lime" />
+          <span className="text-sm font-medium text-white">Grab the orange paddle on the left and play a pickleball game now!</span>
+          <Sparkles className="w-4 h-4 text-white" />
         </motion.div>
 
         {/* Main heading */}
@@ -59,7 +59,7 @@ export default function Hero() {
           className="text-xl sm:text-2xl md:text-2xl lg:text-3xl text-white font-semibold mb-8 drop-shadow-lg leading-tight"
         >
           Bringing dedicated pickleball courts<br className="hidden sm:block" />
-          to Colorado&apos;s North Fork Valley
+          to Hotchkiss, Colorado
         </motion.p>
 
         {/* CTA Buttons */}
