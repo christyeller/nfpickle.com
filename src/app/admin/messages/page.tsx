@@ -99,7 +99,7 @@ export default function MessagesPage() {
                     onClick={() => openMessage(message)}
                     className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${
                       selectedMessage?.id === message.id ? 'bg-primary/5' : ''
-                    } ${!message.read ? 'bg-[#1A5F7A]/10' : ''}`}
+                    } ${!message.read ? 'bg-[#3893A4]/10' : ''}`}
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex items-start gap-3">

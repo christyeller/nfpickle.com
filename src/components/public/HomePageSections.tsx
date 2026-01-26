@@ -210,7 +210,7 @@ export default function HomePageSections({
       </section>
 
       {/* Court Locations */}
-      <section className="section bg-[#1A5F7A] relative overflow-hidden pt-32">
+      <section className="section bg-[#3893A4] relative overflow-hidden pt-32">
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-lime/10 rounded-full blur-3xl" />
 
