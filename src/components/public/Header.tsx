@@ -111,7 +111,7 @@ export default function Header() {
                     isAboutActive ? 'hover:opacity-80' : 'hover:opacity-80'
                   )}
                   style={{
-                    color: isAboutActive ? '#0D3D4D' : '#1A5F7A'
+                    color: isAboutActive ? '#1A5F7A' : '#1A5F7A'
                   }}
                 >
                   About
@@ -126,12 +126,12 @@ export default function Header() {
                     <motion.div
                       layoutId="activeNavIndicator"
                       className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full"
-                      style={{ backgroundColor: '#0D3D4D' }}
+                      style={{ backgroundColor: '#1A5F7A' }}
                       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                     />
                   )}
                   {isAboutActive && prefersReducedMotion && (
-                    <div className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full" style={{ backgroundColor: '#0D3D4D' }} />
+                    <div className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full" style={{ backgroundColor: '#1A5F7A' }} />
                   )}
                 </button>
 
@@ -151,7 +151,7 @@ export default function Header() {
                           className={cn(
                             'block px-4 py-3 text-sm font-semibold transition-colors',
                             pathname === link.href
-                              ? 'bg-[#1A5F7A]/10 text-[#0D3D4D]'
+                              ? 'bg-[#1A5F7A]/10 text-[#1A5F7A]'
                               : 'text-[#1A5F7A] hover:bg-gray-50'
                           )}
                           onClick={() => setIsAboutDropdownOpen(false)}
@@ -385,7 +385,7 @@ function NavLink({ href, label, isActive, isScrolled }: NavLinkProps) {
           : 'hover:opacity-80'
       )}
       style={{
-        color: isActive ? '#0D3D4D' : '#1A5F7A'
+        color: isActive ? '#1A5F7A' : '#1A5F7A'
       }}
     >
       {label}
@@ -393,12 +393,12 @@ function NavLink({ href, label, isActive, isScrolled }: NavLinkProps) {
         <motion.div
           layoutId="activeNavIndicator"
           className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full"
-          style={{ backgroundColor: '#0D3D4D' }}
+          style={{ backgroundColor: '#1A5F7A' }}
           transition={{ type: 'spring', stiffness: 400, damping: 30 }}
         />
       )}
       {isActive && prefersReducedMotion && (
-        <div className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full" style={{ backgroundColor: '#0D3D4D' }} />
+        <div className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full" style={{ backgroundColor: '#1A5F7A' }} />
       )}
     </Link>
   )

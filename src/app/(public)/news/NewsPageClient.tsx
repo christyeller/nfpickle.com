@@ -21,15 +21,15 @@ export default function NewsPageClient({ posts }: NewsPageClientProps) {
           className="absolute inset-0"
           animate={prefersReducedMotion ? {} : {
             background: [
-              'linear-gradient(135deg, #275A6D 0%, #1A3D4A 35%, #1A3D4A 65%, #3A5A6C 100%)',
-              'linear-gradient(135deg, #3A5A6C 0%, #1A3D4A 35%, #1A3D4A 65%, #275A6D 100%)',
-              'linear-gradient(135deg, #38B2AC 0%, #1A3D4A 30%, #1A3D4A 70%, #3A5A6C 100%)',
-              'linear-gradient(135deg, #3A5A6C 0%, #1A3D4A 35%, #1A3D4A 65%, #38B2AC 100%)',
-              'linear-gradient(135deg, #275A6D 0%, #1A3D4A 35%, #1A3D4A 65%, #3A5A6C 100%)',
+              'linear-gradient(135deg, #2A7F9A 0%, #0E4A60 35%, #0E4A60 65%, #1A5F7A 100%)',
+              'linear-gradient(135deg, #1A5F7A 0%, #0E4A60 35%, #0E4A60 65%, #2A7F9A 100%)',
+              'linear-gradient(135deg, #2A7F9A 0%, #0E4A60 30%, #0E4A60 70%, #1A5F7A 100%)',
+              'linear-gradient(135deg, #1A5F7A 0%, #0E4A60 35%, #0E4A60 65%, #2A7F9A 100%)',
+              'linear-gradient(135deg, #2A7F9A 0%, #0E4A60 35%, #0E4A60 65%, #1A5F7A 100%)',
             ]
           }}
           transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ background: 'linear-gradient(135deg, #275A6D 0%, #1A3D4A 35%, #1A3D4A 65%, #3A5A6C 100%)' }}
+          style={{ background: 'linear-gradient(135deg, #2A7F9A 0%, #0E4A60 35%, #0E4A60 65%, #1A5F7A 100%)' }}
         />
 
         {/* Mesh overlay */}

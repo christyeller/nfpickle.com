@@ -69,7 +69,7 @@ export default {
         accent: '#E49B0B',
         dark: {
           DEFAULT: '#1A1A1A',
-          blue: '#1A3D4A',
+          blue: '#0E4A60',
         },
       },
       fontFamily: {

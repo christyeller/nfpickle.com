@@ -158,8 +158,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Image Gallery Section - Overlapping */}
-      <section className="relative z-20 -mt-16 mb-0">
+      {/* Image Gallery Section */}
+      <section className="relative z-20 mt-8 mb-0">
         <div className="container-custom">
           <motion.div
             variants={staggerContainer}

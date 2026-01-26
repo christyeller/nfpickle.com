@@ -26,7 +26,7 @@ export default function Footer() {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <footer className="relative text-white overflow-hidden" style={{ backgroundColor: '#065C6F' }}>
+    <footer className="relative text-white overflow-hidden" style={{ backgroundColor: '#1A5F7A' }}>
       <div className="container-custom relative z-10 py-12 md:py-16">
         <motion.div
           variants={staggerContainer}
@@ -103,9 +103,11 @@ export default function Footer() {
                     group-hover:bg-white/20 transition-colors">
                     <MapPin size={18} className="text-lime" />
                   </div>
-                  <div>
-                    <span className="block text-white font-medium">Paonia Town Park</span>
-                    <span className="text-sm text-white">Paonia, CO 81428</span>
+                  <div className="text-sm">
+                    <span className="block">Doc Maloney Way</span>
+                    <span className="block">at Delta County Fairgrounds</span>
+                    <span className="block">403 Fair Grounds</span>
+                    <span className="block">Hotchkiss, CO 81419</span>
                   </div>
                 </a>
               </li>
