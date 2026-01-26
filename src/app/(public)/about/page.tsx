@@ -77,7 +77,7 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="section bg-gradient-to-br from-court via-court-dark to-purple text-white relative overflow-hidden pt-32">
+      <section className="section text-white relative overflow-hidden pt-32" style={{ background: '#3893A4' }}>
         <div className="absolute inset-0 mesh-background opacity-20" />
         <motion.div
           className="absolute top-1/4 right-1/4 w-96 h-96 bg-lime/20 rounded-full blur-3xl"
@@ -93,7 +93,7 @@ export default function AboutPage() {
         <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <ScrollReveal>
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-lime text-sm font-medium mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm font-medium mb-6">
                 <Heart className="w-4 h-4" />
                 About North Fork Pickleball Club
               </span>

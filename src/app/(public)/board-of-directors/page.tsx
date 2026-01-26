@@ -147,7 +147,7 @@ export default function BoardOfDirectorsPage() {
               initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-lime/20 border-lime/30 text-lime mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-white/10 border-white/30 text-white mb-6"
             >
               <Users size={16} />
               <span className="text-sm font-medium">Leadership</span>
@@ -223,7 +223,7 @@ export default function BoardOfDirectorsPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section bg-gradient-to-br from-court via-court-dark to-purple text-white relative overflow-hidden">
+      <section className="section text-white relative overflow-hidden" style={{ background: '#3893A4' }}>
         <div className="absolute inset-0 mesh-background opacity-30" />
         <motion.div
           className="absolute top-1/4 right-1/4 w-64 h-64 bg-lime/20 rounded-full blur-3xl"

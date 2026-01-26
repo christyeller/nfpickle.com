@@ -38,7 +38,7 @@ export default function NewsPageClient({ posts }: NewsPageClientProps) {
               initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-teal/20 border-teal/30 text-teal mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-white/10 border-white/30 text-white mb-6"
             >
               <Newspaper className="w-4 h-4" />
               <span className="text-sm font-medium">Stay Updated</span>

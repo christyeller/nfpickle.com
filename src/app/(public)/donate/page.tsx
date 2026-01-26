@@ -46,7 +46,7 @@ export default function DonatePage() {
               initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-coral/20 border-coral/30 text-coral mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-white/10 border-white/30 text-white mb-6"
             >
               <Heart className="w-4 h-4" />
               <span className="text-sm font-medium">Give Back</span>
