@@ -23,9 +23,9 @@ export default {
           900: '#4C2B03',
         },
         court: {
-          DEFAULT: '#275A6D',
-          light: '#3A7A92',
-          dark: '#1A3D4A',
+          DEFAULT: '#3893A4',
+          light: '#5AABB8',
+          dark: '#2A7080',
         },
         green: {
           DEFAULT: '#207349',
@@ -39,9 +39,9 @@ export default {
         },
         // Secondary Colors
         teal: {
-          DEFAULT: '#275A6D',
-          light: '#4A8BA3',
-          dark: '#1A3D4A',
+          DEFAULT: '#3893A4',
+          light: '#5AABB8',
+          dark: '#2A7080',
         },
         sunset: {
           DEFAULT: '#F38D09',
@@ -66,9 +66,9 @@ export default {
         },
         // Legacy colors (for gradual migration)
         primary: {
-          DEFAULT: '#275A6D',
-          light: '#4A8BA3',
-          dark: '#1A3D4A',
+          DEFAULT: '#3893A4',
+          light: '#5AABB8',
+          dark: '#2A7080',
         },
         secondary: '#207349',
         accent: '#E49B0B',

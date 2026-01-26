@@ -50,7 +50,7 @@ export default async function PostPage({ params }: PostPageProps) {
         } : undefined}
       >
         {/* Dark overlay for readability */}
-        <div className={`absolute inset-0 ${featuredImageUrl ? 'bg-gradient-to-t from-black/80 via-black/50 to-black/30' : 'bg-gradient-to-br from-primary-dark via-primary to-dark-blue'}`} />
+        <div className={`absolute inset-0 ${featuredImageUrl ? 'bg-black/60' : 'bg-[#3893A4]'}`} />
 
         <div className="container-custom relative z-10 text-center">
           <time className="text-white/80 text-sm">{formatDate(post.publishedAt)}</time>

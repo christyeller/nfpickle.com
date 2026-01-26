@@ -79,16 +79,6 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="section text-white relative overflow-hidden pt-32" style={{ background: '#3893A4' }}>
         <div className="absolute inset-0 mesh-background opacity-20" />
-        <motion.div
-          className="absolute top-1/4 right-1/4 w-96 h-96 bg-lime/20 rounded-full blur-3xl"
-          animate={prefersReducedMotion ? {} : { scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
-          transition={{ duration: 6, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute bottom-0 left-1/4 w-80 h-80 bg-teal/20 rounded-full blur-3xl"
-          animate={prefersReducedMotion ? {} : { scale: [1.2, 1, 1.2], opacity: [0.3, 0.2, 0.3] }}
-          transition={{ duration: 5, repeat: Infinity }}
-        />
 
         <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto text-center">
