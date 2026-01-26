@@ -86,23 +86,23 @@
   }
 
   .btn-primary {
-    @apply bg-orange text-white hover:shadow-glow-orange
-           hover:scale-105 focus:ring-orange;
+    @apply bg-lime text-white hover:shadow-glow-lime
+           hover:scale-105 focus:ring-lime;
   }
 
   .btn-secondary {
-    @apply bg-green text-white hover:bg-green-dark hover:shadow-glow-green
-           hover:scale-105 focus:ring-green;
+    @apply bg-coral text-white hover:bg-coral-dark hover:shadow-glow-coral
+           hover:scale-105 focus:ring-coral;
   }
 
   .btn-gradient {
     @apply bg-cta-gradient text-court-dark font-bold
-           hover:shadow-glow-orange hover:scale-105 focus:ring-orange;
+           hover:shadow-glow-lime hover:scale-105 focus:ring-lime;
   }
 
   .btn-outline {
-    @apply border-2 border-orange text-orange hover:bg-orange hover:text-white
-           focus:ring-orange hover:scale-105;
+    @apply border-2 border-lime text-lime hover:bg-lime hover:text-white
+           focus:ring-lime hover:scale-105;
   }
 
   .btn-outline-white {
