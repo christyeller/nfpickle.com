@@ -112,9 +112,9 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <div className="group flex items-start gap-3 text-orange">
+                <div className="group flex items-start gap-3 text-white">
                   <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
-                    <Inbox size={18} className="text-orange" />
+                    <Inbox size={18} className="text-white" />
                   </div>
                   <div className="text-sm">
                     <span className="block font-medium">Mailing Address</span>
@@ -138,11 +138,11 @@ export default function Footer() {
               <li>
                 <a
                   href="tel:9702615864"
-                  className="group flex items-center gap-3 text-orange hover:text-orange/80 transition-colors"
+                  className="group flex items-center gap-3 text-white hover:text-white/80 transition-colors"
                 >
                   <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0
                     group-hover:bg-white/20 transition-colors">
-                    <Phone size={18} className="text-orange" />
+                    <Phone size={18} className="text-white" />
                   </div>
                   <span className="text-sm">(970) 261-5864</span>
                 </a>
