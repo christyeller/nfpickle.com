@@ -268,7 +268,7 @@ export default function HistoryPage() {
                   {/* Year marker */}
                   <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 flex items-center justify-center">
                     <motion.div
-                      className="w-8 h-8 md:w-16 md:h-16 rounded-full bg-[#E49B0B] text-white flex items-center justify-center font-display font-bold text-xs md:text-lg shadow-lg ring-4 ring-[#E49B0B]/20"
+                      className="w-8 h-8 md:w-16 md:h-16 rounded-full bg-[#F38D09] text-white flex items-center justify-center font-display font-bold text-xs md:text-lg shadow-lg ring-4 ring-[#F38D09]/20"
                       whileHover={prefersReducedMotion ? {} : { scale: 1.1 }}
                     >
                       2026

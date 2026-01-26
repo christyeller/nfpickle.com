@@ -270,7 +270,7 @@ interface GradientTextProps {
 export function GradientText({
   children,
   className = '',
-  colors = ['#E49B0B', '#275A6D', '#207349', '#E49B0B']
+  colors = ['#F38D09', '#275A6D', '#207349', '#F38D09']
 }: GradientTextProps) {
   const gradientString = `linear-gradient(90deg, ${colors.join(', ')})`
 

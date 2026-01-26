@@ -46,10 +46,10 @@ export default function DonatePage() {
               initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-white/10 border-white/30 text-white mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-orange/20 border-orange/30 text-orange mb-6"
             >
               <Heart className="w-4 h-4" />
-              <span className="text-sm font-medium">Give Back</span>
+              <span className="text-sm font-medium">Help Us Build Courts!</span>
             </motion.div>
 
             {/* Main title */}
@@ -60,7 +60,7 @@ export default function DonatePage() {
               transition={{ delay: 0.3, duration: 0.6 }}
             >
               Support Our{' '}
-              <span className="text-coral">Club</span>
+              <span className="text-orange">Club</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -93,14 +93,14 @@ export default function DonatePage() {
       </section>
 
       {/* Why Donate */}
-      <section className="section bg-cream relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-coral/5 rounded-full blur-3xl" />
+      <section className="pt-[50px] pb-[50px] bg-cream relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-orange/5 rounded-full blur-3xl" />
 
         <div className="container-custom relative z-10">
           <ScrollReveal className="max-w-3xl mx-auto text-center" animateOnMount>
             <motion.div
-              className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-coral to-sunset
-                rounded-3xl mb-8 shadow-lg ring-8 ring-coral/10"
+              className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-orange to-sunset
+                rounded-3xl mb-8 shadow-lg ring-8 ring-orange/10"
               whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: 5 }}
               transition={{ type: 'spring', stiffness: 400, damping: 17 }}
             >
@@ -108,11 +108,11 @@ export default function DonatePage() {
             </motion.div>
 
             <h2 className="text-3xl md:text-4xl font-display font-bold text-charcoal-dark mb-6">
-              Why Your Support <span className="text-coral">Matters</span>
+              Why Your Support <span className="text-orange">Matters</span>
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed">
               North Fork Pickleball Club is a volunteer-run organization dedicated to
-              growing the sport in our community. Your donations help us maintain courts,
+              growing the sport in our community. Your donations help us build and maintain courts,
               provide equipment, host events, and keep pickleball accessible to everyone.
             </p>
           </ScrollReveal>
@@ -120,7 +120,7 @@ export default function DonatePage() {
       </section>
 
       {/* Donation Form Section */}
-      <section className="section bg-cream relative overflow-hidden">
+      <section className="pt-[50px] pb-24 bg-cream relative overflow-hidden">
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-lime/5 rounded-full blur-3xl" />
 
         <div className="container-custom relative z-10">
@@ -129,9 +129,9 @@ export default function DonatePage() {
             subtitle="Every contribution helps our community thrive"
             badge="Donate Now"
             badgeIcon={Heart}
-            badgeColor="coral"
+            badgeColor="orange"
             highlightWord="Donation"
-            highlightColor="coral"
+            highlightColor="orange"
           />
 
           <DonationFormWrapper />
@@ -231,11 +231,11 @@ function DonationDetailsForm({ onSubmit }: DonationDetailsFormProps) {
     <ScrollReveal>
       <div className="max-w-3xl mx-auto">
         <div className="relative">
-          <div className="absolute -inset-1 bg-gradient-to-r from-coral via-teal to-lime rounded-3xl blur-sm opacity-20" />
+          <div className="absolute -inset-1 bg-gradient-to-r from-orange via-teal to-lime rounded-3xl blur-sm opacity-20" />
           <div className="relative bg-white rounded-3xl p-8 md:p-10 shadow-elevation-2">
             {error && (
               <motion.div
-                className="bg-coral/10 text-coral p-4 rounded-xl text-sm mb-6 border border-coral/20"
+                className="bg-orange/10 text-orange p-4 rounded-xl text-sm mb-6 border border-orange/20"
                 initial={prefersReducedMotion ? {} : { opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
               >
@@ -255,7 +255,7 @@ function DonationDetailsForm({ onSubmit }: DonationDetailsFormProps) {
                     onClick={() => setDonationType('one-time')}
                     className={`p-4 rounded-xl border-2 font-medium transition-all
                       ${donationType === 'one-time'
-                        ? 'border-coral bg-coral/10 text-coral'
+                        ? 'border-orange bg-orange/10 text-orange'
                         : 'border-gray-200 hover:border-gray-300'
                       }`}
                   >
@@ -380,7 +380,7 @@ function DonationDetailsForm({ onSubmit }: DonationDetailsFormProps) {
                       placeholder="John Doe"
                     />
                     {errors.donorName && (
-                      <p className="text-coral text-sm mt-1">{errors.donorName.message}</p>
+                      <p className="text-orange text-sm mt-1">{errors.donorName.message}</p>
                     )}
                   </div>
 
@@ -397,7 +397,7 @@ function DonationDetailsForm({ onSubmit }: DonationDetailsFormProps) {
                       placeholder="john@example.com"
                     />
                     {errors.donorEmail && (
-                      <p className="text-coral text-sm mt-1">{errors.donorEmail.message}</p>
+                      <p className="text-orange text-sm mt-1">{errors.donorEmail.message}</p>
                     )}
                   </div>
 
@@ -449,8 +449,8 @@ function DonationDetailsForm({ onSubmit }: DonationDetailsFormProps) {
                 type="submit"
                 disabled={isSubmitting || finalAmount < 1}
                 className="w-full inline-flex items-center justify-center gap-2 px-6 py-4
-                  bg-gradient-to-r from-coral to-teal text-white font-bold text-lg rounded-xl
-                  hover:shadow-glow-coral transition-shadow disabled:opacity-50"
+                  bg-gradient-to-r from-orange to-teal text-white font-bold text-lg rounded-xl
+                  hover:shadow-glow-orange transition-shadow disabled:opacity-50"
                 whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
                 whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
               >
@@ -543,8 +543,8 @@ function StripePaymentForm({ donationData, onBack }: StripePaymentFormProps) {
             <button
               onClick={() => window.location.href = '/'}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl
-                bg-gradient-to-r from-coral to-teal text-white font-medium
-                hover:shadow-glow-coral transition-shadow"
+                bg-gradient-to-r from-orange to-teal text-white font-medium
+                hover:shadow-glow-orange transition-shadow"
             >
               Return Home
             </button>
@@ -558,7 +558,7 @@ function StripePaymentForm({ donationData, onBack }: StripePaymentFormProps) {
     <ScrollReveal>
       <div className="max-w-2xl mx-auto">
         <div className="relative">
-          <div className="absolute -inset-1 bg-gradient-to-r from-coral via-teal to-lime rounded-3xl blur-sm opacity-20" />
+          <div className="absolute -inset-1 bg-gradient-to-r from-orange via-teal to-lime rounded-3xl blur-sm opacity-20" />
           <div className="relative bg-white rounded-3xl p-8 md:p-10 shadow-elevation-2">
             <button
               onClick={onBack}
@@ -573,7 +573,7 @@ function StripePaymentForm({ donationData, onBack }: StripePaymentFormProps) {
 
             {error && (
               <motion.div
-                className="bg-coral/10 text-coral p-4 rounded-xl text-sm mb-6 border border-coral/20"
+                className="bg-orange/10 text-orange p-4 rounded-xl text-sm mb-6 border border-orange/20"
                 initial={prefersReducedMotion ? {} : { opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
               >
@@ -588,8 +588,8 @@ function StripePaymentForm({ donationData, onBack }: StripePaymentFormProps) {
                 type="submit"
                 disabled={!stripe || isProcessing}
                 className="w-full inline-flex items-center justify-center gap-2 px-6 py-4
-                  bg-gradient-to-r from-coral to-teal text-white font-bold text-lg rounded-xl
-                  hover:shadow-glow-coral transition-shadow disabled:opacity-50"
+                  bg-gradient-to-r from-orange to-teal text-white font-bold text-lg rounded-xl
+                  hover:shadow-glow-orange transition-shadow disabled:opacity-50"
                 whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
                 whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
               >

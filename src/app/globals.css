@@ -7,7 +7,7 @@
 /* ===== CSS Variables - Natural Pickleball Palette ===== */
 :root {
   /* Primary Colors - From Logo */
-  --color-orange: #E49B0B;
+  --color-orange: #F38D09;
   --color-offwhite: #FDF9F0;
   --color-court: #275A6D;
   --color-court-light: #3A7A92;
@@ -32,9 +32,9 @@
   --color-cream-dark: #F9F5EC;
 
   /* Gradients */
-  --gradient-hero: linear-gradient(135deg, #275A6D 0%, #E49B0B 50%, #207349 100%);
-  --gradient-cta: linear-gradient(90deg, #E49B0B 0%, #275A6D 100%);
-  --gradient-accent: linear-gradient(180deg, #207349 0%, #E49B0B 100%);
+  --gradient-hero: linear-gradient(135deg, #275A6D 0%, #F38D09 50%, #207349 100%);
+  --gradient-cta: linear-gradient(90deg, #F38D09 0%, #275A6D 100%);
+  --gradient-accent: linear-gradient(180deg, #207349 0%, #F38D09 100%);
 
   /* Shadows */
   --shadow-glow-lime: 0 0 30px rgba(228, 155, 11, 0.3);
@@ -86,23 +86,23 @@
   }
 
   .btn-primary {
-    @apply bg-lime text-white hover:shadow-glow-lime
-           hover:scale-105 focus:ring-lime;
+    @apply bg-orange text-white hover:shadow-glow-orange
+           hover:scale-105 focus:ring-orange;
   }
 
   .btn-secondary {
-    @apply bg-coral text-white hover:bg-coral-dark hover:shadow-glow-coral
-           hover:scale-105 focus:ring-coral;
+    @apply bg-green text-white hover:bg-green-dark hover:shadow-glow-green
+           hover:scale-105 focus:ring-green;
   }
 
   .btn-gradient {
     @apply bg-cta-gradient text-court-dark font-bold
-           hover:shadow-glow-lime hover:scale-105 focus:ring-lime;
+           hover:shadow-glow-orange hover:scale-105 focus:ring-orange;
   }
 
   .btn-outline {
-    @apply border-2 border-lime text-lime hover:bg-lime hover:text-court-dark
-           focus:ring-lime hover:scale-105;
+    @apply border-2 border-orange text-orange hover:bg-orange hover:text-white
+           focus:ring-orange hover:scale-105;
   }
 
   .btn-outline-white {

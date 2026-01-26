@@ -10,27 +10,32 @@ export default {
       colors: {
         // Primary Colors - "Natural Pickleball" palette (from logo)
         lime: {
-          DEFAULT: '#E49B0B',
-          50: '#F5F7F3',
-          100: '#E8EDE3',
-          200: '#D4DCC9',
-          300: '#B8C5A8',
-          400: '#8FA07A',
-          500: '#E49B0B',
-          600: '#364228',
-          700: '#2D3721',
-          800: '#232B1A',
-          900: '#1A1F13',
+          DEFAULT: '#F38D09',
+          50: '#FEF6E8',
+          100: '#FDECD1',
+          200: '#FAD9A3',
+          300: '#F8C676',
+          400: '#F5A948',
+          500: '#F38D09',
+          600: '#C97107',
+          700: '#9F5906',
+          800: '#764204',
+          900: '#4C2B03',
         },
         court: {
           DEFAULT: '#275A6D',
           light: '#3A7A92',
           dark: '#1A3D4A',
         },
-        coral: {
+        green: {
           DEFAULT: '#207349',
           light: '#8FAF93',
           dark: '#4A6B4E',
+        },
+        orange: {
+          DEFAULT: '#F38D09',
+          light: '#F5A63D',
+          dark: '#C97107',
         },
         // Secondary Colors
         teal: {
@@ -39,9 +44,9 @@ export default {
           dark: '#1A3D4A',
         },
         sunset: {
-          DEFAULT: '#207349',
-          light: '#8FAF93',
-          dark: '#4A6B4E',
+          DEFAULT: '#F38D09',
+          light: '#F5A63D',
+          dark: '#C97107',
         },
         purple: {
           DEFAULT: '#5A7A8C',
@@ -153,8 +158,9 @@ export default {
         `,
       },
       boxShadow: {
-        'glow-lime': '0 0 30px rgba(228, 155, 11, 0.3)',
-        'glow-coral': '0 0 30px rgba(107, 142, 111, 0.3)',
+        'glow-lime': '0 0 30px rgba(243, 141, 9, 0.3)',
+        'glow-green': '0 0 30px rgba(32, 115, 73, 0.3)',
+        'glow-orange': '0 0 30px rgba(243, 141, 9, 0.3)',
         'glow-teal': '0 0 30px rgba(39, 90, 109, 0.3)',
         'glow-purple': '0 0 30px rgba(90, 122, 140, 0.3)',
         'inner-glow': 'inset 0 0 30px rgba(228, 155, 11, 0.15)',

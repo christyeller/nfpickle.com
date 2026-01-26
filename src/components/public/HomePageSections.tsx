@@ -229,7 +229,7 @@ export default function HomePageSections({
               Court Locations
             </h2>
             <p className="text-xl text-white max-w-3xl mx-auto">
-              You can find a court in the North Fork Valley and surrounding areas... but not in the most centrally located town of Hotchkiss! <span className="text-[#E49B0B]">Help us get pickleball courts built in Hotchkiss!</span>
+              You can find a court in the North Fork Valley and surrounding areas... but not in the most centrally located town of Hotchkiss! <span className="text-[#F38D09]">Help us get pickleball courts built in Hotchkiss!</span>
             </p>
           </ScrollReveal>
 
@@ -476,8 +476,8 @@ export default function HomePageSections({
               <MagneticButton
                 as="a"
                 href="/contact"
-                className="px-10 py-5 bg-[#E49B0B] text-white font-bold text-lg rounded-xl
-                  hover:bg-[#E49B0B]/90 transition-colors"
+                className="px-10 py-5 bg-[#F38D09] text-white font-bold text-lg rounded-xl
+                  hover:bg-[#F38D09]/90 transition-colors"
               >
                 Get in Touch
               </MagneticButton>
