@@ -28,14 +28,14 @@ export default {
           dark: '#2A7080',
         },
         green: {
-          DEFAULT: '#70AD1C',
-          light: '#8FC442',
-          dark: '#568514',
+          DEFAULT: '#207349',
+          light: '#8FAF93',
+          dark: '#4A6B4E',
         },
-        orange: {
-          DEFAULT: '#F38D09',
-          light: '#F5A63D',
-          dark: '#C97107',
+        coral: {
+          DEFAULT: '#207349',
+          light: '#8FAF93',
+          dark: '#4A6B4E',
         },
         // Secondary Colors
         teal: {
