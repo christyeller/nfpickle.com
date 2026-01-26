@@ -31,7 +31,7 @@ const courts = [
       { name: 'Bill Heddles Recreation Center', url: 'https://www.cityofdelta.net/parksrecgolf/page/recreation-center', type: 'both', courts: null },
     ],
     schedule: 'Outdoor tennis courts are lined for pickleball. Indoor rec pickleball is offered on the basketball court at scheduled times listed on their website.',
-    color: 'coral' as const,
+    color: 'teal' as const,
   },
   {
     name: 'Cedaredge',
@@ -39,7 +39,7 @@ const courts = [
       { name: 'Grand Mesa Pickleball Club', url: 'https://www.grandmesapickleball.org/', type: 'outdoor', courts: null },
     ],
     schedule: 'Play is limited to members only. They have their own organization and are also raising money to build more courts.',
-    color: 'purple' as const,
+    color: 'coral' as const,
   },
 ]
 
