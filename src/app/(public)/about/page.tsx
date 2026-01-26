@@ -93,7 +93,7 @@ export default function AboutPage() {
         <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <ScrollReveal>
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-lime text-sm font-medium mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm font-medium mb-6">
                 <Heart className="w-4 h-4" />
                 About North Fork Pickleball Club
               </span>
