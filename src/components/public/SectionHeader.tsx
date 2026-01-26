@@ -9,9 +9,9 @@ interface SectionHeaderProps {
   centered?: boolean
   badge?: string
   badgeIcon?: LucideIcon
-  badgeColor?: 'lime' | 'coral' | 'teal' | 'purple'
+  badgeColor?: 'lime' | 'coral' | 'teal' | 'purple' | 'orange'
   highlightWord?: string
-  highlightColor?: 'lime' | 'coral' | 'teal' | 'purple' | 'gradient'
+  highlightColor?: 'lime' | 'coral' | 'teal' | 'purple' | 'orange' | 'gradient'
   darkMode?: boolean
 }
 
@@ -20,6 +20,7 @@ const badgeColors = {
   coral: 'bg-coral/10 text-coral',
   teal: 'bg-teal/10 text-teal',
   purple: 'bg-purple/10 text-purple',
+  orange: 'bg-orange/10 text-orange',
 }
 
 const highlightColors = {
@@ -27,6 +28,7 @@ const highlightColors = {
   coral: 'text-coral',
   teal: 'text-teal',
   purple: 'text-purple',
+  orange: 'text-orange',
   gradient: 'gradient-text',
 }
 
