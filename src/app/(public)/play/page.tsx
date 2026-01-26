@@ -405,21 +405,19 @@ export default function PlayPage() {
       </section>
 
       {/* CTA */}
-      <section className="section text-white relative overflow-hidden" style={{ background: '#3893A4' }}>
-        <div className="absolute inset-0 mesh-background opacity-30" />
-
+      <section className="section relative overflow-hidden">
         <div className="container-custom relative z-10 text-center">
           <ScrollReveal>
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-charcoal-dark mb-4">
               Ready to <span className="text-lime">Play?</span>
             </h2>
-            <p className="text-xl text-white/80 mb-8 max-w-xl mx-auto">
+            <p className="text-xl text-gray-600 mb-8 max-w-xl mx-auto">
               New to pickleball? No problem! We welcome beginners at all our open play sessions.
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-court-dark
-                font-bold text-lg rounded-xl hover:shadow-glow-lime transition-shadow"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-teal text-white
+                font-bold text-lg rounded-xl hover:bg-teal/90 transition-colors"
             >
               Have Questions? Contact Us
               <ArrowRight className="w-5 h-5" />
