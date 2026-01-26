@@ -16,6 +16,9 @@ export default async function HomePage() {
       where: { status: 'published' },
       orderBy: { publishedAt: 'desc' },
       take: 3,
+      include: {
+        Media: true,
+      },
     }),
     prisma.member.count(),
   ])

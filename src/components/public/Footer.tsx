@@ -48,7 +48,7 @@ export default function Footer() {
                   key={social.label}
                   href={social.href}
                   className="w-11 h-11 rounded-xl bg-white/10 border border-white/20
-                    flex items-center justify-center text-orange hover:bg-orange hover:border-orange
+                    flex items-center justify-center text-white hover:bg-orange hover:border-orange
                     hover:text-court-dark transition-all duration-300"
                   aria-label={social.label}
                   whileHover={prefersReducedMotion ? {} : { scale: 1.1, y: -2 }}
@@ -63,7 +63,7 @@ export default function Footer() {
           {/* Quick Links */}
           <motion.div variants={staggerItem}>
             <h4 className="font-display font-semibold text-lg mb-6 flex items-center gap-2 text-white">
-              <span className="w-8 h-0.5 bg-orange rounded-full" />
+              <span className="w-8 h-0.5 bg-white rounded-full" />
               Quick Links
             </h4>
             <ul className="space-y-3">
@@ -71,11 +71,11 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="group inline-flex items-center gap-2 text-orange
-                      hover:text-orange/80 transition-colors"
+                    className="group inline-flex items-center gap-2 text-white
+                      hover:text-white/80 transition-colors"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-orange
-                      group-hover:bg-orange/80 transition-colors" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-white
+                      group-hover:bg-white/80 transition-colors" />
                     {link.label}
                     <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-2
                       group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
@@ -88,7 +88,7 @@ export default function Footer() {
           {/* Contact */}
           <motion.div variants={staggerItem}>
             <h4 className="font-display font-semibold text-lg mb-6 flex items-center gap-2 text-white">
-              <span className="w-8 h-0.5 bg-orange rounded-full" />
+              <span className="w-8 h-0.5 bg-white rounded-full" />
               Contact Us
             </h4>
             <ul className="space-y-4">
@@ -97,11 +97,11 @@ export default function Footer() {
                   href="https://maps.google.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-start gap-3 text-orange hover:text-orange/80 transition-colors"
+                  className="group flex items-start gap-3 text-white hover:text-white/80 transition-colors"
                 >
                   <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0
                     group-hover:bg-white/20 transition-colors">
-                    <MapPin size={18} className="text-orange" />
+                    <MapPin size={18} className="text-white" />
                   </div>
                   <div className="text-sm">
                     <span className="block">Doc Maloney Way</span>
@@ -114,11 +114,11 @@ export default function Footer() {
               <li>
                 <a
                   href="mailto:info@northforkpickleball.com"
-                  className="group flex items-center gap-3 text-orange hover:text-orange/80 transition-colors"
+                  className="group flex items-center gap-3 text-white hover:text-white/80 transition-colors"
                 >
                   <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0
                     group-hover:bg-white/20 transition-colors">
-                    <Mail size={18} className="text-orange" />
+                    <Mail size={18} className="text-white" />
                   </div>
                   <span className="text-sm">info@northforkpickleball.com</span>
                 </a>
@@ -156,7 +156,7 @@ export default function Footer() {
               &copy; {new Date().getFullYear()} North Fork Pickleball Club. All rights reserved.
             </p>
             <p className="text-white text-sm flex items-center gap-1.5">
-              Made with <Heart className="w-4 h-4 text-orange fill-orange" /> in Colorado
+              Made with <Heart className="w-4 h-4 text-white fill-white" /> in Colorado
             </p>
           </div>
         </motion.div>

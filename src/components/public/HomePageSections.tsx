@@ -313,7 +313,7 @@ export default function HomePageSections({
       </section>
 
       {/* Testimonials */}
-      <section className="section bg-[#509725] relative overflow-hidden">
+      <section className="section bg-[#207348] relative overflow-hidden">
         {/* Animated background */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
@@ -427,7 +427,7 @@ export default function HomePageSections({
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/ready-to-play-bg.jpg"
+            src="https://media.nfpickle.com/site-assets/courts.jpg"
             alt="Pickleball court background"
             fill
             unoptimized
