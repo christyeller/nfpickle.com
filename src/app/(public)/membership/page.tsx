@@ -141,20 +141,10 @@ export default function MembershipPage() {
     <>
       {/* Hero Section */}
       <section className="relative pt-20 pb-32 bg-charcoal-dark overflow-hidden">
-        {/* Animated background gradient */}
-        <motion.div
+        {/* Background */}
+        <div
           className="absolute inset-0"
-          animate={prefersReducedMotion ? {} : {
-            background: [
-              'linear-gradient(135deg, #2A7F9A 0%, #0E4A60 35%, #0E4A60 65%, #1A5F7A 100%)',
-              'linear-gradient(135deg, #1A5F7A 0%, #0E4A60 35%, #0E4A60 65%, #2A7F9A 100%)',
-              'linear-gradient(135deg, #A3E635 0%, #0E4A60 30%, #0E4A60 70%, #1A5F7A 100%)',
-              'linear-gradient(135deg, #1A5F7A 0%, #0E4A60 35%, #0E4A60 65%, #A3E635 100%)',
-              'linear-gradient(135deg, #2A7F9A 0%, #0E4A60 35%, #0E4A60 65%, #1A5F7A 100%)',
-            ]
-          }}
-          transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ background: 'linear-gradient(135deg, #2A7F9A 0%, #0E4A60 35%, #0E4A60 65%, #1A5F7A 100%)' }}
+          style={{ background: '#3893A4' }}
         />
 
         {/* Mesh overlay */}

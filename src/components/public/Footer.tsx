@@ -26,7 +26,7 @@ export default function Footer() {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <footer className="relative text-white overflow-hidden" style={{ backgroundColor: '#1A5F7A' }}>
+    <footer className="relative text-white overflow-hidden" style={{ backgroundColor: '#3893A4' }}>
       <div className="container-custom relative z-10 py-12 md:py-16">
         <motion.div
           variants={staggerContainer}

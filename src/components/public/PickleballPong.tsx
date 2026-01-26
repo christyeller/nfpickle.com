@@ -40,7 +40,7 @@ interface GameState {
 }
 
 // Colors
-const COURT_BLUE = '#1a5f7a'
+const COURT_BLUE = '#3893A4'
 const OUTSIDE_BLUE = '#FDF9F0'
 const LINE_WHITE = 'rgba(255, 255, 255, 0.9)'
 const PLAYER_PADDLE_COLOR = '#E49B0B'

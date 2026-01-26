@@ -111,7 +111,7 @@ export default function Header() {
                     isAboutActive ? 'hover:opacity-80' : 'hover:opacity-80'
                   )}
                   style={{
-                    color: isAboutActive ? '#1A5F7A' : '#1A5F7A'
+                    color: isAboutActive ? '#3893A4' : '#3893A4'
                   }}
                 >
                   About
@@ -126,12 +126,12 @@ export default function Header() {
                     <motion.div
                       layoutId="activeNavIndicator"
                       className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full"
-                      style={{ backgroundColor: '#1A5F7A' }}
+                      style={{ backgroundColor: '#3893A4' }}
                       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                     />
                   )}
                   {isAboutActive && prefersReducedMotion && (
-                    <div className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full" style={{ backgroundColor: '#1A5F7A' }} />
+                    <div className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full" style={{ backgroundColor: '#3893A4' }} />
                   )}
                 </button>
 
@@ -151,8 +151,8 @@ export default function Header() {
                           className={cn(
                             'block px-4 py-3 text-sm font-semibold transition-colors',
                             pathname === link.href
-                              ? 'bg-[#1A5F7A]/10 text-[#1A5F7A]'
-                              : 'text-[#1A5F7A] hover:bg-gray-50'
+                              ? 'bg-[#3893A4]/10 text-[#3893A4]'
+                              : 'text-[#3893A4] hover:bg-gray-50'
                           )}
                           onClick={() => setIsAboutDropdownOpen(false)}
                         >
@@ -262,7 +262,7 @@ export default function Header() {
                       className={cn(
                         'block py-3 px-4 rounded-xl font-bold text-lg transition-colors',
                         pathname === '/'
-                          ? 'bg-[#1A5F7A]/20 text-[#5AAFD4] hover:bg-[#1A5F7A]/30'
+                          ? 'bg-[#3893A4]/20 text-[#5AAFD4] hover:bg-[#3893A4]/30'
                           : 'text-[#5AAFD4]/80 hover:text-[#5AAFD4] hover:bg-white/5'
                       )}
                     >
@@ -277,7 +277,7 @@ export default function Header() {
                       className={cn(
                         'w-full flex items-center justify-between py-3 px-4 rounded-xl font-bold text-lg transition-colors',
                         isAboutActive
-                          ? 'bg-[#1A5F7A]/20 text-[#5AAFD4] hover:bg-[#1A5F7A]/30'
+                          ? 'bg-[#3893A4]/20 text-[#5AAFD4] hover:bg-[#3893A4]/30'
                           : 'text-[#5AAFD4]/80 hover:text-[#5AAFD4] hover:bg-white/5'
                       )}
                     >
@@ -308,7 +308,7 @@ export default function Header() {
                                 className={cn(
                                   'block py-2 px-4 rounded-lg font-medium text-base transition-colors',
                                   pathname === link.href
-                                    ? 'bg-[#1A5F7A]/10 text-[#5AAFD4]'
+                                    ? 'bg-[#3893A4]/10 text-[#5AAFD4]'
                                     : 'text-[#5AAFD4]/60 hover:text-[#5AAFD4] hover:bg-white/5'
                                 )}
                               >
@@ -330,7 +330,7 @@ export default function Header() {
                         className={cn(
                           'block py-3 px-4 rounded-xl font-bold text-lg transition-colors',
                           pathname === link.href
-                            ? 'bg-[#1A5F7A]/20 text-[#5AAFD4] hover:bg-[#1A5F7A]/30'
+                            ? 'bg-[#3893A4]/20 text-[#5AAFD4] hover:bg-[#3893A4]/30'
                             : 'text-[#5AAFD4]/80 hover:text-[#5AAFD4] hover:bg-white/5'
                         )}
                       >
@@ -385,7 +385,7 @@ function NavLink({ href, label, isActive, isScrolled }: NavLinkProps) {
           : 'hover:opacity-80'
       )}
       style={{
-        color: isActive ? '#1A5F7A' : '#1A5F7A'
+        color: isActive ? '#3893A4' : '#3893A4'
       }}
     >
       {label}
@@ -393,12 +393,12 @@ function NavLink({ href, label, isActive, isScrolled }: NavLinkProps) {
         <motion.div
           layoutId="activeNavIndicator"
           className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full"
-          style={{ backgroundColor: '#1A5F7A' }}
+          style={{ backgroundColor: '#3893A4' }}
           transition={{ type: 'spring', stiffness: 400, damping: 30 }}
         />
       )}
       {isActive && prefersReducedMotion && (
-        <div className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full" style={{ backgroundColor: '#1A5F7A' }} />
+        <div className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full" style={{ backgroundColor: '#3893A4' }} />
       )}
     </Link>
   )
