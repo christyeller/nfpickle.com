@@ -37,7 +37,7 @@ export default async function EventPage({ params }: EventPageProps) {
   return (
     <>
       {/* Hero */}
-      <section className="pb-16 bg-gradient-to-br from-primary-dark via-primary to-dark-blue">
+      <section className="pb-16 bg-[#3893A4]">
         <div className="container-custom">
           <Link
             href="/events"
