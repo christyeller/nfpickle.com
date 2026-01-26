@@ -51,7 +51,7 @@ export default function PageHero({
   return (
     <section className="relative pb-20 bg-charcoal-dark overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-court via-court-dark to-purple" />
+      <div className="absolute inset-0" style={{ background: '#3893A4' }} />
 
       {/* Mesh overlay */}
       <div className="absolute inset-0 mesh-background opacity-30" />

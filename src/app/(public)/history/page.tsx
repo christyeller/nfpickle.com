@@ -410,7 +410,7 @@ export default function HistoryPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section bg-gradient-to-br from-court via-court-dark to-purple text-white relative overflow-hidden">
+      <section className="section text-white relative overflow-hidden" style={{ background: '#3893A4' }}>
         <div className="absolute inset-0 mesh-background opacity-30" />
         <motion.div
           className="absolute top-1/4 right-1/4 w-64 h-64 bg-lime/20 rounded-full blur-3xl"
