@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { motion, useReducedMotion } from 'framer-motion'
 import { contactSchema, type ContactFormData } from '@/lib/validations'
-import { MapPin, Mail, Phone, Send, CheckCircle, Clock } from 'lucide-react'
+import { MapPin, Mail, Phone, Send, CheckCircle, Clock, Inbox } from 'lucide-react'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 
 
@@ -202,6 +202,22 @@ export default function ContactPage() {
                 </motion.div>
 
                 <motion.div
+                  className="flex items-start gap-4 p-4 rounded-2xl bg-lime/5 border border-lime/20"
+                  whileHover={prefersReducedMotion ? {} : { x: 4 }}
+                >
+                  <div className="p-3 rounded-xl bg-lime text-white shadow-lg">
+                    <Inbox size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-semibold text-charcoal-dark">Mailing Address</h3>
+                    <p className="text-gray-600">
+                      PO Box 215<br />
+                      Crawford, CO 81415
+                    </p>
+                  </div>
+                </motion.div>
+
+                <motion.div
                   className="flex items-start gap-4 p-4 rounded-2xl bg-coral/5 border border-coral/20"
                   whileHover={prefersReducedMotion ? {} : { x: 4 }}
                 >
@@ -220,19 +236,19 @@ export default function ContactPage() {
                 </motion.div>
 
                 <motion.div
-                  className="flex items-start gap-4 p-4 rounded-2xl bg-lime/5 border border-lime/20"
+                  className="flex items-start gap-4 p-4 rounded-2xl bg-teal/5 border border-teal/20"
                   whileHover={prefersReducedMotion ? {} : { x: 4 }}
                 >
-                  <div className="p-3 rounded-xl bg-lime text-white shadow-lg">
+                  <div className="p-3 rounded-xl bg-teal text-white shadow-lg">
                     <Phone size={24} />
                   </div>
                   <div>
                     <h3 className="font-display font-semibold text-charcoal-dark">Phone</h3>
                     <a
                       href="tel:9702615864"
-                      className="text-lime hover:text-lime/80 transition-colors"
+                      className="text-teal hover:text-teal/80 transition-colors"
                     >
-                      970.261.5864
+                      (970) 261-5864
                     </a>
                   </div>
                 </motion.div>
