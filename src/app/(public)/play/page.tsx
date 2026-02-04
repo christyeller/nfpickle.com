@@ -2,9 +2,10 @@
 
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
-import { MapPin, Clock, Star, Zap, ArrowRight, Info, Mail, Smartphone } from 'lucide-react'
+import { MapPin, Clock, Star, Zap, ArrowRight, Info, Mail, Smartphone, ClipboardList } from 'lucide-react'
 import SectionHeader from '@/components/public/SectionHeader'
 import { ScrollReveal } from '@/components/public/ScrollReveal'
+import { PickleballPong } from '@/components/public/PickleballPong'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 
 const courts = [
@@ -103,27 +104,29 @@ export default function PlayPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="section text-white relative overflow-hidden pt-32" style={{ background: '#3893A4' }}>
-        <div className="absolute inset-0 mesh-background opacity-20" />
+      <section className="min-h-screen flex items-center justify-center text-white relative overflow-hidden">
+        <div className="absolute inset-0" style={{ top: '-50px' }}>
+          <PickleballPong className="w-full h-full" />
+        </div>
 
-        <div className="container-custom relative z-10">
+        <div className="container-custom relative z-10" style={{ marginTop: '50px' }}>
           <div className="max-w-4xl mx-auto text-center">
             <ScrollReveal>
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm font-medium mb-6">
-                <Zap className="w-4 h-4" />
-                Find Your Game
+              <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 text-sm font-medium text-white mb-6">
+                <span className="w-2 h-2 bg-lime rounded-full animate-pulse" />
+                Use your mouse to control the paddle and play a pickleball game now!
               </span>
             </ScrollReveal>
 
             <ScrollReveal delay={0.1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 drop-shadow-lg">
                 Play{' '}
                 <span className="text-lime">Pickleball</span>
               </h1>
             </ScrollReveal>
 
             <ScrollReveal delay={0.2}>
-              <p className="text-xl md:text-2xl text-white/80 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-xl md:text-2xl text-white/80 leading-relaxed max-w-3xl mx-auto drop-shadow-lg">
                 Courts, schedules, and everything you need to get playing
               </p>
             </ScrollReveal>
@@ -151,7 +154,7 @@ export default function PlayPage() {
             <Link href="#basic-rules" className="text-center group">
               <motion.div variants={staggerItem}>
                 <div className="text-3xl md:text-5xl font-display font-bold text-lime mb-1">
-                  <Info className="w-8 h-8 md:w-12 md:h-12 mx-auto group-hover:scale-110 transition-transform" />
+                  <ClipboardList className="w-8 h-8 md:w-12 md:h-12 mx-auto group-hover:scale-110 transition-transform" />
                 </div>
                 <div className="text-sm md:text-base font-medium text-white group-hover:text-lime transition-colors">
                   Basic Rules
@@ -177,21 +180,6 @@ export default function PlayPage() {
           </motion.div>
         </div>
 
-        {/* Bottom wave */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg
-            viewBox="0 0 1440 60"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-auto"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M0 60V30C240 10 480 0 720 10C960 20 1200 40 1440 30V60H0Z"
-              fill="#FCF9F0"
-            />
-          </svg>
-        </div>
       </section>
 
       {/* Court Locations */}
