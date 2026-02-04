@@ -83,11 +83,12 @@ export default function Header() {
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
                 <Image
-                  src="/logo.png"
+                  src="https://media.nfpickle.com/site-assets/new-logo.png"
                   alt="North Fork Pickleball"
                   width={300}
                   height={120}
                   className="h-[120px] w-auto object-contain"
+                  unoptimized
                   priority
                 />
               </motion.div>

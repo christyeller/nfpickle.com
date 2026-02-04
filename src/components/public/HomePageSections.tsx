@@ -104,7 +104,7 @@ export default function HomePageSections({
   return (
     <>
       {/* Features Section */}
-      <section className="section bg-[#FDF9F0] relative overflow-hidden">
+      <section className="section bg-[#FDF9F0] relative overflow-hidden" style={{ paddingTop: '75px' }}>
         {/* Background decorations */}
         <div className="absolute inset-0 grid-pattern opacity-30" />
         <div className="absolute top-0 right-0 w-96 h-96 bg-lime/5 rounded-full blur-3xl" />
@@ -156,36 +156,42 @@ export default function HomePageSections({
               title="Fastest Growing Sport"
               description="Pickleball is the fastest-growing sport in the United States. More people play every year, so the North Fork Valley needs more access to the sport."
               color="lime"
+              imageSrc="https://media.nfpickle.com/site-assets/with-shirley.avif"
             />
             <FeatureCard
               icon="AllAges"
               title="All Ages"
               description="Pickleball is enjoyed by people of all ages, which is very rare for a sport. That increases participation and promotes intergenerational relationships."
               color="coral"
+              imageSrc="https://media.nfpickle.com/site-assets/group.jpg"
             />
             <FeatureCard
               icon="FunPaddle"
               title="Fun & Affordable"
               description="Pickleball is fun, easy to learn, and highly social. No previous experience is necessary and a paddle and a ball are all that is needed. That is important in Delta County."
               color="teal"
+              imageSrc="https://media.nfpickle.com/site-assets/paoniaplayers.jpg"
             />
             <FeatureCard
               icon="MentalHealth"
               title="Improves Mental Health"
               description="Physical activity releases endorphins, while the social interaction boosts mood, leading to reduced depression, stress, and improved life satisfaction, say researchers."
               color="purple"
+              imageSrc="https://media.nfpickle.com/site-assets/pexels-davidgari-17333854.jpg"
             />
             <FeatureCard
               icon="Community"
               title="Builds Community"
               description="Pickleball fosters a strong sense of belonging. It's an easy way to meet new people and form lasting bonds."
               color="lime"
+              imageSrc="https://media.nfpickle.com/site-assets/couple.jpg"
             />
             <FeatureCard
               icon="PhysicalHealth"
               title="Improves Physical Health"
               description="Pickleball improves cardiovascular fitness, joint health, balance, coordination, strength, and weight management."
               color="coral"
+              imageSrc="https://media.nfpickle.com/site-assets/pexels-rodrigo-ortega-2044210904-30864598.jpg"
             />
           </motion.div>
         </div>
@@ -510,18 +516,18 @@ export default function HomePageSections({
       )}
 
       {/* Final CTA */}
-      <section className="relative py-32 overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <Image
-            src="https://media.nfpickle.com/site-assets/courts.jpg"
-            alt="Pickleball court background"
-            fill
-            unoptimized
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-black/60" />
-        </div>
+      <section
+        className="relative py-32 overflow-hidden"
+        style={{
+          backgroundImage: 'url(https://media.nfpickle.com/site-assets/courts.jpg)',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/60" />
 
         <div className="container-custom relative z-10 text-center">
           <ScrollReveal className="max-w-3xl mx-auto">

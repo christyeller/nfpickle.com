@@ -11,21 +11,28 @@ import {
   heroCTA,
 } from '@/lib/animations'
 import { MagneticButton } from './MagneticButton'
-import { PickleballPong } from './PickleballPong'
 import { CountUp } from './CountUp'
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Pickleball Pong Game Background */}
-      <div className="absolute inset-0" style={{ top: '-50px' }}>
-        <PickleballPong className="w-full h-full" />
+      {/* Video Background */}
+      <div className="absolute inset-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source src="https://media.nfpickle.com/site-assets/istockphoto-1411720682-640_adpp_is.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
       {/* Content */}
       <motion.div
         className="container-custom relative z-10 text-center text-white px-4"
-        style={{ marginTop: '50px' }}
         variants={heroContent}
         initial="hidden"
         animate="visible"
@@ -40,7 +47,7 @@ export default function Hero() {
             animate={{ scale: [1, 1.2, 1], opacity: [1, 0.8, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
-          <span className="text-sm font-medium text-white">Grab the orange paddle on the left and play a pickleball game now!</span>
+          <span className="text-sm font-medium text-white">North Fork Valley&apos;s Premier Pickleball Community</span>
           <Sparkles className="w-4 h-4 text-white" />
         </motion.div>
 
@@ -50,7 +57,7 @@ export default function Hero() {
           className="font-display font-black mb-6 leading-[0.9]"
         >
           <span className="block text-5xl sm:text-6xl md:text-8xl lg:text-9xl text-lime drop-shadow-lg">
-            North Fork <span className="text-white">Pickleball</span>
+            North Fork <span className="text-white">Pickleball Club</span>
           </span>
         </motion.h1>
 

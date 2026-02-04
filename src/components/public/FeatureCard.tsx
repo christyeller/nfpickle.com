@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import {
   Users,
@@ -78,6 +79,7 @@ interface FeatureCardProps {
   index?: number
   color?: keyof typeof colorVariants
   href?: string
+  imageSrc?: string
 }
 
 export default function FeatureCard({
@@ -87,6 +89,7 @@ export default function FeatureCard({
   index = 0,
   color = 'lime',
   href,
+  imageSrc,
 }: FeatureCardProps) {
   const Icon = getIcon(icon)
   const prefersReducedMotion = useReducedMotion()
@@ -105,44 +108,59 @@ export default function FeatureCard({
         maxTilt={8}
         scale={1.02}
       >
-        {/* Gradient border on hover */}
+        {/* Background fill on hover */}
         <div
-          className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${colors.gradient}
-            opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+          className="absolute -inset-4 rounded-3xl bg-[#207348]
+            opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         />
 
-        {/* Icon container */}
+        {/* Icon or Image container */}
         <motion.div
-          className="relative mb-6"
-          whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: 5 }}
+          className="relative z-10 mb-6"
+          whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: imageSrc ? 0 : 5 }}
           transition={{ type: 'spring', stiffness: 400, damping: 17 }}
         >
-          <div
-            className={`w-16 h-16 rounded-2xl ${colors.iconBg} flex items-center justify-center
-              shadow-lg transition-shadow duration-300 group-hover:shadow-xl`}
-          >
-            <Icon className={`w-8 h-8 ${colors.iconText}`} />
-          </div>
-          {/* Glow effect */}
-          <div
-            className={`absolute inset-0 w-16 h-16 rounded-2xl ${colors.iconBg}
-              opacity-0 group-hover:opacity-40 blur-xl transition-opacity duration-500`}
-          />
+          {imageSrc ? (
+            <div className="w-[100px] h-[100px] rounded-full overflow-hidden shadow-lg transition-shadow duration-300 group-hover:shadow-xl">
+              <Image
+                src={imageSrc}
+                alt={title}
+                width={100}
+                height={100}
+                unoptimized
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ) : (
+            <>
+              <div
+                className={`w-16 h-16 rounded-2xl ${colors.iconBg} flex items-center justify-center
+                  shadow-lg transition-shadow duration-300 group-hover:shadow-xl`}
+              >
+                <Icon className={`w-8 h-8 ${colors.iconText}`} />
+              </div>
+              {/* Glow effect */}
+              <div
+                className={`absolute inset-0 w-16 h-16 rounded-2xl ${colors.iconBg}
+                  opacity-0 group-hover:opacity-40 blur-xl transition-opacity duration-500`}
+              />
+            </>
+          )}
         </motion.div>
 
         {/* Content */}
         <h3
-          className={`text-xl font-display font-bold mb-3 text-charcoal-dark
-            ${colors.hoverText} transition-colors duration-300`}
+          className="relative z-10 text-xl font-display font-bold mb-3 text-charcoal-dark
+            group-hover:text-white transition-colors duration-300"
         >
           {title}
         </h3>
-        <p className="text-gray-600 leading-relaxed">{description}</p>
+        <p className="relative z-10 text-gray-600 group-hover:text-white/90 leading-relaxed transition-colors duration-300">{description}</p>
 
         {/* Arrow indicator */}
         {href && (
           <motion.div
-            className={`mt-6 flex items-center gap-2 font-medium ${
+            className={`relative z-10 mt-6 flex items-center gap-2 font-medium ${
               color === 'lime' ? 'text-lime-700' :
               color === 'coral' ? 'text-coral' :
               color === 'teal' ? 'text-teal' :
@@ -162,11 +180,6 @@ export default function FeatureCard({
           </motion.div>
         )}
 
-        {/* Decorative corner */}
-        <div
-          className="absolute top-0 right-0 w-20 h-20 bg-[#FDF9F0]
-            rounded-bl-[100px] rounded-tr-2xl"
-        />
       </CardWrapper>
     </motion.div>
   )

@@ -36,6 +36,14 @@ export default function Footer() {
         >
           {/* Brand Section */}
           <motion.div variants={staggerItem} className="lg:col-span-2">
+            <Image
+              src="https://media.nfpickle.com/site-assets/whitelogo.png"
+              alt="North Fork Pickleball Club"
+              width={250}
+              height={100}
+              unoptimized
+              className="mb-6 h-auto w-[250px] object-contain"
+            />
             <p className="text-white mb-8 max-w-md leading-relaxed">
               The North Fork Pickleball Club (NFPC) exists to provide a fun, healthy, recreational activity for our rural North Fork Community while promoting exercise, development of skills and camaraderie through the enjoyment of pickleball.
             </p>

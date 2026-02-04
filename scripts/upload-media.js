@@ -16,8 +16,8 @@ require('dotenv').config();
 const MEDIA_DIR = path.join(__dirname, '..', 'media');
 const UPLOADED_LOG = path.join(MEDIA_DIR, '.uploaded');
 
-// Supported image extensions
-const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.avif', '.svg'];
+// Supported media extensions
+const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.avif', '.svg', '.mp4'];
 
 // MIME types
 const MIME_TYPES = {
@@ -28,6 +28,7 @@ const MIME_TYPES = {
   '.webp': 'image/webp',
   '.avif': 'image/avif',
   '.svg': 'image/svg+xml',
+  '.mp4': 'video/mp4',
 };
 
 async function main() {
