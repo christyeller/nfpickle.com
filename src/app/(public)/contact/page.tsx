@@ -114,7 +114,7 @@ export default function ContactPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
             >
-              Questions about pickleball, membership, or just want to say hello?
+              Questions about pickleball, events, or just want to say hello?
               Drop us a line — we promise we&apos;re friendlier than our backhands.
             </motion.p>
 
@@ -178,7 +178,7 @@ export default function ContactPage() {
                 Get in Touch
               </h2>
               <p className="text-gray-600 mb-8 leading-relaxed">
-                Whether you have questions about open play, membership, or just want to learn
+                Whether you have questions about open play, events, or just want to learn
                 more about pickleball in the North Fork Valley, we&apos;re here to help.
               </p>
 

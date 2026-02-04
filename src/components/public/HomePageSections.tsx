@@ -13,6 +13,7 @@ import {
   Award,
   Star,
   MapPin,
+  Building2,
 } from 'lucide-react'
 import { staggerContainer, staggerItem, fadeInUp } from '@/lib/animations'
 import EventCard from './EventCard'
@@ -322,6 +323,77 @@ export default function HomePageSections({
             >
               Join Us For Open Play
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Court Renderings Section */}
+      <section className="section bg-[#FDF9F0] relative overflow-hidden">
+        <div className="absolute inset-0 grid-pattern opacity-30" />
+        <div className="absolute top-0 left-0 w-96 h-96 bg-teal/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-lime/5 rounded-full blur-3xl" />
+
+        <div className="container-custom relative z-10">
+          <ScrollReveal className="text-center mb-16">
+            <motion.span
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal/10 text-teal text-sm font-medium mb-4"
+            >
+              <Building2 className="w-4 h-4" />
+              Coming Soon
+            </motion.span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-charcoal-dark">
+              Our New Courts in <span className="text-teal">Hotchkiss</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Here are the renderings of our proposed courts to be built in Hotchkiss at the Delta County Fairgrounds. <span className="text-[#F38D09] font-semibold">Help us make this dream of pickleball in Hotchkiss a reality!</span>
+            </p>
+          </ScrollReveal>
+
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="grid md:grid-cols-3 gap-4 md:gap-6"
+          >
+            {[
+              { src: 'https://media.nfpickle.com/media/content/rendering1.png', alt: 'Court rendering - aerial view' },
+              { src: 'https://media.nfpickle.com/media/content/rendering2.png', alt: 'Court rendering - side view' },
+              { src: 'https://media.nfpickle.com/media/content/rendering3.png', alt: 'Court rendering - perspective view' },
+            ].map((image, index) => (
+              <motion.div
+                key={index}
+                variants={staggerItem}
+                className="group relative aspect-video overflow-hidden rounded-2xl shadow-elevation-2 hover:shadow-elevation-3 transition-shadow duration-300"
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  unoptimized
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="text-center mt-12"
+          >
+            <Link
+              href="/donate"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#F38D09] text-white font-bold text-lg rounded-xl hover:bg-[#F38D09]/90 transition-colors"
+            >
+              <Heart className="w-5 h-5" />
+              Support This Project
             </Link>
           </motion.div>
         </div>

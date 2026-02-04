@@ -429,11 +429,11 @@ export default function AboutPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/membership"
+                href="/play"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-white text-coral
                   font-bold text-lg rounded-xl hover:bg-white/90 transition-colors"
               >
-                Become a Member
+                Find Open Play
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <Link

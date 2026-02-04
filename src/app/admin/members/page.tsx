@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import AdminHeader from '@/components/admin/AdminHeader'
 import DataTable from '@/components/admin/DataTable'
 import { formatDate } from '@/lib/utils'
-import { membershipTierLabels, skillLevelLabels, type MembershipTier, type SkillLevel } from '@/types'
+import { skillLevelLabels, type SkillLevel } from '@/types'
 import type { Member } from '@prisma/client'
 
 export default function MembersPage() {
@@ -57,23 +57,6 @@ export default function MembersPage() {
         member.skillLevel
           ? skillLevelLabels[member.skillLevel as SkillLevel]
           : '-',
-    },
-    {
-      key: 'membershipTier',
-      label: 'Membership',
-      render: (member: Member) => (
-        <span
-          className={`px-2 py-1 text-xs rounded ${
-            member.membershipTier === 'lifetime'
-              ? 'bg-purple-100 text-purple-700'
-              : member.membershipTier === 'annual'
-              ? 'bg-green-100 text-green-700'
-              : 'bg-gray-100 text-gray-700'
-          }`}
-        >
-          {membershipTierLabels[member.membershipTier as MembershipTier]}
-        </span>
-      ),
     },
     {
       key: 'joinedAt',

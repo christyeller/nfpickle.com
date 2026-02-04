@@ -46,7 +46,6 @@ export const memberSchema = z.object({
   lastName: z.string().min(1, 'Last name is required'),
   phone: z.string().optional(),
   skillLevel: z.enum(['beginner', 'intermediate', 'advanced']).optional(),
-  membershipTier: z.enum(['free', 'annual', 'lifetime']).default('free'),
 })
 
 export const settingsSchema = z.object({
