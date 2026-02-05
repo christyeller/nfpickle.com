@@ -114,7 +114,7 @@ export default function PlayPage() {
             <ScrollReveal>
               <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 text-sm font-medium text-white mb-6">
                 <span className="w-2 h-2 bg-lime rounded-full animate-pulse" />
-                Use your mouse to control the paddle and play a pickleball game now!
+                Use your mouse to control the orange paddle and play a pickleball game now!
               </span>
             </ScrollReveal>
 
@@ -129,6 +129,18 @@ export default function PlayPage() {
               <p className="text-xl md:text-2xl text-white/80 leading-relaxed max-w-3xl mx-auto drop-shadow-lg">
                 Courts, schedules, and everything you need to get playing
               </p>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.3}>
+              <div className="mt-8">
+                <Link
+                  href="#open-play"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-[#F38D09] text-white font-bold text-lg rounded-xl hover:bg-[#F38D09]/90 transition-colors"
+                >
+                  <Smartphone className="w-5 h-5" />
+                  Download the Team App for current Play Schedules
+                </Link>
+              </div>
             </ScrollReveal>
           </div>
 
@@ -183,7 +195,7 @@ export default function PlayPage() {
       </section>
 
       {/* Court Locations */}
-      <section className="section bg-cream relative overflow-hidden">
+      <section className="section bg-cream relative overflow-hidden pt-[40px]">
         <div className="absolute top-0 right-0 w-96 h-96 bg-lime/5 rounded-full blur-3xl" />
 
         <div className="container-custom relative z-10">
@@ -260,20 +272,32 @@ export default function PlayPage() {
       </section>
 
       {/* TeamReach App Section */}
-      <section id="open-play" className="section bg-white relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-teal/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-lime/5 rounded-full blur-3xl" />
+      <section
+        id="open-play"
+        className="section relative overflow-hidden"
+        style={{
+          backgroundImage: 'url(https://media.nfpickle.com/site-assets/paoniacourts.jpg)',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        <div className="absolute inset-0 bg-black/50" />
 
         <div className="container-custom relative z-10">
-          <SectionHeader
-            title="Find Open Play"
-            subtitle="Download TeamReach to see when and where people are playing"
-            badge="Stay Connected"
-            badgeIcon={Smartphone}
-            badgeColor="teal"
-            highlightWord="Play"
-            highlightColor="teal"
-          />
+          <div className="text-center mb-12">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white text-sm font-medium mb-4">
+              <Smartphone className="w-4 h-4" />
+              Stay Connected
+            </span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">
+              Find Open <span className="text-[#F38D09]">Play</span>
+            </h2>
+            <p className="text-xl text-white font-bold max-w-3xl mx-auto">
+              Download the TeamReach app below and enter your group code to see when and where people are playing in our region
+            </p>
+          </div>
 
           {/* App Download Buttons */}
           <motion.div
@@ -314,7 +338,7 @@ export default function PlayPage() {
             transition={{ delay: 0.2 }}
             className="max-w-3xl mx-auto"
           >
-            <h3 className="text-xl font-display font-semibold text-charcoal-dark text-center mb-6">
+            <h3 className="text-xl font-display font-semibold text-white text-center mb-6">
               Enter your group code to join:
             </h3>
             <motion.div

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { motion, useReducedMotion } from 'framer-motion'
 import { contactSchema, type ContactFormData } from '@/lib/validations'
-import { MapPin, Mail, Phone, Send, CheckCircle, Clock, Inbox } from 'lucide-react'
+import { MapPin, Mail, Phone, Send, CheckCircle, Inbox } from 'lucide-react'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 
 
@@ -51,15 +51,17 @@ export default function ContactPage() {
   return (
     <>
       {/* Custom Creative Hero */}
-      <section className="relative pt-20 pb-32 bg-charcoal-dark overflow-hidden">
-        {/* Background */}
-        <div
-          className="absolute inset-0"
-          style={{ background: '#3893A4' }}
-        />
-
-        {/* Mesh overlay */}
-        <div className="absolute inset-0 mesh-background opacity-20" />
+      <section
+        className="relative pt-28 pb-[300px] overflow-hidden"
+        style={{
+          backgroundImage: 'url(https://media.nfpickle.com/site-assets/820092564-img_2068.jpeg)',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/50" />
 
         {/* Content */}
         <div className="container-custom relative z-10 text-center">
@@ -109,7 +111,7 @@ export default function ContactPage() {
 
             {/* Subtitle */}
             <motion.p
-              className="text-xl text-white/70 max-w-xl mx-auto mb-8"
+              className="text-xl text-white max-w-xl mx-auto mb-8"
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
@@ -144,12 +146,12 @@ export default function ContactPage() {
         </div>
 
         {/* Bottom wave */}
-        <div className="absolute bottom-0 left-0 right-0">
+        <div className="absolute -bottom-px left-0 right-0">
           <svg
             viewBox="0 0 1440 60"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-auto"
+            className="w-full h-auto block"
             preserveAspectRatio="none"
           >
             <path
@@ -161,7 +163,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Form & Info */}
-      <section className="section bg-cream relative overflow-hidden">
+      <section className="section bg-cream relative overflow-hidden -mt-px pt-[25px]">
         <div className="absolute top-0 left-0 w-96 h-96 bg-coral/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-teal/5 rounded-full blur-3xl" />
 
@@ -191,7 +193,7 @@ export default function ContactPage() {
                     <MapPin size={24} />
                   </div>
                   <div>
-                    <h3 className="font-display font-semibold text-charcoal-dark">Location</h3>
+                    <h3 className="font-display font-semibold text-charcoal-dark text-base">Location</h3>
                     <p className="text-gray-600">
                       Doc Maloney Way<br />
                       at Delta County Fairgrounds<br />
@@ -209,7 +211,7 @@ export default function ContactPage() {
                     <Inbox size={24} />
                   </div>
                   <div>
-                    <h3 className="font-display font-semibold text-charcoal-dark">Mailing Address</h3>
+                    <h3 className="font-display font-semibold text-charcoal-dark text-base">Mailing Address</h3>
                     <p className="text-gray-600">
                       PO Box 215<br />
                       Crawford, CO 81415
@@ -225,7 +227,7 @@ export default function ContactPage() {
                     <Mail size={24} />
                   </div>
                   <div>
-                    <h3 className="font-display font-semibold text-charcoal-dark">Email</h3>
+                    <h3 className="font-display font-semibold text-charcoal-dark text-base">Email</h3>
                     <a
                       href="mailto:info@northforkpickleball.com"
                       className="text-coral hover:text-coral/80 transition-colors"
@@ -243,7 +245,7 @@ export default function ContactPage() {
                     <Phone size={24} />
                   </div>
                   <div>
-                    <h3 className="font-display font-semibold text-charcoal-dark">Phone</h3>
+                    <h3 className="font-display font-semibold text-charcoal-dark text-base">Phone</h3>
                     <a
                       href="tel:9702615864"
                       className="text-teal hover:text-teal/80 transition-colors"
@@ -254,19 +256,6 @@ export default function ContactPage() {
                 </motion.div>
               </div>
 
-              <motion.div
-                className="mt-8 p-6 rounded-2xl bg-lime/5 border border-lime/20"
-                whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
-              >
-                <div className="flex items-start gap-3 mb-3">
-                  <Clock size={20} className="text-lime-700 mt-0.5" />
-                  <h3 className="font-display font-semibold text-charcoal-dark">Open Play</h3>
-                </div>
-                <p className="text-gray-600">
-                  The best way to get involved is to show up at one of our open play sessions!
-                  Check our schedule and come play - no RSVP needed.
-                </p>
-              </motion.div>
             </motion.div>
 
             {/* Contact Form */}

@@ -22,15 +22,17 @@ export default function EventsPageClient({
   return (
     <>
       {/* Hero Section */}
-      <section className="relative pt-20 pb-32 bg-charcoal-dark overflow-hidden">
-        {/* Background */}
-        <div
-          className="absolute inset-0"
-          style={{ background: '#3893A4' }}
-        />
-
-        {/* Mesh overlay */}
-        <div className="absolute inset-0 mesh-background opacity-20" />
+      <section
+        className="relative pt-28 pb-[300px] overflow-hidden"
+        style={{
+          backgroundImage: 'url(https://media.nfpickle.com/site-assets/tournament.jpg)',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/50" />
 
         {/* Content */}
         <div className="container-custom relative z-10 text-center">
@@ -58,12 +60,12 @@ export default function EventsPageClient({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
             >
-              <span className="text-coral">Events</span>
+              <span className="text-white">Events</span>
             </motion.h1>
 
             {/* Subtitle */}
             <motion.p
-              className="text-xl text-white/70 max-w-xl mx-auto"
+              className="text-xl text-white max-w-xl mx-auto"
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
@@ -74,12 +76,12 @@ export default function EventsPageClient({
         </div>
 
         {/* Bottom wave */}
-        <div className="absolute bottom-0 left-0 right-0">
+        <div className="absolute -bottom-px left-0 right-0">
           <svg
             viewBox="0 0 1440 60"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-auto"
+            className="w-full h-auto block"
             preserveAspectRatio="none"
           >
             <path
@@ -91,7 +93,7 @@ export default function EventsPageClient({
       </section>
 
       {/* Upcoming Events */}
-      <section className="section bg-cream relative overflow-hidden">
+      <section className="section bg-cream relative overflow-hidden -mt-px pt-[25px]">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-lime/10 via-teal/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
 
         <div className="container-custom relative z-10">

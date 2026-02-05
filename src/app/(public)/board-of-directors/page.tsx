@@ -134,7 +134,7 @@ export default function BoardOfDirectorsPage() {
         }}
       >
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-black/50" />
 
         {/* Content */}
         <div className="container-custom relative z-10 text-center">
@@ -177,7 +177,7 @@ export default function BoardOfDirectorsPage() {
 
             {/* Subtitle */}
             <motion.p
-              className="text-xl text-white/70 max-w-xl mx-auto"
+              className="text-xl text-white max-w-xl mx-auto"
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
@@ -205,7 +205,7 @@ export default function BoardOfDirectorsPage() {
       </section>
 
       {/* Board Section */}
-      <section className="section bg-cream relative overflow-hidden -mt-px">
+      <section className="section bg-cream relative overflow-hidden -mt-px pt-[25px]">
         <div className="absolute top-0 left-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-teal/5 rounded-full blur-3xl" />
 

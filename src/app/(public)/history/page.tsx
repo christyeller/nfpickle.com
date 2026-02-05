@@ -21,7 +21,7 @@ export default function HistoryPage() {
         }}
       >
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-black/50" />
 
         {/* Content */}
         <div className="container-custom relative z-10 text-center">
@@ -64,7 +64,7 @@ export default function HistoryPage() {
 
             {/* Subtitle */}
             <motion.p
-              className="text-xl text-white/70 max-w-xl mx-auto"
+              className="text-xl text-white max-w-xl mx-auto"
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}

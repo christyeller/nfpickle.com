@@ -15,15 +15,17 @@ export default function NewsPageClient({ posts }: NewsPageClientProps) {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative pt-20 pb-32 bg-charcoal-dark overflow-hidden">
-        {/* Background */}
-        <div
-          className="absolute inset-0"
-          style={{ background: '#3893A4' }}
-        />
-
-        {/* Mesh overlay */}
-        <div className="absolute inset-0 mesh-background opacity-20" />
+      <section
+        className="relative pt-28 pb-[300px] overflow-hidden"
+        style={{
+          backgroundImage: 'url(https://media.nfpickle.com/site-assets/820092544-img_2992.jpeg)',
+          backgroundPosition: 'center 40%',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/50" />
 
         {/* Content */}
         <div className="container-custom relative z-10 text-center">
@@ -51,12 +53,12 @@ export default function NewsPageClient({ posts }: NewsPageClientProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
             >
-              <span className="text-teal">News</span>
+              <span className="text-white">News</span>
             </motion.h1>
 
             {/* Subtitle */}
             <motion.p
-              className="text-xl text-white/70 max-w-xl mx-auto"
+              className="text-xl text-white max-w-xl mx-auto"
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
@@ -67,12 +69,12 @@ export default function NewsPageClient({ posts }: NewsPageClientProps) {
         </div>
 
         {/* Bottom wave */}
-        <div className="absolute bottom-0 left-0 right-0">
+        <div className="absolute -bottom-px left-0 right-0">
           <svg
             viewBox="0 0 1440 60"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-auto"
+            className="w-full h-auto block"
             preserveAspectRatio="none"
           >
             <path
@@ -84,7 +86,7 @@ export default function NewsPageClient({ posts }: NewsPageClientProps) {
       </section>
 
       {/* Posts */}
-      <section className="section bg-cream">
+      <section className="section bg-cream -mt-px pt-[25px]">
         <div className="container-custom">
           {posts.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
