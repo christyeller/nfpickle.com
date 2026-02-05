@@ -36,9 +36,10 @@ export default function Footer() {
         >
           {/* Brand Section */}
           <motion.div variants={staggerItem} className="lg:col-span-2">
+            <p className="text-white/70 text-sm font-semibold uppercase tracking-wider mb-2">Sponsored By:</p>
             <Image
-              src="https://media.nfpickle.com/site-assets/whitelogo.png"
-              alt="North Fork Pickleball Club"
+              src="https://media.nfpickle.com/site-assets/white-dmea.svg"
+              alt="DMEA"
               width={250}
               height={100}
               unoptimized

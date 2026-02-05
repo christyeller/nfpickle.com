@@ -451,7 +451,6 @@ export default function HomePageSections({
               quote="It has been so much fun learning how to play pickleball. I have enjoyed being more active and it's a great way to connect and meet new people."
               author="Karen Kropp"
               role="Club Member"
-              variant="featured"
               accentColor="teal"
             />
             <TestimonialCard
