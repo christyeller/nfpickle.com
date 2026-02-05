@@ -343,19 +343,6 @@ export default function ContactPage() {
 
                         <div>
                           <label className="block text-sm font-medium text-charcoal-dark mb-2">
-                            Subject
-                          </label>
-                          <input
-                            {...register('subject')}
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50
-                              focus:border-teal focus:ring-2 focus:ring-teal/20 focus:bg-white
-                              transition-all outline-none"
-                            placeholder="What's this about?"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block text-sm font-medium text-charcoal-dark mb-2">
                             Message *
                           </label>
                           <textarea
