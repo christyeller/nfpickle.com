@@ -2,49 +2,8 @@
 
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Users, Target, Heart, MapPin, Zap, ArrowRight, Calendar } from 'lucide-react'
+import { ArrowRight, Calendar } from 'lucide-react'
 import { ScrollReveal } from '@/components/public/ScrollReveal'
-import SectionHeader from '@/components/public/SectionHeader'
-import { staggerContainer, staggerItem } from '@/lib/animations'
-
-const values = [
-  {
-    icon: Users,
-    title: 'Community First',
-    description: 'Building connections through the shared love of pickleball.',
-    color: 'lime' as const,
-  },
-  {
-    icon: Heart,
-    title: 'Inclusivity',
-    description: 'Welcoming players of all ages, abilities, and backgrounds.',
-    color: 'coral' as const,
-  },
-  {
-    icon: Target,
-    title: 'Growth',
-    description: 'Helping every player improve their game and enjoy the sport.',
-    color: 'teal' as const,
-  },
-]
-
-const colorMap = {
-  lime: {
-    bg: 'bg-lime/10',
-    icon: 'bg-lime text-court-dark',
-    ring: 'ring-lime/20',
-  },
-  coral: {
-    bg: 'bg-coral/10',
-    icon: 'bg-coral text-white',
-    ring: 'ring-coral/20',
-  },
-  teal: {
-    bg: 'bg-teal/10',
-    icon: 'bg-teal text-white',
-    ring: 'ring-teal/20',
-  },
-}
 
 export default function HistoryPage() {
   const prefersReducedMotion = useReducedMotion()
@@ -52,15 +11,17 @@ export default function HistoryPage() {
   return (
     <>
       {/* Custom Creative Hero */}
-      <section className="relative pt-28 pb-40 bg-charcoal-dark overflow-hidden">
-        {/* Background */}
-        <div
-          className="absolute inset-0"
-          style={{ background: '#3893A4' }}
-        />
-
-        {/* Mesh overlay */}
-        <div className="absolute inset-0 mesh-background opacity-20" />
+      <section
+        className="relative pt-28 pb-40 overflow-hidden"
+        style={{
+          backgroundImage: 'url(https://media.nfpickle.com/site-assets/crawford-court.jpg)',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/30" />
 
         {/* Content */}
         <div className="container-custom relative z-10 text-center">
@@ -114,12 +75,12 @@ export default function HistoryPage() {
         </div>
 
         {/* Bottom wave */}
-        <div className="absolute bottom-0 left-0 right-0">
+        <div className="absolute -bottom-px left-0 right-0">
           <svg
             viewBox="0 0 1440 60"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-auto"
+            className="w-full h-auto block"
             preserveAspectRatio="none"
           >
             <path
@@ -131,7 +92,7 @@ export default function HistoryPage() {
       </section>
 
       {/* Timeline Section */}
-      <section className="section bg-cream relative overflow-hidden">
+      <section className="section bg-cream relative overflow-hidden -mt-px">
         <div className="absolute top-0 left-0 w-96 h-96 bg-teal/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-lime/5 rounded-full blur-3xl" />
 
@@ -282,146 +243,18 @@ export default function HistoryPage() {
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="section bg-gray-50 relative overflow-hidden">
-        <div className="absolute inset-0 dots-pattern opacity-30" />
-
-        <div className="container-custom relative z-10">
-          <SectionHeader
-            title="Our Values"
-            subtitle="What guides everything we do"
-            badge="What We Believe"
-            badgeIcon={Heart}
-            badgeColor="coral"
-            highlightWord="Values"
-            highlightColor="coral"
-          />
-
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto"
-          >
-            {values.map((value) => {
-              const colors = colorMap[value.color]
-              return (
-                <motion.div
-                  key={value.title}
-                  variants={staggerItem}
-                  className="text-center"
-                >
-                  <motion.div
-                    className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl ${colors.icon}
-                      shadow-lg mb-6 ring-8 ${colors.ring}`}
-                    whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: 5 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                  >
-                    <value.icon size={36} />
-                  </motion.div>
-                  <h3 className="text-xl font-display font-bold text-charcoal-dark mb-2">
-                    {value.title}
-                  </h3>
-                  <p className="text-gray-600">{value.description}</p>
-                </motion.div>
-              )
-            })}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Location Section */}
-      <section className="section bg-cream relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl" />
-
-        <div className="container-custom relative z-10">
-          <SectionHeader
-            title="Our Location"
-            subtitle="Playing in the beautiful North Fork Valley"
-            badge="Find Us"
-            badgeIcon={MapPin}
-            badgeColor="purple"
-            highlightWord="Location"
-            highlightColor="purple"
-          />
-
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              className="grid md:grid-cols-2 gap-8 items-center"
-              initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div>
-                <motion.div
-                  className="flex items-start gap-4 mb-6 p-4 rounded-2xl bg-purple/5 border border-purple/20"
-                  whileHover={prefersReducedMotion ? {} : { x: 4 }}
-                >
-                  <div className="p-3 rounded-xl bg-purple text-white shadow-lg">
-                    <MapPin size={24} />
-                  </div>
-                  <div>
-                    <h3 className="font-display font-semibold text-lg text-charcoal-dark">
-                      Paonia Town Park
-                    </h3>
-                    <p className="text-gray-600">214 Grand Ave, Paonia, CO 81428</p>
-                  </div>
-                </motion.div>
-
-                <div className="space-y-4 text-gray-600">
-                  <ScrollReveal delay={0.1}>
-                    <p>
-                      Our primary courts are located at Paonia Town Park, featuring 4 dedicated
-                      pickleball courts with lights for evening play. The park offers parking,
-                      restrooms, and shaded areas for spectators.
-                    </p>
-                  </ScrollReveal>
-                  <ScrollReveal delay={0.2}>
-                    <p>
-                      Additional courts are available at Hotchkiss Town Park, and we&apos;re
-                      working to expand facilities throughout the valley.
-                    </p>
-                  </ScrollReveal>
-                </div>
-              </div>
-
-              <ScrollReveal>
-                <div className="relative">
-                  <div className="absolute -inset-2 bg-gradient-to-r from-purple via-teal to-lime rounded-3xl blur-lg opacity-30" />
-                  <div className="relative rounded-2xl aspect-video border border-gray-200 overflow-hidden">
-                    <iframe
-                      src="https://maps.google.com/maps?q=Paonia+Town+Park,+214+Grand+Ave,+Paonia,+CO+81428&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                      width="100%"
-                      height="100%"
-                      style={{ border: 0 }}
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      title="Paonia Town Park Location"
-                      className="absolute inset-0"
-                    />
-                  </div>
-                </div>
-              </ScrollReveal>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section className="section text-white relative overflow-hidden" style={{ background: '#3893A4' }}>
-        <div className="absolute inset-0 mesh-background opacity-30" />
-        <motion.div
-          className="absolute top-1/4 right-1/4 w-64 h-64 bg-lime/20 rounded-full blur-3xl"
-          animate={prefersReducedMotion ? {} : { scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 4, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-coral/20 rounded-full blur-3xl"
-          animate={prefersReducedMotion ? {} : { scale: [1.2, 1, 1.2], opacity: [0.5, 0.3, 0.5] }}
-          transition={{ duration: 4, repeat: Infinity }}
-        />
+      <section
+        className="section text-white relative overflow-hidden"
+        style={{
+          backgroundImage: 'url(https://media.nfpickle.com/site-assets/gallery-2.jpg)',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        <div className="absolute inset-0 bg-black/50" />
 
         <div className="container-custom relative z-10 text-center">
           <ScrollReveal>

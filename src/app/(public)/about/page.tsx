@@ -77,8 +77,16 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="section text-white relative overflow-hidden pt-32" style={{ background: '#3893A4' }}>
-        <div className="absolute inset-0 mesh-background opacity-20" />
+      <section
+        className="section text-white relative overflow-hidden pt-32"
+        style={{
+          backgroundImage: 'url(https://media.nfpickle.com/site-assets/paoniaplayers.jpg)',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        <div className="absolute inset-0 bg-black/50" />
 
         <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -91,7 +99,7 @@ export default function AboutPage() {
 
             <ScrollReveal delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-                Bringing Pickleball to the{' '}
+                Growing Pickleball in the{' '}
                 <span className="text-lime">North Fork Valley</span>
               </h1>
             </ScrollReveal>
@@ -222,6 +230,18 @@ export default function AboutPage() {
             <h3 className="text-xl md:text-2xl font-display font-bold text-charcoal-dark leading-relaxed text-center max-w-4xl mx-auto">
               Providing access to pickleball facilities would allow our high school students to participate in a sport that is swiftly gaining recognition at both the varsity and collegiate levels.
             </h3>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.4}>
+            <div className="text-center mt-8">
+              <Link
+                href="/history"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-coral text-white font-bold text-lg rounded-xl hover:bg-coral/90 transition-colors"
+              >
+                History of Pickleball in the Valley
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
           </ScrollReveal>
         </div>
       </section>
@@ -412,11 +432,17 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section bg-coral text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-white rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2" />
-        </div>
+      <section
+        className="section text-white relative overflow-hidden"
+        style={{
+          backgroundImage: 'url(https://media.nfpickle.com/site-assets/with-tony.jpeg)',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        <div className="absolute inset-0 bg-black/50" />
 
         <div className="container-custom relative z-10 text-center">
           <ScrollReveal>

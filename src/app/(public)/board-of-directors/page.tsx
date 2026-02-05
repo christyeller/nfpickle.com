@@ -124,15 +124,17 @@ export default function BoardOfDirectorsPage() {
   return (
     <>
       {/* Custom Creative Hero */}
-      <section className="relative pt-28 pb-40 bg-charcoal-dark overflow-hidden">
-        {/* Background */}
-        <div
-          className="absolute inset-0"
-          style={{ background: '#3893A4' }}
-        />
-
-        {/* Mesh overlay */}
-        <div className="absolute inset-0 mesh-background opacity-20" />
+      <section
+        className="relative pt-28 pb-[300px] overflow-hidden"
+        style={{
+          backgroundImage: 'url(https://media.nfpickle.com/site-assets/in-paonia.jpg)',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/30" />
 
         {/* Content */}
         <div className="container-custom relative z-10 text-center">
@@ -186,12 +188,12 @@ export default function BoardOfDirectorsPage() {
         </div>
 
         {/* Bottom wave */}
-        <div className="absolute bottom-0 left-0 right-0">
+        <div className="absolute -bottom-px left-0 right-0">
           <svg
             viewBox="0 0 1440 60"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-auto"
+            className="w-full h-auto block"
             preserveAspectRatio="none"
           >
             <path
@@ -203,7 +205,7 @@ export default function BoardOfDirectorsPage() {
       </section>
 
       {/* Board Section */}
-      <section className="section bg-cream relative overflow-hidden">
+      <section className="section bg-cream relative overflow-hidden -mt-px">
         <div className="absolute top-0 left-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-teal/5 rounded-full blur-3xl" />
 
@@ -223,13 +225,17 @@ export default function BoardOfDirectorsPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section text-white relative overflow-hidden" style={{ background: '#3893A4' }}>
-        <div className="absolute inset-0 mesh-background opacity-30" />
-        <motion.div
-          className="absolute top-1/4 right-1/4 w-64 h-64 bg-lime/20 rounded-full blur-3xl"
-          animate={prefersReducedMotion ? {} : { scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 4, repeat: Infinity }}
-        />
+      <section
+        className="section text-white relative overflow-hidden"
+        style={{
+          backgroundImage: 'url(https://media.nfpickle.com/site-assets/820092531-img_3458.jpeg)',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        <div className="absolute inset-0 bg-black/50" />
 
         <div className="container-custom relative z-10 text-center">
           <ScrollReveal>
