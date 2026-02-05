@@ -185,19 +185,29 @@ function DonationDetailsForm({ onSubmit }: DonationDetailsFormProps) {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<DonationFormData>({
     resolver: zodResolver(donationSchema),
+    defaultValues: {
+      donationType: 'one-time',
+      amount: 0,
+    },
   })
 
   const finalAmount = selectedAmount || parseFloat(customAmount) || 0
 
-  const onSubmitForm = async (data: DonationFormData) => {
-    if (finalAmount < 1) {
-      setError('Please select or enter an amount')
-      return
-    }
+  // Keep react-hook-form in sync with our state
+  const updateAmount = (amount: number) => {
+    setValue('amount', amount, { shouldValidate: true })
+  }
 
+  const updateDonationType = (type: 'one-time' | 'recurring') => {
+    setDonationType(type)
+    setValue('donationType', type, { shouldValidate: true })
+  }
+
+  const onSubmitForm = async (data: DonationFormData) => {
     setIsSubmitting(true)
     setError('')
 
@@ -207,8 +217,6 @@ function DonationDetailsForm({ onSubmit }: DonationDetailsFormProps) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...data,
-          amount: finalAmount,
-          donationType,
           frequency: donationType === 'recurring' ? frequency : undefined,
         }),
       })
@@ -252,7 +260,7 @@ function DonationDetailsForm({ onSubmit }: DonationDetailsFormProps) {
                 <div className="grid grid-cols-2 gap-4">
                   <button
                     type="button"
-                    onClick={() => setDonationType('one-time')}
+                    onClick={() => updateDonationType('one-time')}
                     className={`p-4 rounded-xl border-2 font-medium transition-all
                       ${donationType === 'one-time'
                         ? 'border-orange bg-orange/10 text-orange'
@@ -263,7 +271,7 @@ function DonationDetailsForm({ onSubmit }: DonationDetailsFormProps) {
                   </button>
                   <button
                     type="button"
-                    onClick={() => setDonationType('recurring')}
+                    onClick={() => updateDonationType('recurring')}
                     className={`p-4 rounded-xl border-2 font-medium transition-all
                       ${donationType === 'recurring'
                         ? 'border-teal bg-teal/10 text-teal'
@@ -317,21 +325,22 @@ function DonationDetailsForm({ onSubmit }: DonationDetailsFormProps) {
                   Select Amount
                 </label>
                 <div className="grid grid-cols-4 gap-3">
-                  {presetAmounts.map((amount) => (
+                  {presetAmounts.map((amt) => (
                     <button
-                      key={amount}
+                      key={amt}
                       type="button"
                       onClick={() => {
-                        setSelectedAmount(amount)
+                        setSelectedAmount(amt)
                         setCustomAmount('')
+                        updateAmount(amt)
                       }}
                       className={`p-4 rounded-xl border-2 font-bold transition-all
-                        ${selectedAmount === amount
+                        ${selectedAmount === amt
                           ? 'border-lime bg-lime/10 text-lime-700'
                           : 'border-gray-200 hover:border-gray-300'
                         }`}
                     >
-                      ${amount}
+                      ${amt}
                     </button>
                   ))}
                 </div>
@@ -352,6 +361,7 @@ function DonationDetailsForm({ onSubmit }: DonationDetailsFormProps) {
                     onChange={(e) => {
                       setCustomAmount(e.target.value)
                       setSelectedAmount(null)
+                      updateAmount(parseFloat(e.target.value) || 0)
                     }}
                     className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-gray-50
                       focus:border-lime focus:ring-2 focus:ring-lime/20 focus:bg-white
@@ -359,6 +369,9 @@ function DonationDetailsForm({ onSubmit }: DonationDetailsFormProps) {
                     placeholder="Enter amount"
                   />
                 </div>
+                {errors.amount && (
+                  <p className="text-orange text-sm mt-1">{errors.amount.message}</p>
+                )}
               </div>
 
               {/* Donor Information */}
