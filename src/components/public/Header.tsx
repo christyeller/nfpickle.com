@@ -83,7 +83,7 @@ export default function Header() {
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
                 <Image
-                  src="https://media.nfpickle.com/site-assets/new-logo.png"
+                  src="https://media.nfpickle.com/site-assets/newlogo-tp.png"
                   alt="North Fork Pickleball"
                   width={300}
                   height={120}

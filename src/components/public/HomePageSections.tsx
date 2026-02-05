@@ -251,7 +251,7 @@ export default function HomePageSections({
               Court Locations
             </h2>
             <p className="text-xl text-white max-w-3xl mx-auto">
-              You can find a court in the North Fork Valley and surrounding areas... but not in the most centrally located town of Hotchkiss! <span className="text-[#F38D09]">Help us get pickleball courts built in Hotchkiss!</span>
+              You can find a court in the North Fork Valley and surrounding areas... but not in the most centrally located town of Hotchkiss! <span className="text-white font-black">Help us get pickleball courts built in Hotchkiss!</span>
             </p>
           </ScrollReveal>
 
@@ -327,7 +327,7 @@ export default function HomePageSections({
               href="/play#open-play"
               className="group inline-flex items-center gap-2 px-8 py-4 bg-lime text-white font-bold text-lg rounded-xl hover:bg-lime/90 transition-colors"
             >
-              Join Us For Open Play
+              Learn More About Local Play Schedules
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
@@ -406,14 +406,17 @@ export default function HomePageSections({
       </section>
 
       {/* Testimonials */}
-      <section className="section bg-[#207348] relative overflow-hidden">
-        {/* Animated background */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
-        </div>
-        <div className="absolute inset-0 grid-pattern opacity-10" />
+      <section
+        className="section relative overflow-hidden"
+        style={{
+          backgroundImage: 'url(https://media.nfpickle.com/site-assets/NFV.png)',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-black/50" />
 
         <div className="container-custom relative z-10">
           <ScrollReveal className="text-center mb-16">

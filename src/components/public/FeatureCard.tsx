@@ -104,7 +104,7 @@ export default function FeatureCard({
     >
       <CardWrapper
         className={`group relative h-full p-8 rounded-2xl bg-white border border-gray-100
-          transition-all duration-500 ${colors.glow}`}
+          transition-all duration-500 ${colors.glow} text-center`}
         maxTilt={8}
         scale={1.02}
       >
@@ -116,7 +116,7 @@ export default function FeatureCard({
 
         {/* Icon or Image container */}
         <motion.div
-          className="relative z-10 mb-6"
+          className="relative z-10 mb-6 flex justify-center"
           whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: imageSrc ? 0 : 5 }}
           transition={{ type: 'spring', stiffness: 400, damping: 17 }}
         >
