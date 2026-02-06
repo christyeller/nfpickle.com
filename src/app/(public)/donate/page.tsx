@@ -23,15 +23,17 @@ export default function DonatePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative pt-20 pb-32 bg-charcoal-dark overflow-hidden">
-        {/* Background */}
-        <div
-          className="absolute inset-0"
-          style={{ background: '#3893A4' }}
-        />
-
-        {/* Mesh overlay */}
-        <div className="absolute inset-0 mesh-background opacity-20" />
+      <section
+        className="relative pt-28 pb-[300px] overflow-hidden"
+        style={{
+          backgroundImage: 'url(https://media.nfpickle.com/site-assets/IMG_4965.jpeg)',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/50" />
 
         {/* Content */}
         <div className="container-custom relative z-10 text-center">
@@ -46,7 +48,7 @@ export default function DonatePage() {
               initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-orange/20 border-orange/30 text-orange mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-white/10 border-white/30 text-white mb-6"
             >
               <Heart className="w-4 h-4" />
               <span className="text-sm font-medium">Help Us Build Courts!</span>
@@ -65,12 +67,12 @@ export default function DonatePage() {
 
             {/* Subtitle */}
             <motion.p
-              className="text-xl text-white/70 max-w-xl mx-auto"
+              className="text-xl text-white max-w-2xl mx-auto"
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
             >
-              Help grow pickleball in the North Fork Valley and get courts built in Hotchkiss!
+              Help grow pickleball in the North Fork Valley and get courts built in Hotchkiss! Your donations help us build courts, host events, and keep pickleball accessible to everyone.
             </motion.p>
           </motion.div>
         </div>
@@ -92,35 +94,8 @@ export default function DonatePage() {
         </div>
       </section>
 
-      {/* Why Donate */}
-      <section className="pt-[50px] pb-[50px] bg-cream relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-orange/5 rounded-full blur-3xl" />
-
-        <div className="container-custom relative z-10">
-          <ScrollReveal className="max-w-3xl mx-auto text-center" animateOnMount>
-            <motion.div
-              className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-orange to-sunset
-                rounded-3xl mb-8 shadow-lg ring-8 ring-orange/10"
-              whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: 5 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-            >
-              <Heart size={48} className="text-white" />
-            </motion.div>
-
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-charcoal-dark mb-6">
-              Why Your Support <span className="text-orange">Matters</span>
-            </h2>
-            <p className="text-lg text-gray-600 leading-relaxed">
-              North Fork Pickleball Club is a volunteer-run organization dedicated to
-              growing the sport in our community. Your donations help us build and maintain courts,
-              provide equipment, host events, and keep pickleball accessible to everyone.
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
-
       {/* Donation Form Section */}
-      <section className="pt-[50px] pb-24 bg-cream relative overflow-hidden">
+      <section className="pt-12 pb-24 bg-cream relative overflow-hidden">
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-lime/5 rounded-full blur-3xl" />
 
         <div className="container-custom relative z-10">
