@@ -324,7 +324,7 @@ function DonationDetailsForm({ onSubmit }: DonationDetailsFormProps) {
                 <label className="block text-sm font-medium text-charcoal-dark mb-3">
                   Select Amount
                 </label>
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {presetAmounts.map((amt) => (
                     <button
                       key={amt}
