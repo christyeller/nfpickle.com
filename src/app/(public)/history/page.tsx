@@ -12,7 +12,7 @@ export default function HistoryPage() {
     <>
       {/* Custom Creative Hero */}
       <section
-        className="relative pt-28 pb-40 overflow-hidden"
+        className="relative pt-28 pb-[300px] overflow-hidden"
         style={{
           backgroundImage: 'url(https://media.nfpickle.com/site-assets/crawford-court.jpg)',
           backgroundPosition: 'center',
