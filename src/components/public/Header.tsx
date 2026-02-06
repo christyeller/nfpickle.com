@@ -192,10 +192,7 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <motion.button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={cn(
-                'lg:hidden p-2 rounded-lg transition-colors',
-                isScrolled ? 'text-white hover:bg-white/10' : 'text-white hover:bg-white/10'
-              )}
+              className="lg:hidden p-2 rounded-lg transition-colors text-[#3893A4] hover:bg-[#3893A4]/10"
               whileTap={prefersReducedMotion ? {} : { scale: 0.9 }}
             >
               <AnimatePresence mode="wait">
@@ -234,14 +231,14 @@ export default function Header() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-[300px] bg-charcoal-dark border-l border-white/10 z-50 lg:hidden"
+              className="fixed top-0 right-0 bottom-0 w-[300px] bg-[#FDF9F0] border-l border-[#3893A4]/10 z-50 lg:hidden"
             >
               <div className="flex flex-col h-full p-6">
                 {/* Close button */}
                 <div className="flex justify-end mb-8">
                   <motion.button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+                    className="p-2 text-[#3893A4] hover:bg-[#3893A4]/10 rounded-lg transition-colors"
                     whileTap={prefersReducedMotion ? {} : { scale: 0.9 }}
                   >
                     <X size={24} />
@@ -263,8 +260,8 @@ export default function Header() {
                       className={cn(
                         'block py-3 px-4 rounded-xl font-bold text-lg transition-colors',
                         pathname === '/'
-                          ? 'bg-[#3893A4]/20 text-[#5AAFD4] hover:bg-[#3893A4]/30'
-                          : 'text-[#5AAFD4]/80 hover:text-[#5AAFD4] hover:bg-white/5'
+                          ? 'bg-[#3893A4]/20 text-[#3893A4] hover:bg-[#3893A4]/30'
+                          : 'text-[#3893A4]/80 hover:text-[#3893A4] hover:bg-[#3893A4]/5'
                       )}
                     >
                       Home
@@ -278,8 +275,8 @@ export default function Header() {
                       className={cn(
                         'w-full flex items-center justify-between py-3 px-4 rounded-xl font-bold text-lg transition-colors',
                         isAboutActive
-                          ? 'bg-[#3893A4]/20 text-[#5AAFD4] hover:bg-[#3893A4]/30'
-                          : 'text-[#5AAFD4]/80 hover:text-[#5AAFD4] hover:bg-white/5'
+                          ? 'bg-[#3893A4]/20 text-[#3893A4] hover:bg-[#3893A4]/30'
+                          : 'text-[#3893A4]/80 hover:text-[#3893A4] hover:bg-[#3893A4]/5'
                       )}
                     >
                       About
@@ -309,8 +306,8 @@ export default function Header() {
                                 className={cn(
                                   'block py-2 px-4 rounded-lg font-medium text-base transition-colors',
                                   pathname === link.href
-                                    ? 'bg-[#3893A4]/10 text-[#5AAFD4]'
-                                    : 'text-[#5AAFD4]/60 hover:text-[#5AAFD4] hover:bg-white/5'
+                                    ? 'bg-[#3893A4]/10 text-[#3893A4]'
+                                    : 'text-[#3893A4]/60 hover:text-[#3893A4] hover:bg-[#3893A4]/5'
                                 )}
                               >
                                 {link.label}
@@ -331,8 +328,8 @@ export default function Header() {
                         className={cn(
                           'block py-3 px-4 rounded-xl font-bold text-lg transition-colors',
                           pathname === link.href
-                            ? 'bg-[#3893A4]/20 text-[#5AAFD4] hover:bg-[#3893A4]/30'
-                            : 'text-[#5AAFD4]/80 hover:text-[#5AAFD4] hover:bg-white/5'
+                            ? 'bg-[#3893A4]/20 text-[#3893A4] hover:bg-[#3893A4]/30'
+                            : 'text-[#3893A4]/80 hover:text-[#3893A4] hover:bg-[#3893A4]/5'
                         )}
                       >
                         {link.label}
