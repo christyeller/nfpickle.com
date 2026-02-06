@@ -105,7 +105,7 @@ export default function AboutPage() {
             </ScrollReveal>
 
             <ScrollReveal delay={0.2}>
-              <p className="text-xl md:text-2xl text-white/80 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-xl md:text-2xl text-white leading-relaxed max-w-3xl mx-auto">
                 Pickleball is the fastest-growing sport in the United States, enjoyed by people of all ages—from young children to active seniors. Fun, easy to learn, and highly social, pickleball promotes physical health, wellness, and strong community connections.
               </p>
             </ScrollReveal>

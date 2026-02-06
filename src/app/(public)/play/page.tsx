@@ -104,17 +104,32 @@ export default function PlayPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center text-white relative overflow-hidden">
-        <div className="absolute inset-0" style={{ top: '-50px' }}>
+      <section className="section pt-32 lg:min-h-screen lg:flex lg:items-center lg:justify-center text-white relative overflow-hidden">
+        {/* Mobile/Tablet: Static background image */}
+        <div
+          className="absolute inset-0 lg:hidden bg-cover bg-center"
+          style={{ backgroundImage: 'url(https://media.nfpickle.com/site-assets/lesli-whitecotton-UHZ_w1bOIvY-unsplash.jpg)' }}
+        >
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+
+        {/* Desktop: Interactive Pong game */}
+        <div className="absolute inset-0 hidden lg:block" style={{ top: '-50px' }}>
           <PickleballPong className="w-full h-full" />
         </div>
 
-        <div className="container-custom relative z-10" style={{ marginTop: '50px' }}>
+        <div className="container-custom relative z-10 lg:mt-[50px]">
           <div className="max-w-4xl mx-auto text-center">
             <ScrollReveal>
-              <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 text-sm font-medium text-white mb-6">
+              {/* Desktop: Game instructions */}
+              <span className="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 text-sm font-medium text-white mb-6">
                 <span className="w-2 h-2 bg-lime rounded-full animate-pulse" />
                 Use your mouse to control the orange paddle and play a pickleball game now!
+              </span>
+              {/* Mobile/Tablet: Simple badge */}
+              <span className="inline-flex lg:hidden items-center gap-2 px-5 py-2.5 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 text-sm font-medium text-white mb-6">
+                <span className="w-2 h-2 bg-lime rounded-full animate-pulse" />
+                Find courts and schedules in the North Fork Valley
               </span>
             </ScrollReveal>
 
@@ -192,6 +207,21 @@ export default function PlayPage() {
           </motion.div>
         </div>
 
+        {/* Bottom wave - mobile/tablet only */}
+        <div className="absolute bottom-0 left-0 right-0 lg:hidden">
+          <svg
+            viewBox="0 0 1440 60"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-auto"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0 60V30C240 10 480 0 720 10C960 20 1200 40 1440 30V60H0Z"
+              fill="#FCF9F0"
+            />
+          </svg>
+        </div>
       </section>
 
       {/* Court Locations */}
