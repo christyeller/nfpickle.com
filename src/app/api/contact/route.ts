@@ -5,7 +5,7 @@ import { prisma } from '@/lib/prisma'
 import { contactSchema } from '@/lib/validations'
 import { randomUUID } from 'crypto'
 
-const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'lynngraunke@gmail.com'
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'northforkpickleball@gmail.com'
 
 export async function GET() {
   try {
