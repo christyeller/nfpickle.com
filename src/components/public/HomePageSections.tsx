@@ -125,7 +125,7 @@ export default function HomePageSections({
               Growing the Sport of Pickleball in our Valley
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We&apos;re excited to announce a new community effort to bring <strong>dedicated pickleball courts</strong> to the North Fork Valley! To make this dream a reality, we have formed a 501(c)(3) nonprofit organization which will allow us to receive State and Federal grants; a vital step in securing resources for our project. We are currently working with the Delta County Commissioners, the Delta County School District and the North Fork Pool Park and Recreation District to strategize creation of both tennis courts and dedicated pickleball courts in the Hotchkiss area.
+              We&apos;re excited to announce a new community effort to bring <strong>dedicated pickleball and tennis courts</strong> to the North Fork Valley! To make this dream a reality, we have formed a 501(c)(3) nonprofit organization which will allow us to receive State and Federal grants; a vital step in securing resources for our project. We are currently working with the Delta County Commissioners, the Delta County School District and the North Fork Pool Park and Recreation District to strategize creation of both tennis courts and dedicated pickleball courts in the Hotchkiss area.
             </p>
           </ScrollReveal>
 
@@ -136,7 +136,7 @@ export default function HomePageSections({
             className="text-center mb-12"
           >
             <Link
-              href="#"
+              href="#new-courts"
               className="group inline-flex items-center gap-2 px-8 py-4 bg-lime text-white font-bold text-lg rounded-xl hover:bg-lime/90 transition-colors"
             >
               Learn More About Our Proposed New Courts in Hotchkiss
@@ -335,7 +335,7 @@ export default function HomePageSections({
       </section>
 
       {/* Court Renderings Section */}
-      <section className="section bg-[#FDF9F0] relative overflow-hidden">
+      <section id="new-courts" className="section bg-[#FDF9F0] relative overflow-hidden">
         <div className="absolute inset-0 grid-pattern opacity-30" />
         <div className="absolute top-0 left-0 w-96 h-96 bg-teal/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-lime/5 rounded-full blur-3xl" />

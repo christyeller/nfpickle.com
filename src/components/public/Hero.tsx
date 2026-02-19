@@ -108,6 +108,9 @@ export default function Hero() {
           transition={{ delay: 0.8, duration: 0.6 }}
           className="flex flex-col items-center"
         >
+          <p className="text-sm text-white mb-3 uppercase tracking-wider">
+            Registered TeamReach Players by Town
+          </p>
           <div className="flex flex-wrap justify-center gap-4 md:gap-6">
             {[
               { count: 228, label: 'Delta' },
@@ -126,9 +129,6 @@ export default function Hero() {
               </div>
             ))}
           </div>
-          <p className="text-sm text-white mt-3 uppercase tracking-wider">
-            Registered Players by Town
-          </p>
         </motion.div>
       </motion.div>
 
