@@ -170,7 +170,7 @@ export default function AboutPage() {
               { src: 'https://media.nfpickle.com/site-assets/about/crawford-court.jpg', alt: 'Crawford pickleball court opening' },
               { src: 'https://media.nfpickle.com/site-assets/about/gallery-2.jpg', alt: 'Club members at community event' },
               { src: 'https://media.nfpickle.com/site-assets/about/kim-bev.jpg', alt: 'Kim and Bev at the courts' },
-              { src: 'https://media.nfpickle.com/site-assets/about/play.jpg', alt: 'Pickleball game in action' },
+              { src: 'https://media.nfpickle.com/site-assets/about-att.jpeg', alt: 'Pickleball players' },
             ].map((image, index) => (
               <motion.div
                 key={index}
@@ -447,7 +447,7 @@ export default function AboutPage() {
         <div className="container-custom relative z-10 text-center">
           <ScrollReveal>
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Join Our <span className="text-white/90">Community</span>
+              Join Our <span className="text-lime">Community</span>
             </h2>
             <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
               Whether you&apos;re new to pickleball or an experienced player, we&apos;d love
@@ -456,8 +456,8 @@ export default function AboutPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/play"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-coral
-                  font-bold text-lg rounded-xl hover:bg-white/90 transition-colors"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-lime text-court-dark
+                  font-bold text-lg rounded-xl hover:shadow-glow-lime transition-shadow"
               >
                 Find Open Play
                 <ArrowRight className="w-5 h-5" />

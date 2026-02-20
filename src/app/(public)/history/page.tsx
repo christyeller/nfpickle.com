@@ -247,7 +247,7 @@ export default function HistoryPage() {
       <section
         className="section text-white relative overflow-hidden"
         style={{
-          backgroundImage: 'url(https://media.nfpickle.com/site-assets/gallery-2.jpg)',
+          backgroundImage: 'url(https://media.nfpickle.com/site-assets/history-join.png)',
           backgroundAttachment: 'fixed',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
@@ -276,8 +276,8 @@ export default function HistoryPage() {
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 glass-dark text-white
-                  font-bold text-lg rounded-xl hover:bg-white/20 transition-colors"
+                className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white text-white
+                  font-bold text-lg rounded-xl hover:bg-white/10 transition-colors"
               >
                 Get in Touch
               </Link>
