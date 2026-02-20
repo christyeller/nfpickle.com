@@ -243,6 +243,53 @@ export default function HistoryPage() {
         </div>
       </section>
 
+      {/* Vision Section */}
+      <section className="bg-cream pb-16 md:pb-20">
+        <div className="container-custom">
+          <ScrollReveal>
+            <div className="bg-white rounded-2xl p-8 md:p-12 shadow-elevation-2 border-l-4 border-lime relative overflow-hidden">
+              {/* Decorative background elements */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-lime/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+              <div className="absolute bottom-0 right-20 w-40 h-40 bg-court/5 rounded-full blur-2xl translate-y-1/2" />
+
+              <div className="relative z-10">
+                <h2 className="text-2xl md:text-3xl font-display font-bold text-charcoal mb-4">
+                  Our Vision for the Future of Pickleball
+                </h2>
+
+                <p className="text-gray-600 text-lg leading-relaxed mb-8">
+                  NFPC is in the process of planning, developing and raising $1 million to build 8 dedicated pickleball courts and 4 dedicated tennis courts at the Delta County Fairgrounds between the Maloney House and the new Miners Trail &mdash; land that&apos;s already been dedicated. These courts will serve the whole North Fork Valley and become the home courts for North Fork High School tennis.
+                </p>
+
+                {/* Stats row */}
+                <div className="flex flex-wrap gap-4 mb-8">
+                  <div className="flex items-center gap-3 bg-cream rounded-xl px-5 py-3">
+                    <span className="text-3xl font-display font-bold text-court">8</span>
+                    <span className="text-sm font-medium text-gray-600 leading-tight">Pickleball<br />Courts</span>
+                  </div>
+                  <div className="flex items-center gap-3 bg-cream rounded-xl px-5 py-3">
+                    <span className="text-3xl font-display font-bold text-court">4</span>
+                    <span className="text-sm font-medium text-gray-600 leading-tight">Tennis<br />Courts</span>
+                  </div>
+                  <div className="flex items-center gap-3 bg-cream rounded-xl px-5 py-3">
+                    <span className="text-3xl font-display font-bold text-court">$1M</span>
+                    <span className="text-sm font-medium text-gray-600 leading-tight">Fundraising<br />Goal</span>
+                  </div>
+                </div>
+
+                <Link
+                  href="/donate"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-lime text-white font-bold text-lg rounded-xl hover:shadow-glow-lime transition-shadow"
+                >
+                  Donate Now
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section
         className="section text-white relative overflow-hidden"
