@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Users, Target, Heart, ArrowRight, MapPin, GraduationCap, TrendingUp, Handshake } from 'lucide-react'
+import { Users, Target, Heart, ArrowRight, MapPin, GraduationCap, TrendingUp, Handshake, Gift } from 'lucide-react'
 import SectionHeader from '@/components/public/SectionHeader'
 import { ScrollReveal } from '@/components/public/ScrollReveal'
 import { staggerContainer, staggerItem } from '@/lib/animations'
@@ -380,6 +380,32 @@ export default function AboutPage() {
               </div>
             </ScrollReveal>
           </div>
+
+          {/* We Need Your Help callout */}
+          <ScrollReveal delay={0.3}>
+            <div className="mt-12 max-w-6xl mx-auto rounded-2xl bg-green p-8 md:p-10 text-white shadow-elevation-3">
+              <div className="flex flex-col items-start gap-4 md:gap-6">
+                <div className="flex items-start gap-4 md:gap-6">
+                  <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Gift className="w-7 h-7" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-display font-bold mb-2">We Need Your Help!</h3>
+                    <p className="text-white/90 text-lg leading-relaxed">
+                      In addition to monetary donations to our Capital Campaign, we welcome &ldquo;in-kind&rdquo; donations such as Grant Writing, Accounting, PR/Marketing/Social Media skills and FundRaising ideas! <strong className="text-white font-bold">No donation is too small!</strong>
+                    </p>
+                  </div>
+                </div>
+                <Link
+                  href="/donate"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white text-green-dark font-bold rounded-xl hover:bg-white/90 transition-colors ml-0 md:ml-20"
+                >
+                  Donate Now
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
