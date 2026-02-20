@@ -8,7 +8,15 @@ import { Users, ArrowRight, ChevronDown } from 'lucide-react'
 import { ScrollReveal } from '@/components/public/ScrollReveal'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 
-const boardMembers = [
+interface BoardMember {
+  name: string
+  role: string
+  image: string
+  bio: string
+  imagePosition?: string
+}
+
+const boardMembers: BoardMember[] = [
   {
     name: 'Kim Burke',
     role: 'President',
@@ -25,7 +33,8 @@ const boardMembers = [
     name: 'Lynn Graunke',
     role: 'Secretary',
     image: '/images/board/lynn.jpeg',
-    bio: "Lynn Graunke has called the North Fork Valley home for the past three years and loves being part of a community that values health, connection, and time outdoors. With a professional background in project management and many years of service on a variety of volunteer committees, Lynn has developed strong skills in listening, collaborating, and helping move ideas into action. She cares deeply about keeping people active at every age and is excited about supporting the continued growth of the pickleball program. When she's not volunteering, Lynn enjoys ranching, hiking, snowshoeing, and spending time with her husband and their two Labrador retrievers.",
+    imagePosition: 'object-[50%_10%]',
+    bio: "My name is Lynn Graunke and I have called the North Fork Valley home for the past three years. I love being part of a community that values health, connection, and time outdoors! I have a professional background in project management and many years of service on a variety of volunteer committees, which has helped me develop strong skills in listening, collaborating, and helping move ideas into action. I care deeply about keeping people active at every age and I am very excited about supporting the continued growth of the North Fork pickleball program. When I'm not volunteering, I enjoy ranching, hiking, snowshoeing, and spending time with my husband and our two Labrador retrievers.",
   },
   {
     name: 'Tony Vervloet',
@@ -43,7 +52,7 @@ const boardMembers = [
 
 const BIO_PREVIEW_LENGTH = 150
 
-function BoardMemberCard({ member }: { member: typeof boardMembers[0] }) {
+function BoardMemberCard({ member }: { member: BoardMember }) {
   const [isExpanded, setIsExpanded] = useState(false)
   const prefersReducedMotion = useReducedMotion()
 
@@ -70,7 +79,7 @@ function BoardMemberCard({ member }: { member: typeof boardMembers[0] }) {
               alt={member.name}
               width={176}
               height={176}
-              className="w-full h-full object-cover"
+              className={`w-full h-full object-cover ${member.imagePosition ?? ''}`}
             />
           </div>
         ) : (
