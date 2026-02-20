@@ -2,44 +2,52 @@
 
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
-import { MapPin, Clock, Star, Zap, ArrowRight, Info, Mail, Smartphone, ClipboardList } from 'lucide-react'
+import { MapPin, Clock, Star, Zap, ArrowRight, Info, Mail, Smartphone, ClipboardList, Navigation } from 'lucide-react'
 import SectionHeader from '@/components/public/SectionHeader'
 import { ScrollReveal } from '@/components/public/ScrollReveal'
 import { PickleballPong } from '@/components/public/PickleballPong'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 
-const courts = [
+interface Court {
+  name: string
+  locations: { name: string; url: string; type: string; courts: number | null; address?: string }[]
+  schedule?: string
+  admission?: string
+  color: 'lime' | 'teal' | 'purple' | 'coral'
+}
+
+const courts: Court[] = [
   {
     name: 'Crawford',
     locations: [
-      { name: 'Crawford Town Hall', url: 'https://townofcrawford.colorado.gov/', type: 'outdoor', courts: 1 },
-      { name: 'Crawford Montessori School', url: 'https://nfmc.deltaschools.com/en-US', type: 'indoor', courts: 1 },
+      { name: 'Crawford Town Hall', url: 'https://townofcrawford.colorado.gov/', type: 'outdoor', courts: null, address: '425 Highway 92, Crawford' },
+      { name: 'North Fork Montessori @ Crawford', url: 'https://nfmc.deltaschools.com/en-US', type: 'indoor', courts: null, address: '51 Fir Avenue, Crawford' },
     ],
-    schedule: 'Currently playing indoors: Wednesdays at 4pm and Saturdays at 9am.',
+    admission: 'FREE',
     color: 'lime' as const,
   },
   {
     name: 'Paonia',
     locations: [
-      { name: 'Apple Valley Park', url: 'https://townofpaonia.colorado.gov/departments/parks-recreation', type: 'outdoor', courts: 3 },
+      { name: 'Apple Valley Park', url: 'https://townofpaonia.colorado.gov/departments/parks-recreation', type: 'outdoor', courts: 3, address: '45 Pan American Avenue, Paonia' },
     ],
-    schedule: 'Play happens on Tuesdays, Thursdays and Saturdays. Start times are anywhere from 11am - 1pm and vary according to weather.',
+    admission: 'FREE',
     color: 'teal' as const,
   },
   {
     name: 'Delta',
     locations: [
-      { name: 'Bill Heddles Recreation Center', url: 'https://www.cityofdelta.net/parksrecgolf/page/recreation-center', type: 'both', courts: null },
+      { name: 'Bill Heddles Recreation Center', url: 'https://www.cityofdelta.net/parksrecgolf/page/recreation-center', type: 'both', courts: null, address: '360 Main Street, Delta' },
     ],
-    schedule: 'Outdoor tennis courts are lined for pickleball. Indoor rec pickleball is offered on the basketball court at scheduled times listed on their website.',
+    admission: 'Outdoor — FREE | Indoor — $8 general admission',
     color: 'teal' as const,
   },
   {
     name: 'Cedaredge',
     locations: [
-      { name: 'Grand Mesa Pickleball Club', url: 'https://www.grandmesapickleball.org/', type: 'outdoor', courts: null },
+      { name: 'Grand Mesa Pickleball Club', url: 'https://www.grandmesapickleball.org/', type: 'indoor', courts: null, address: '360 SW 8th Avenue, Cedaredge' },
     ],
-    schedule: 'Play is limited to members only. They have their own organization and are also raising money to build more courts.',
+    admission: '$70/year membership',
     color: 'coral' as const,
   },
 ]
@@ -153,7 +161,7 @@ export default function PlayPage() {
                   className="inline-flex items-center gap-2 px-8 py-4 bg-[#F38D09] text-white font-bold text-lg rounded-xl hover:bg-[#F38D09]/90 transition-colors"
                 >
                   <Smartphone className="w-5 h-5" />
-                  Download the Team App for current Play Schedules
+                  Download the TeamReach App for Current Play Schedules
                 </Link>
               </div>
             </ScrollReveal>
@@ -167,16 +175,18 @@ export default function PlayPage() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <motion.div variants={staggerItem} className="text-center">
-              <div className="text-3xl md:text-5xl font-display font-bold text-lime mb-1">
-                <MapPin className="w-8 h-8 md:w-12 md:h-12 mx-auto" />
-              </div>
-              <div className="text-sm md:text-base font-medium text-white">
-                Our Courts
-              </div>
-              <div className="text-xs md:text-sm text-white/60">
-                Multiple locations
-              </div>
+            <motion.div variants={staggerItem}>
+              <Link href="#court-locations" className="text-center group block">
+                <div className="text-3xl md:text-5xl font-display font-bold text-lime mb-1">
+                  <MapPin className="w-8 h-8 md:w-12 md:h-12 mx-auto group-hover:scale-110 transition-transform" />
+                </div>
+                <div className="text-sm md:text-base font-medium text-white group-hover:text-lime transition-colors">
+                  Our Courts
+                </div>
+                <div className="text-xs md:text-sm text-white/60">
+                  Multiple locations
+                </div>
+              </Link>
             </motion.div>
             <Link href="#basic-rules" className="text-center group">
               <motion.div variants={staggerItem}>
@@ -225,13 +235,13 @@ export default function PlayPage() {
       </section>
 
       {/* Court Locations */}
-      <section className="section bg-cream relative overflow-hidden pt-[40px]">
+      <section id="court-locations" className="section bg-cream relative overflow-hidden pt-[40px]">
         <div className="absolute top-0 right-0 w-96 h-96 bg-lime/5 rounded-full blur-3xl" />
 
         <div className="container-custom relative z-10">
           <SectionHeader
             title="Court Locations"
-            subtitle="Find a court near you in the North Fork Valley"
+            subtitle="Find a court near you in the North Fork Valley and/or Greater Delta County"
             badge="Our Courts"
             badgeIcon={MapPin}
             badgeColor="lime"
@@ -266,32 +276,55 @@ export default function PlayPage() {
                         {court.name}
                       </h3>
 
+                      {court.admission && (
+                        <p className="mt-2 text-sm font-semibold text-charcoal-dark">
+                          Admission: {court.admission}
+                        </p>
+                      )}
+
                       <div className="mt-3 space-y-2">
                         {court.locations.map((location) => (
-                          <div key={location.name} className="flex flex-wrap items-center gap-2">
-                            <a
-                              href={location.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-court hover:text-court-dark font-medium underline underline-offset-2"
-                            >
-                              {location.name}
-                            </a>
-                            <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${colors.badge}`}>
-                              {location.type === 'both' ? 'Indoor & Outdoor' : location.type}
-                            </span>
-                            {location.courts && (
-                              <span className="px-2 py-0.5 bg-gray-100 rounded-full text-xs text-gray-600">
-                                {location.courts} {location.courts === 1 ? 'court' : 'courts'}
+                          <div key={location.name}>
+                            <div className="flex flex-wrap items-center gap-2">
+                              <a
+                                href={location.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-court hover:text-court-dark font-medium underline underline-offset-2"
+                              >
+                                {location.name}
+                              </a>
+                              <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${colors.badge}`}>
+                                {location.type === 'both' ? 'Indoor & Outdoor' : location.type}
                               </span>
+                              {location.courts && (
+                                <span className="px-2 py-0.5 bg-gray-100 rounded-full text-xs text-gray-600">
+                                  {location.courts} {location.courts === 1 ? 'court' : 'courts'}
+                                </span>
+                              )}
+                            </div>
+                            {location.address && (
+                              <a
+                                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(location.address + ', CO')}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-court transition-colors group/dir"
+                              >
+                                <Navigation size={13} className="text-court group-hover/dir:text-court-dark flex-shrink-0" />
+                                <span className="underline underline-offset-2 decoration-gray-300 group-hover/dir:decoration-court">
+                                  {location.address}
+                                </span>
+                              </a>
                             )}
                           </div>
                         ))}
                       </div>
 
-                      <p className="mt-4 text-sm text-gray-600">
-                        {court.schedule}
-                      </p>
+                      {court.schedule && (
+                        <p className="mt-4 text-sm text-gray-600">
+                          {court.schedule}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </motion.div>

@@ -385,6 +385,20 @@ export default function ContactPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Board Meeting Info */}
+      <section className="bg-cream pb-16 md:pb-20">
+        <div className="container-custom max-w-5xl mx-auto">
+          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-elevation-1 border border-gray-100 text-center">
+            <h3 className="text-xl font-display font-bold text-charcoal-dark mb-3">
+              Questions?
+            </h3>
+            <p className="text-gray-600 leading-relaxed">
+              Currently we have Board Meetings every other Monday at 1:00 pm in the upstairs meeting room at the Bank of Colorado: 394 Bridge Street, Hotchkiss, CO 81419. All are welcome.
+            </p>
+          </div>
+        </div>
+      </section>
     </>
   )
 }
