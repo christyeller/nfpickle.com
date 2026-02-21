@@ -31,14 +31,14 @@ const boardMembers: BoardMember[] = [
   },
   {
     name: 'Lynn Graunke',
-    role: 'Secretary',
+    role: 'Secretary/Treasurer',
     image: '/images/board/lynn.jpeg',
     imagePosition: 'object-[50%_10%]',
     bio: "My name is Lynn Graunke and I have called the North Fork Valley home for the past three years. I love being part of a community that values health, connection, and time outdoors! I have a professional background in project management and many years of service on a variety of volunteer committees, which has helped me develop strong skills in listening, collaborating, and helping move ideas into action. I care deeply about keeping people active at every age and I am very excited about supporting the continued growth of the North Fork pickleball program. When I'm not volunteering, I enjoy ranching, hiking, snowshoeing, and spending time with my husband and our two Labrador retrievers.",
   },
   {
     name: 'Tony Vervloet',
-    role: 'Treasurer',
+    role: 'Member at Large',
     image: '/images/board/tony.jpeg',
     bio: "My name is Tony Vervloet, and I'm an avid pickleball player with a current 4.0 club rating and more than eight years of playing experience. Over the years, I've also enjoyed teaching pickleball classes to a wide range of players—from beginners (2.0) through intermediate levels (3.5). I am currently in my second year as Tournament Director for the Kokopelli Klassic, an event that welcomes approximately 350–400 players from throughout the greater Phoenix area, with skill levels ranging from 3.0 to 4.5. Prior to my pickleball journey, I worked for Union Oil Company of California (UNOCAL) and Chevron Corporation as an oil and gas drilling engineer. I retired in 2014 after serving as Drilling Manager for Western Venezuela and Trinidad.",
   },
