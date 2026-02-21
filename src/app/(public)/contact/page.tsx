@@ -54,8 +54,8 @@ export default function ContactPage() {
       <section
         className="relative pt-28 pb-[300px] overflow-hidden"
         style={{
-          backgroundImage: 'url(https://media.nfpickle.com/site-assets/820092564-img_2068.jpeg)',
-          backgroundPosition: 'center',
+          backgroundImage: 'url(https://media.nfpickle.com/site-assets/with-tony.jpeg)',
+          backgroundPosition: 'center 30%',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
         }}
@@ -197,7 +197,6 @@ export default function ContactPage() {
                     <p className="text-gray-600">
                       Doc Maloney Way<br />
                       at Delta County Fairgrounds<br />
-                      403 Fair Grounds<br />
                       Hotchkiss, CO 81419
                     </p>
                   </div>
