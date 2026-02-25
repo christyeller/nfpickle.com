@@ -68,7 +68,8 @@ export async function POST(request: NextRequest) {
           donorName: validatedData.donorName,
           donorEmail: validatedData.donorEmail,
           donationType: 'one-time',
-        }
+        },
+        validatedData.donorEmail // receipt_email for Stripe receipts
       )
 
       clientSecret = paymentIntent.client_secret!

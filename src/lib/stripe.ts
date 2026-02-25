@@ -23,12 +23,14 @@ export const stripe = new Proxy({} as Stripe, {
  */
 export async function createPaymentIntent(
   amount: number,
-  metadata: Record<string, string>
+  metadata: Record<string, string>,
+  receiptEmail?: string
 ): Promise<Stripe.PaymentIntent> {
   return await stripe.paymentIntents.create({
     amount: Math.round(amount * 100), // Convert to cents
     currency: 'usd',
     metadata,
+    receipt_email: receiptEmail,
     automatic_payment_methods: {
       enabled: true,
     },
