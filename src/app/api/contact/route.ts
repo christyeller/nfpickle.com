@@ -4,6 +4,8 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { contactSchema } from '@/lib/validations'
 import { randomUUID } from 'crypto'
+import { rateLimit, getClientIp } from '@/lib/rate-limit'
+import { sanitizeText, escapeHtml } from '@/lib/sanitize'
 
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'northforkpickleball@gmail.com'
 
@@ -28,13 +30,26 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limit: 3 submissions per minute
+    const ip = getClientIp(request)
+    const { success, response } = await rateLimit(ip, 'contact')
+    if (!success) return response!
+
     const body = await request.json()
     const validatedData = contactSchema.parse(body)
+
+    // Sanitize user input to prevent XSS
+    const sanitizedData = {
+      ...validatedData,
+      name: sanitizeText(validatedData.name),
+      message: sanitizeText(validatedData.message),
+      subject: validatedData.subject ? sanitizeText(validatedData.subject) : undefined,
+    }
 
     const message = await prisma.contactSubmission.create({
       data: {
         id: randomUUID(),
-        ...validatedData,
+        ...sanitizedData,
       },
     })
 
@@ -49,11 +64,11 @@ export async function POST(request: NextRequest) {
         subject: validatedData.subject || `New Contact Form Message from ${validatedData.name}`,
         html: `
           <h2>New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${validatedData.name}</p>
-          <p><strong>Email:</strong> ${validatedData.email}</p>
-          ${validatedData.subject ? `<p><strong>Subject:</strong> ${validatedData.subject}</p>` : ''}
+          <p><strong>Name:</strong> ${escapeHtml(sanitizedData.name)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(sanitizedData.email)}</p>
+          ${sanitizedData.subject ? `<p><strong>Subject:</strong> ${escapeHtml(sanitizedData.subject)}</p>` : ''}
           <p><strong>Message:</strong></p>
-          <p>${validatedData.message.replace(/\n/g, '<br>')}</p>
+          <p>${escapeHtml(sanitizedData.message).replace(/\n/g, '<br>')}</p>
         `,
       })
     }

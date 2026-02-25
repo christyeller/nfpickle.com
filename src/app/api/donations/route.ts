@@ -11,6 +11,7 @@ import {
   createSubscription
 } from '@/lib/stripe'
 import { randomUUID } from 'crypto'
+import { rateLimit, getClientIp } from '@/lib/rate-limit'
 
 /**
  * GET /api/donations
@@ -44,6 +45,11 @@ export async function GET() {
  */
 export async function POST(request: NextRequest) {
   try {
+    // Rate limit: 5 attempts per minute
+    const ip = getClientIp(request)
+    const { success, response } = await rateLimit(ip, 'donations')
+    if (!success) return response!
+
     const body = await request.json()
     const validatedData = donationSchema.parse(body)
 
