@@ -1,6 +1,8 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ChevronDown, Heart, Users, Sparkles } from 'lucide-react'
 import {
@@ -14,21 +16,50 @@ import { MagneticButton } from './MagneticButton'
 import { CountUp } from './CountUp'
 
 export default function Hero() {
+  const [videoLoaded, setVideoLoaded] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    // Check if mobile device
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Video Background */}
+      {/* Fallback Image (shows while video loads or on mobile) */}
       <div className="absolute inset-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source src="https://media.nfpickle.com/site-assets/istockphoto-1411720682-640_adpp_is.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-black/40" />
+        <Image
+          src="https://media.nfpickle.com/site-assets/features-bg.jpg"
+          alt="Pickleball court"
+          fill
+          priority
+          className={`object-cover transition-opacity duration-500 ${videoLoaded && !isMobile ? 'opacity-0' : 'opacity-100'}`}
+        />
       </div>
+
+      {/* Video Background (hidden on mobile for performance) */}
+      {!isMobile && (
+        <div className="absolute inset-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            onCanPlay={() => setVideoLoaded(true)}
+            className={`w-full h-full object-cover transition-opacity duration-500 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+          >
+            <source src="https://media.nfpickle.com/site-assets/istockphoto-1411720682-640_adpp_is.mp4" type="video/mp4" />
+          </video>
+        </div>
+      )}
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/40" />
 
       {/* Content */}
       <motion.div
