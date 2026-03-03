@@ -7,7 +7,11 @@ import { randomUUID } from 'crypto'
 import { rateLimit, getClientIp } from '@/lib/rate-limit'
 import { sanitizeText, escapeHtml } from '@/lib/sanitize'
 
-const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'northforkpickleball@gmail.com'
+// Support multiple email addresses separated by commas in CONTACT_EMAIL
+const CONTACT_EMAILS = (process.env.CONTACT_EMAIL || 'northforkpickleball@gmail.com')
+  .split(',')
+  .map(email => email.trim())
+  .filter(email => email.length > 0)
 
 export async function GET() {
   try {
@@ -59,7 +63,7 @@ export async function POST(request: NextRequest) {
       const resend = new Resend(process.env.RESEND_API_KEY)
       await resend.emails.send({
         from: 'North Fork Pickleball <info@northforkpickleball.com>',
-        to: CONTACT_EMAIL,
+        to: CONTACT_EMAILS,
         replyTo: validatedData.email,
         subject: validatedData.subject || `New Contact Form Message from ${validatedData.name}`,
         html: `
