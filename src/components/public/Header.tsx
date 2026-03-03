@@ -78,7 +78,7 @@ export default function Header() {
             {/* Logo */}
             <Link href="/" className="flex items-center group">
               <motion.div
-                className="relative h-[120px] w-auto"
+                className="relative h-[60px] lg:h-[120px] w-auto"
                 whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
@@ -87,7 +87,7 @@ export default function Header() {
                   alt="North Fork Pickleball"
                   width={300}
                   height={120}
-                  className="h-[120px] w-auto object-contain"
+                  className="h-[60px] lg:h-[120px] w-auto object-contain"
                   unoptimized
                   priority
                 />
