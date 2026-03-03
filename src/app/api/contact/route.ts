@@ -5,7 +5,23 @@ import { prisma } from '@/lib/prisma'
 import { contactSchema } from '@/lib/validations'
 import { randomUUID } from 'crypto'
 import { rateLimit, getClientIp } from '@/lib/rate-limit'
-import { sanitizeText, escapeHtml } from '@/lib/sanitize'
+
+// Simple text sanitization - strip HTML tags (doesn't require jsdom)
+function sanitizeText(text: string): string {
+  return text.replace(/<[^>]*>/g, '').trim()
+}
+
+// Escape HTML entities for safe display in emails
+function escapeHtml(text: string): string {
+  const htmlEntities: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  }
+  return text.replace(/[&<>"']/g, (char) => htmlEntities[char])
+}
 
 // Support multiple email addresses separated by commas in CONTACT_EMAIL
 const CONTACT_EMAILS = (process.env.CONTACT_EMAIL || 'northforkpickleball@gmail.com')
