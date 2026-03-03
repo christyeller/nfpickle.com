@@ -388,6 +388,27 @@ export default function HomePageSections({
           </motion.div>
 
           <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="mt-8 max-w-2xl mx-auto"
+          >
+            <div className="relative aspect-video overflow-hidden rounded-2xl shadow-elevation-2">
+              <Image
+                src="https://media.nfpickle.com/site-assets/proposed-court-location.png"
+                alt="Bird's eye view of proposed court location"
+                fill
+                unoptimized
+                className="object-cover"
+              />
+            </div>
+            <p className="text-gray-600 italic text-center mt-4">
+              Here&apos;s a bird&apos;s eye view of our proposed location. For reference, the road just north of the red box is Doc Maloney Way. To the left (west) is the Maloney House and to the right (east) is the parking lot for the Miners Trail.
+            </p>
+          </motion.div>
+
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
