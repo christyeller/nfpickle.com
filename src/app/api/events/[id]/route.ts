@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
+import { revalidatePath } from 'next/cache'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { eventSchema } from '@/lib/validations'
@@ -66,6 +67,11 @@ export async function PUT(
       },
     })
 
+    // Revalidate public pages so updated content appears immediately
+    revalidatePath('/events')
+    revalidatePath(`/events/${slug}`)
+    revalidatePath('/')
+
     return NextResponse.json({ event })
   } catch (error) {
     console.error('Error updating event:', error)
@@ -85,7 +91,18 @@ export async function DELETE(
     }
 
     const { id } = await params
+
+    // Get the event slug before deleting for revalidation
+    const event = await prisma.event.findUnique({ where: { id } })
+
     await prisma.event.delete({ where: { id } })
+
+    // Revalidate public pages
+    revalidatePath('/events')
+    if (event?.slug) {
+      revalidatePath(`/events/${event.slug}`)
+    }
+    revalidatePath('/')
 
     return NextResponse.json({ success: true })
   } catch (error) {

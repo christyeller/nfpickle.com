@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
+import { revalidatePath } from 'next/cache'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { postSchema } from '@/lib/validations'
@@ -63,6 +64,11 @@ export async function PUT(
       },
     })
 
+    // Revalidate public pages so updated content appears immediately
+    revalidatePath('/news')
+    revalidatePath(`/news/${slug}`)
+    revalidatePath('/')
+
     return NextResponse.json({ post })
   } catch (error) {
     console.error('Error updating post:', error)
@@ -82,7 +88,18 @@ export async function DELETE(
     }
 
     const { id } = await params
+
+    // Get the post slug before deleting for revalidation
+    const post = await prisma.post.findUnique({ where: { id } })
+
     await prisma.post.delete({ where: { id } })
+
+    // Revalidate public pages
+    revalidatePath('/news')
+    if (post?.slug) {
+      revalidatePath(`/news/${post.slug}`)
+    }
+    revalidatePath('/')
 
     return NextResponse.json({ success: true })
   } catch (error) {

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
+import { revalidatePath } from 'next/cache'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { postSchema } from '@/lib/validations'
@@ -59,6 +60,10 @@ export async function POST(request: NextRequest) {
         ...(featuredImageId && { featuredImageId }),
       },
     })
+
+    // Revalidate public pages so new content appears immediately
+    revalidatePath('/news')
+    revalidatePath('/')
 
     return NextResponse.json({ post }, { status: 201 })
   } catch (error) {
