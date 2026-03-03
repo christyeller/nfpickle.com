@@ -30,7 +30,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-[70px] lg:-mt-[160px] py-[30px] lg:py-[40px] pt-[100px] lg:pt-[200px]">
       {/* Fallback Image (shows while video loads or on mobile) */}
       <div className="absolute inset-0">
         <Image
