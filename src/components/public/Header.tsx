@@ -68,7 +68,7 @@ export default function Header() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-[10px] lg:py-[20px]',
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-[10px]',
           isScrolled && 'backdrop-blur-xl shadow-elevation-3'
         )}
         style={{ backgroundColor: '#FDF9F0' }}
@@ -78,7 +78,7 @@ export default function Header() {
             {/* Logo */}
             <Link href="/" className="flex items-center group">
               <motion.div
-                className="relative h-[50px] lg:h-[120px] w-auto"
+                className="relative h-[50px] lg:h-[100px] w-auto"
                 whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
@@ -87,7 +87,7 @@ export default function Header() {
                   alt="North Fork Pickleball"
                   width={300}
                   height={120}
-                  className="h-[50px] lg:h-[120px] w-auto object-contain"
+                  className="h-[50px] lg:h-[100px] w-auto object-contain"
                   unoptimized
                   priority
                 />

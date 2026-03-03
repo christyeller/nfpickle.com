@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ChevronDown, Heart, Users, Sparkles } from 'lucide-react'
 import {
@@ -16,20 +15,9 @@ import { CountUp } from './CountUp'
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-[70px] lg:-mt-[160px] py-[30px] lg:py-[40px] pt-[100px] lg:pt-[200px]">
-      {/* Fallback Image (shows on mobile only) */}
-      <div className="absolute inset-0 lg:hidden">
-        <Image
-          src="https://media.nfpickle.com/site-assets/features-bg.jpg"
-          alt="Pickleball court"
-          fill
-          priority
-          className="object-cover"
-        />
-      </div>
-
-      {/* Video Background (shows on desktop only) */}
-      <div className="absolute inset-0 hidden lg:block">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-[70px] lg:-mt-[120px]">
+      {/* Video Background */}
+      <div className="absolute inset-0">
         <video
           autoPlay
           loop
@@ -37,16 +25,14 @@ export default function Hero() {
           playsInline
           className="w-full h-full object-cover"
         >
-          <source src="https://media.nfpickle.com/site-assets/pexels_vid.mp4" type="video/mp4" />
+          <source src="/hero-video.mp4" type="video/mp4" />
         </video>
+        <div className="absolute inset-0 bg-black/40" />
       </div>
-
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40" />
 
       {/* Content */}
       <motion.div
-        className="container-custom relative z-10 text-center text-white px-4"
+        className="container-custom relative z-10 text-center text-white px-4 pt-[90px] lg:pt-[140px]"
         variants={heroContent}
         initial="hidden"
         animate="visible"
@@ -70,16 +56,20 @@ export default function Hero() {
           variants={heroTitle}
           className="font-display font-black mb-6 leading-[0.9]"
         >
-          <span className="block text-5xl sm:text-6xl md:text-8xl lg:text-9xl text-lime drop-shadow-lg">
-            North Fork <span className="text-white">Pickleball Club</span>
+          <span className="block text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-lime drop-shadow-lg">
+            North Fork
+          </span>
+          <span className="block text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-white drop-shadow-lg">
+            Pickleball Club
           </span>
         </motion.h1>
 
         <motion.p
           variants={heroSubtitle}
-          className="text-xl sm:text-2xl md:text-2xl lg:text-3xl text-white font-semibold mb-8 drop-shadow-lg leading-tight"
+          className="text-lg sm:text-xl md:text-xl lg:text-2xl text-white font-semibold mb-8 drop-shadow-lg leading-tight"
         >
-          Bringing dedicated pickleball courts<br className="hidden sm:block" />
+          Bringing dedicated pickleball courts{' '}
+          <br className="hidden sm:block" />
           to Hotchkiss, Colorado
         </motion.p>
 
@@ -137,7 +127,7 @@ export default function Hero() {
                 className="flex items-center gap-3 px-5 py-3 rounded-xl bg-black/30 backdrop-blur-sm border border-white/10"
               >
                 <div className="text-center">
-                  <CountUp end={stat.count} duration={2} className="text-3xl font-bold font-display text-white drop-shadow-md" />
+                  <CountUp end={stat.count} duration={2} className="text-2xl font-bold font-display text-white drop-shadow-md" />
                   <p className="text-xs text-white/70 uppercase tracking-wider">{stat.label}</p>
                 </div>
               </div>
