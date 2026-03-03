@@ -57,24 +57,34 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    // Send email notification (lazy-load Resend to avoid build-time errors)
+    // Send email notification (non-blocking - don't fail submission if email fails)
     if (process.env.RESEND_API_KEY) {
-      const { Resend } = await import('resend')
-      const resend = new Resend(process.env.RESEND_API_KEY)
-      await resend.emails.send({
-        from: 'North Fork Pickleball <info@northforkpickleball.com>',
-        to: CONTACT_EMAILS,
-        replyTo: validatedData.email,
-        subject: validatedData.subject || `New Contact Form Message from ${validatedData.name}`,
-        html: `
-          <h2>New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${escapeHtml(sanitizedData.name)}</p>
-          <p><strong>Email:</strong> ${escapeHtml(sanitizedData.email)}</p>
-          ${sanitizedData.subject ? `<p><strong>Subject:</strong> ${escapeHtml(sanitizedData.subject)}</p>` : ''}
-          <p><strong>Message:</strong></p>
-          <p>${escapeHtml(sanitizedData.message).replace(/\n/g, '<br>')}</p>
-        `,
-      })
+      try {
+        const { Resend } = await import('resend')
+        const resend = new Resend(process.env.RESEND_API_KEY)
+        // Use verified domain sender, or fallback to Resend's default
+        const fromEmail = process.env.RESEND_FROM_EMAIL || 'North Fork Pickleball <onboarding@resend.dev>'
+        const result = await resend.emails.send({
+          from: fromEmail,
+          to: CONTACT_EMAILS,
+          replyTo: validatedData.email,
+          subject: validatedData.subject || `New Contact Form Message from ${validatedData.name}`,
+          html: `
+            <h2>New Contact Form Submission</h2>
+            <p><strong>Name:</strong> ${escapeHtml(sanitizedData.name)}</p>
+            <p><strong>Email:</strong> ${escapeHtml(sanitizedData.email)}</p>
+            ${sanitizedData.subject ? `<p><strong>Subject:</strong> ${escapeHtml(sanitizedData.subject)}</p>` : ''}
+            <p><strong>Message:</strong></p>
+            <p>${escapeHtml(sanitizedData.message).replace(/\n/g, '<br>')}</p>
+          `,
+        })
+        if (result.error) {
+          console.error('Resend error:', result.error)
+        }
+      } catch (emailError) {
+        // Log but don't fail - the message is already saved to database
+        console.error('Failed to send email notification:', emailError)
+      }
     }
 
     return NextResponse.json({ message }, { status: 201 })
