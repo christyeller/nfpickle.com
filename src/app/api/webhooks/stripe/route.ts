@@ -41,10 +41,11 @@ async function sendDonationEmails(donation: {
     const resend = new Resend(process.env.RESEND_API_KEY)
     const fromEmail = process.env.RESEND_FROM_EMAIL || 'North Fork Pickleball <onboarding@resend.dev>'
 
+    // Amount is stored in dollars, not cents
     const formattedAmount = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-    }).format(donation.amount / 100)
+    }).format(donation.amount)
 
     const donationTypeText = donation.donationType === 'recurring'
       ? `Recurring (${donation.frequency})`
