@@ -39,9 +39,12 @@ export default function ContactPage() {
         setIsSubmitted(true)
         reset()
       } else {
-        setError('Failed to send message. Please try again.')
+        const errorData = await res.json().catch(() => ({}))
+        console.error('Contact form error:', res.status, errorData)
+        setError(errorData.error || 'Failed to send message. Please try again.')
       }
-    } catch {
+    } catch (err) {
+      console.error('Contact form exception:', err)
       setError('Failed to send message. Please try again.')
     } finally {
       setIsSubmitting(false)
