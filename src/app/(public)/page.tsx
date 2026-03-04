@@ -1,6 +1,15 @@
+import { Metadata } from 'next'
 import { prisma } from '@/lib/prisma'
 import Hero from '@/components/public/Hero'
 import HomePageSections from '@/components/public/HomePageSections'
+
+export const metadata: Metadata = {
+  title: 'North Fork Pickleball Club | Hotchkiss Pickleball Courts & Community',
+  description: 'North Fork Pickleball Club is bringing dedicated pickleball courts to Hotchkiss, Colorado. Join our growing community of players in the North Fork Valley - Paonia, Hotchkiss, and Crawford. Open play, events, and more!',
+  alternates: {
+    canonical: 'https://nfpickle.com',
+  },
+}
 
 export default async function HomePage() {
   const [upcomingEvents, recentPosts, membersCount] = await Promise.all([
