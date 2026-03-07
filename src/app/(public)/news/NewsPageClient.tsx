@@ -43,7 +43,7 @@ export default function NewsPageClient({ posts }: NewsPageClientProps) {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-white/10 border-white/30 text-white mb-6"
             >
               <Newspaper className="w-4 h-4" />
-              <span className="text-sm font-medium">Stay Updated</span>
+              <span className="text-sm font-medium">Pickleball With a View Starts Here</span>
             </motion.div>
 
             {/* Main title */}

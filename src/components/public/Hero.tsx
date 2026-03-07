@@ -47,7 +47,7 @@ export default function Hero() {
             animate={{ scale: [1, 1.2, 1], opacity: [1, 0.8, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
-          <span className="text-sm font-medium text-white">North Fork Valley&apos;s Premier Pickleball Community</span>
+          <span className="text-sm font-medium text-white">Pickleball With a View Starts Here</span>
           <Sparkles className="w-4 h-4 text-white" />
         </motion.div>
 

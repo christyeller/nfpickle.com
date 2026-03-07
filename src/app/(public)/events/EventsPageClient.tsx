@@ -50,7 +50,7 @@ export default function EventsPageClient({
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-white/10 border-white/30 text-white mb-6"
             >
               <Calendar className="w-4 h-4" />
-              <span className="text-sm font-medium">Join the Fun</span>
+              <span className="text-sm font-medium">Pickleball With a View Starts Here</span>
             </motion.div>
 
             {/* Main title */}

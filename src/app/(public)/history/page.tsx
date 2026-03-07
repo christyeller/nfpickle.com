@@ -39,7 +39,7 @@ export default function HistoryPage() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-white/10 border-white/30 text-white mb-6"
             >
               <Calendar size={16} />
-              <span className="text-sm font-medium">Timeline</span>
+              <span className="text-sm font-medium">Pickleball With a View Starts Here</span>
             </motion.div>
 
             {/* Main title with animated words */}

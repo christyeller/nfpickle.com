@@ -87,7 +87,7 @@ export default function ContactPage() {
               >
                 👋
               </motion.span>
-              <span className="text-sm font-medium">We&apos;d love to hear from you</span>
+              <span className="text-sm font-medium">Pickleball With a View Starts Here</span>
             </motion.div>
 
             {/* Main title with animated words */}

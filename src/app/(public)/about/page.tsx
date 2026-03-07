@@ -93,7 +93,7 @@ export default function AboutPage() {
             <ScrollReveal>
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm font-medium mb-6">
                 <Heart className="w-4 h-4" />
-                About North Fork Pickleball Club
+                Pickleball With a View Starts Here
               </span>
             </ScrollReveal>
 
