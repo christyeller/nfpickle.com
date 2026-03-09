@@ -46,7 +46,7 @@ const courtLocations = [
   {
     name: 'Paonia',
     locations: [
-      { name: 'Apple Valley Park', url: 'https://townofpaonia.colorado.gov/departments/parks-recreation', type: 'outdoor', courts: 3, address: '45 Pan American Avenue, Paonia' },
+      { name: 'Apple Valley Park', url: 'https://townofpaonia.colorado.gov/departments/parks-recreation', type: 'outdoor', courts: null, address: '45 Pan American Avenue, Paonia' },
     ],
     admission: 'FREE',
     color: 'teal' as const,

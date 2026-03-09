@@ -218,48 +218,53 @@ export default function PostContent({ content }: PostContentProps) {
     return null
   }
 
-  // Split the content at gallery placeholders and render galleries inline
+  // Split the content at gallery placeholders and render galleries inline,
+  // grouping consecutive non-gallery elements into single prose blocks
   const parts: React.ReactNode[] = []
   const tempDiv = document.createElement('div')
   tempDiv.innerHTML = sanitizedContent
 
-  const processNodes = (nodes: NodeListOf<ChildNode> | ChildNode[]) => {
-    nodes.forEach((node, nodeIndex) => {
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        const el = node as Element
-        if (el.getAttribute('data-type') === 'image-gallery') {
-          const galleryId = el.getAttribute('data-gallery-id')
-          const gallery = galleries.find(g => g.id === galleryId)
-          if (gallery) {
-            parts.push(
-              <ImageGallery
-                key={galleryId}
-                images={gallery.data.images}
-                layout={gallery.data.layout}
-                columns={gallery.data.columns}
-              />
-            )
-          }
-        } else {
-          // For other elements, render as HTML
-          const html = el.outerHTML
+  let htmlBuffer = ''
+
+  const flushHtmlBuffer = () => {
+    if (htmlBuffer) {
+      parts.push(
+        <div
+          key={`prose-${parts.length}`}
+          className="post-content"
+          dangerouslySetInnerHTML={{ __html: htmlBuffer }}
+        />
+      )
+      htmlBuffer = ''
+    }
+  }
+
+  tempDiv.childNodes.forEach((node) => {
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      const el = node as Element
+      if (el.getAttribute('data-type') === 'image-gallery') {
+        flushHtmlBuffer()
+        const galleryId = el.getAttribute('data-gallery-id')
+        const gallery = galleries.find(g => g.id === galleryId)
+        if (gallery) {
           parts.push(
-            <div
-              key={`html-${nodeIndex}-${parts.length}`}
-              className="prose prose-lg max-w-none"
-              dangerouslySetInnerHTML={{ __html: html }}
+            <ImageGallery
+              key={galleryId}
+              images={gallery.data.images}
+              layout={gallery.data.layout}
+              columns={gallery.data.columns}
             />
           )
         }
-      } else if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim()) {
-        parts.push(
-          <span key={`text-${nodeIndex}-${parts.length}`}>{node.textContent}</span>
-        )
+      } else {
+        htmlBuffer += el.outerHTML
       }
-    })
-  }
+    } else if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim()) {
+      htmlBuffer += node.textContent
+    }
+  })
 
-  processNodes(tempDiv.childNodes)
+  flushHtmlBuffer()
 
   return <div ref={containerRef}>{parts}</div>
 }
