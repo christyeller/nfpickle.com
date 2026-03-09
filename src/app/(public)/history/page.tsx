@@ -258,7 +258,7 @@ export default function HistoryPage() {
                 </h2>
 
                 <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                  NFPC is in the process of planning, developing and raising $1 million to build 8 dedicated pickleball courts and 4 dedicated tennis courts at the Delta County Fairgrounds between the Maloney House and the new Miners Trail &mdash; land that&apos;s already been dedicated. These courts will serve the whole North Fork Valley and become the home courts for North Fork High School tennis.
+                  NFPC is in the process of planning, developing and raising $1 million to build <strong>8 dedicated pickleball courts</strong> as well as <strong>4 dedicated tennis courts</strong> at the Delta County Fairgrounds between the Maloney House and the new Miners Trail &mdash; land that&apos;s already been dedicated. These courts will serve the whole North Fork Valley and become the home courts for North Fork High School tennis.
                 </p>
 
                 {/* Stats row */}
