@@ -23,9 +23,11 @@ import {
   CodeSquare,
   Undo,
   Redo,
+  FileText,
 } from 'lucide-react'
 import { useState } from 'react'
 import ImageUploadButton from './ImageUploadButton'
+import DocumentUploadButton from './DocumentUploadButton'
 import GalleryBuilderModal from './GalleryBuilderModal'
 
 interface ToolbarProps {
@@ -211,7 +213,7 @@ export default function Toolbar({ editor, features }: ToolbarProps) {
         </div>
       )}
 
-      {/* Links and Images */}
+      {/* Links, Images, and Documents */}
       {(features.links || features.images) && (
         <div className="flex gap-1 border-r border-gray-300 pr-2">
           {features.links && (
@@ -235,6 +237,9 @@ export default function Toolbar({ editor, features }: ToolbarProps) {
               >
                 <Images size={18} />
               </ToolbarButton>
+              <DocumentUploadButton editor={editor}>
+                <FileText size={18} />
+              </DocumentUploadButton>
             </>
           )}
         </div>

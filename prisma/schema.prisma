@@ -105,6 +105,8 @@ model Media {
   category     MediaCategory  @default(CONTENT)
   r2Key        String?        @unique
   tags         String[]
+  mediaType    MediaType      @default(IMAGE)
+  originalName String?
   Event        Event[]
   GalleryImage GalleryImage[]
   User         User?          @relation(fields: [uploadedBy], references: [id])
@@ -115,6 +117,7 @@ model Media {
   @@index([cloudinaryId])
   @@index([createdAt])
   @@index([r2Key])
+  @@index([mediaType])
 }
 
 model Member {
@@ -186,4 +189,9 @@ enum MediaCategory {
   CONTENT
   FEATURED
   GALLERY
+}
+
+enum MediaType {
+  IMAGE
+  DOCUMENT
 }

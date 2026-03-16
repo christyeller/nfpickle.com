@@ -6,7 +6,28 @@ import { uploadToR2, getR2Key, generateUniqueFilename } from '@/lib/r2'
 import { randomUUID } from 'crypto'
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
-const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/avif']
+const MAX_DOCUMENT_SIZE = 25 * 1024 * 1024 // 25MB for documents
+
+const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/avif']
+const ALLOWED_DOCUMENT_TYPES = [
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/vnd.ms-excel',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  'text/plain',
+  'text/csv',
+]
+
+const ALL_ALLOWED_TYPES = [...ALLOWED_IMAGE_TYPES, ...ALLOWED_DOCUMENT_TYPES]
+
+function getMediaType(mimeType: string): 'IMAGE' | 'DOCUMENT' {
+  return ALLOWED_IMAGE_TYPES.includes(mimeType) ? 'IMAGE' : 'DOCUMENT'
+}
+
+function getR2Folder(mediaType: 'IMAGE' | 'DOCUMENT'): string {
+  return mediaType === 'DOCUMENT' ? 'documents' : 'content'
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,17 +45,21 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate file type
-    if (!ALLOWED_TYPES.includes(file.type)) {
+    if (!ALL_ALLOWED_TYPES.includes(file.type)) {
       return NextResponse.json(
-        { error: 'Invalid file type. Only JPEG, PNG, WebP, and AVIF are allowed' },
+        { error: 'Invalid file type. Allowed: JPEG, PNG, WebP, AVIF, PDF, Word, Excel, TXT, CSV' },
         { status: 400 }
       )
     }
 
+    const mediaType = getMediaType(file.type)
+    const maxSize = mediaType === 'DOCUMENT' ? MAX_DOCUMENT_SIZE : MAX_FILE_SIZE
+
     // Validate file size
-    if (file.size > MAX_FILE_SIZE) {
+    if (file.size > maxSize) {
+      const maxMB = maxSize / (1024 * 1024)
       return NextResponse.json(
-        { error: 'File too large. Maximum size is 10MB' },
+        { error: `File too large. Maximum size is ${maxMB}MB` },
         { status: 400 }
       )
     }
@@ -45,7 +70,8 @@ export async function POST(request: NextRequest) {
 
     // Generate unique filename and R2 key
     const uniqueFilename = generateUniqueFilename(file.name)
-    const r2Key = getR2Key('content', uniqueFilename)
+    const folder = getR2Folder(mediaType)
+    const r2Key = getR2Key(folder, uniqueFilename)
 
     // Upload to R2
     const url = await uploadToR2(buffer, r2Key, file.type)
@@ -67,6 +93,8 @@ export async function POST(request: NextRequest) {
         secureUrl: url,
         format,
         bytes: file.size,
+        mediaType,
+        originalName: file.name,
         updatedAt: new Date(),
         ...(user?.id && { uploadedBy: user.id }),
       },
