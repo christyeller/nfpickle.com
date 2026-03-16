@@ -193,6 +193,22 @@ export default function BoardOfDirectorsPage() {
             >
               The dedicated volunteers leading our club
             </motion.p>
+
+            {/* CTA Button */}
+            <motion.div
+              initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.6 }}
+              className="mt-8"
+            >
+              <Link
+                href="/news/board-meeting-minutes"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-[#F38D09] text-white font-bold text-lg rounded-xl hover:bg-[#F38D09]/90 transition-colors"
+              >
+                View our Board Meeting Minutes
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
 
