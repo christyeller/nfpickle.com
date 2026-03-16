@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
-import { MapPin, Clock, Star, Zap, ArrowRight, Info, Mail, Smartphone, ClipboardList, Navigation } from 'lucide-react'
+import { MapPin, Clock, Star, Zap, ArrowRight, Info, Mail, ClipboardList, Navigation } from 'lucide-react'
 import SectionHeader from '@/components/public/SectionHeader'
 import { ScrollReveal } from '@/components/public/ScrollReveal'
 import { PickleballPong } from '@/components/public/PickleballPong'
@@ -158,9 +159,15 @@ export default function PlayPage() {
               <div className="mt-8">
                 <Link
                   href="#open-play"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-[#F38D09] text-white font-bold text-lg rounded-xl hover:bg-[#F38D09]/90 transition-colors"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-[#F38D09] text-white font-bold text-lg rounded-xl hover:bg-[#F38D09]/90 transition-colors"
                 >
-                  <Smartphone className="w-5 h-5" />
+                  <Image
+                    src="https://media.nfpickle.com/site-assets/teamreach.png"
+                    alt="TeamReach"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6"
+                  />
                   Download the TeamReach App for Current Play Schedules
                 </Link>
               </div>
@@ -360,6 +367,15 @@ export default function PlayPage() {
             <p className="text-xl text-white font-bold max-w-3xl mx-auto">
               Download the TeamReach app below and enter your group code to see when and where people are playing in our region
             </p>
+            <div className="mt-8">
+              <Image
+                src="https://media.nfpickle.com/site-assets/teamreach.png"
+                alt="TeamReach"
+                width={80}
+                height={80}
+                className="mx-auto"
+              />
+            </div>
           </div>
 
           {/* App Download Buttons */}

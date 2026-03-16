@@ -117,9 +117,9 @@ export default function Hero() {
           </p>
           <div className="flex flex-wrap justify-center gap-4 md:gap-6">
             {[
-              { count: 228, label: 'Delta' },
+              { count: 236, label: 'Delta' },
               { count: 107, label: 'Cedaredge' },
-              { count: 66, label: 'Paonia' },
+              { count: 68, label: 'Paonia' },
               { count: 48, label: 'Crawford' },
             ].map((stat) => (
               <div
