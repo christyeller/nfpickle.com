@@ -81,6 +81,12 @@ async function sendDonationEmails(donation: {
         ${donation.donationType === 'recurring' ? `<p>This is a <strong>${donation.frequency}</strong> recurring donation. You can manage your subscription at any time.</p>` : ''}
         ${donation.receiptUrl ? `<p><a href="${donation.receiptUrl}">View your receipt</a></p>` : ''}
         <hr>
+        <p style="font-size: 14px; color: #666; margin-top: 20px;">
+          The North Fork Pickleball Club is a 501(c)(3) tax-exempt organization with public charity status.
+          All contributions are fully tax-deductible.<br>
+          <strong>EIN: 39-3292058</strong>
+        </p>
+        <hr>
         <p>With gratitude,<br><strong>North Fork Pickleball Club</strong></p>
         <p>
           <small>

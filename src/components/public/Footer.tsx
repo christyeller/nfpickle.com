@@ -45,8 +45,12 @@ export default function Footer() {
               unoptimized
               className="mb-6 h-auto w-[250px] object-contain"
             />
-            <p className="text-white mb-8 max-w-md leading-relaxed">
+            <p className="text-white mb-6 max-w-md leading-relaxed">
               The North Fork Pickleball Club (NFPC) exists to provide a fun, healthy, recreational activity for our rural North Fork Community while promoting exercise, development of skills and camaraderie through the enjoyment of pickleball.
+            </p>
+            <p className="text-white/80 text-sm mb-8 max-w-md leading-relaxed">
+              The North Fork Pickleball Club is a 501(c)(3) tax-exempt organization with public charity status. All contributions are fully tax-deductible.<br />
+              <span className="font-semibold">EIN: 39-3292058</span>
             </p>
 
             {/* Social Links */}
