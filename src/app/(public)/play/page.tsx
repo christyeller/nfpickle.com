@@ -133,7 +133,7 @@ export default function PlayPage() {
               {/* Desktop: Game instructions */}
               <span className="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 text-sm font-medium text-white mb-6">
                 <span className="w-2 h-2 bg-lime rounded-full animate-pulse" />
-                Pickleball With a View Starts Here
+                Grab the orange paddle on the left with your mouse or touchpad and play pickleball with us!
               </span>
               {/* Mobile/Tablet: Simple badge */}
               <span className="inline-flex lg:hidden items-center gap-2 px-5 py-2.5 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 text-sm font-medium text-white mb-6">
