@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
-import { MapPin, Clock, Star, Zap, ArrowRight, Info, Mail, ClipboardList, Navigation } from 'lucide-react'
+import { MapPin, Clock, Star, Zap, ArrowRight, Info, Mail, ClipboardList, Navigation, Smartphone } from 'lucide-react'
 import SectionHeader from '@/components/public/SectionHeader'
 import { ScrollReveal } from '@/components/public/ScrollReveal'
 import { PickleballPong } from '@/components/public/PickleballPong'
