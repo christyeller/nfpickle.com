@@ -118,7 +118,6 @@ export default function Footer() {
                   <div className="text-sm">
                     <span className="block">Doc Maloney Way</span>
                     <span className="block">at Delta County Fairgrounds</span>
-                    <span className="block">403 Fair Grounds</span>
                     <span className="block">Hotchkiss, CO 81419</span>
                   </div>
                 </a>
