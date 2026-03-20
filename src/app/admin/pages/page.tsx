@@ -74,6 +74,21 @@ export default function PagesPage() {
         </span>
       ),
     },
+    {
+      key: 'view',
+      label: '',
+      render: (page: Page) =>
+        page.status === 'published' ? (
+          <a
+            href={`/pages/${page.slug}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-teal-600 hover:text-teal-700 font-medium"
+          >
+            View Page
+          </a>
+        ) : null,
+    },
   ]
 
   return (

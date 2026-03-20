@@ -16,6 +16,7 @@ export default function EditPagePage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
+  const [pageSlug, setPageSlug] = useState('')
 
   const {
     register,
@@ -37,6 +38,7 @@ export default function EditPagePage() {
       const data = await res.json()
       if (data.page) {
         reset(data.page)
+        setPageSlug(data.page.slug)
       }
     } catch (error) {
       console.error('Error fetching page:', error)
@@ -160,6 +162,15 @@ export default function EditPagePage() {
               <Link href="/admin/pages" className="btn btn-ghost">
                 Cancel
               </Link>
+              {pageSlug && (
+                <Link
+                  href={`/pages/${pageSlug}`}
+                  target="_blank"
+                  className="btn btn-ghost text-teal-600 hover:text-teal-700"
+                >
+                  View Page
+                </Link>
+              )}
             </div>
           </form>
         </div>
