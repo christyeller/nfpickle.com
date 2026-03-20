@@ -22,10 +22,8 @@ const navItems = [
   { href: '/admin/events', label: 'Events', icon: Calendar },
   { href: '/admin/posts', label: 'Posts', icon: Newspaper },
   { href: '/admin/pages', label: 'Pages', icon: FileText },
-  { href: '/admin/members', label: 'Members', icon: Users },
   { href: '/admin/donations', label: 'Donations', icon: Heart },
   { href: '/admin/messages', label: 'Messages', icon: Mail },
-  { href: '/admin/settings', label: 'Settings', icon: Settings },
 ]
 
 export default function Sidebar() {

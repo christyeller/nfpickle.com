@@ -18,6 +18,7 @@ export default function EditPostPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
+  const [postSlug, setPostSlug] = useState('')
 
   const {
     register,
@@ -37,6 +38,7 @@ export default function EditPostPage() {
 
         if (data.post) {
           const post: Post = data.post
+          setPostSlug(post.slug)
           reset({
             title: post.title,
             excerpt: post.excerpt || '',
@@ -186,6 +188,15 @@ export default function EditPostPage() {
                 <Link href="/admin/posts" className="btn btn-ghost">
                   Cancel
                 </Link>
+                {postSlug && (
+                  <Link
+                    href={`/news/${postSlug}`}
+                    target="_blank"
+                    className="btn btn-ghost text-teal-600 hover:text-teal-700"
+                  >
+                    View Post
+                  </Link>
+                )}
               </div>
               <button
                 type="button"

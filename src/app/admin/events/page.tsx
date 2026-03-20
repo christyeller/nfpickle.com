@@ -78,6 +78,21 @@ export default function EventsPage() {
         </span>
       ),
     },
+    {
+      key: 'view',
+      label: '',
+      render: (event: Event) =>
+        event.status === 'published' ? (
+          <a
+            href={`/events/${event.slug}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-teal-600 hover:text-teal-700 font-medium"
+          >
+            View Event
+          </a>
+        ) : null,
+    },
   ]
 
   return (

@@ -18,6 +18,7 @@ export default function EditEventPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
+  const [eventSlug, setEventSlug] = useState('')
 
   const {
     register,
@@ -40,6 +41,7 @@ export default function EditEventPage() {
 
         if (data.event) {
           const event: Event = data.event
+          setEventSlug(event.slug)
           reset({
             title: event.title,
             eventType: event.eventType as EventFormData['eventType'],
@@ -267,6 +269,15 @@ export default function EditEventPage() {
                 <Link href="/admin/events" className="btn btn-ghost">
                   Cancel
                 </Link>
+                {eventSlug && (
+                  <Link
+                    href={`/events/${eventSlug}`}
+                    target="_blank"
+                    className="btn btn-ghost text-teal-600 hover:text-teal-700"
+                  >
+                    View Event
+                  </Link>
+                )}
               </div>
               <button
                 type="button"

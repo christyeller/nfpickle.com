@@ -72,6 +72,21 @@ export default function PostsPage() {
         </span>
       ),
     },
+    {
+      key: 'view',
+      label: '',
+      render: (post: Post) =>
+        post.status === 'published' ? (
+          <a
+            href={`/news/${post.slug}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-teal-600 hover:text-teal-700 font-medium"
+          >
+            View Post
+          </a>
+        ) : null,
+    },
   ]
 
   return (
