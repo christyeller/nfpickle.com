@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Facebook, Instagram, Mail, MapPin, Heart, ArrowUpRight, Phone, Inbox } from 'lucide-react'
+import { Facebook, Mail, MapPin, Heart, ArrowUpRight, Phone, Inbox } from 'lucide-react'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 
 const quickLinks = [
@@ -17,8 +17,7 @@ const quickLinks = [
 ]
 
 const socialLinks = [
-  { icon: Facebook, href: '#', label: 'Facebook' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
+  { icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61577439236579', label: 'Facebook' },
 ]
 
 export default function Footer() {
