@@ -114,6 +114,7 @@ export default function EmailOptInForm({ variant = 'strip' }: EmailOptInFormProp
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
+            <Mail size={28} className="text-white mx-auto mb-3" />
             <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
               Join Our List!
             </h2>
