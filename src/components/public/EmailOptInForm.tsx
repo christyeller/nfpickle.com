@@ -104,7 +104,7 @@ export default function EmailOptInForm({ variant = 'strip' }: EmailOptInFormProp
 
   // Strip variant for homepage
   return (
-    <section className="bg-[#207348] relative overflow-hidden">
+    <section className="bg-[#F38D09] relative overflow-hidden">
       <div className="absolute inset-0 dots-pattern opacity-10" />
       <div className="container-custom relative z-10 py-8 md:py-10">
         <div className="max-w-4xl mx-auto text-center">
@@ -163,7 +163,7 @@ export default function EmailOptInForm({ variant = 'strip' }: EmailOptInFormProp
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-8 py-3 bg-[#F38D09] text-white font-bold text-lg rounded-xl hover:bg-[#F38D09]/90 transition-colors disabled:opacity-50 whitespace-nowrap"
+                  className="px-8 py-3 bg-teal text-white font-bold text-lg rounded-xl hover:bg-teal/90 transition-colors disabled:opacity-50 whitespace-nowrap"
                 >
                   {isSubmitting ? 'Joining...' : 'Join'}
                 </button>
