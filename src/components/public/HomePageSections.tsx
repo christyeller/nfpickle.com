@@ -168,7 +168,7 @@ export default function HomePageSections({
               Growing the Sport of Pickleball in our Valley
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We&apos;re excited to announce a new community effort to bring <strong>dedicated pickleball and tennis courts</strong> to the North Fork Valley! To make this dream a reality, we have formed a 501(c)(3) nonprofit organization which will allow us to receive State and Federal grants; a vital step in securing resources for our project. We are currently working with the Delta County Commissioners, the Delta County School District and the North Fork Pool Park and Recreation District to strategize creation of both tennis courts and dedicated pickleball courts in the Hotchkiss area.
+              We&apos;re excited to announce a new community effort to bring <strong>dedicated pickleball and tennis courts</strong> to the North Fork Valley! To make this dream a reality, we have formed a 501(c)(3) nonprofit organization which will allow us to receive State and Federal grants; a vital step in securing resources for our project. We are currently working with the Delta County Commissioners, the Delta County School District and the North Fork Pool Park and Recreation District to strategize creation of both tennis courts and dedicated pickleball courts at the Delta County Fairgrounds.
             </p>
           </ScrollReveal>
 
