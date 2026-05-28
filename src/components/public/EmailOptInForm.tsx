@@ -114,10 +114,9 @@ export default function EmailOptInForm({ variant = 'strip' }: EmailOptInFormProp
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white text-sm font-medium mb-4">
-              <Mail size={16} />
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
               Join Our List!
-            </div>
+            </h2>
             <p className="text-white text-lg mb-6">
               We will keep you updated about local pickleball events, clinics, fundraisers and more.
             </p>
@@ -163,7 +162,7 @@ export default function EmailOptInForm({ variant = 'strip' }: EmailOptInFormProp
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-8 py-3 bg-teal text-white font-bold text-lg rounded-xl hover:bg-teal/90 transition-colors disabled:opacity-50 whitespace-nowrap"
+                  className="px-8 py-3 bg-white text-[#F38D09] font-bold text-lg rounded-xl hover:bg-white/90 transition-colors disabled:opacity-50 whitespace-nowrap"
                 >
                   {isSubmitting ? 'Joining...' : 'Join'}
                 </button>
