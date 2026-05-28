@@ -163,6 +163,14 @@ model Post {
   Media           Media?   @relation(fields: [featuredImageId], references: [id])
 }
 
+model Subscriber {
+  id        String   @id
+  firstName String
+  lastName  String
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
 model SiteSettings {
   id              String  @id @default("settings")
   clubName        String  @default("North Fork Pickleball Club")

@@ -24,6 +24,7 @@ const navItems = [
   { href: '/admin/pages', label: 'Pages', icon: FileText },
   { href: '/admin/donations', label: 'Donations', icon: Heart },
   { href: '/admin/messages', label: 'Messages', icon: Mail },
+  { href: '/admin/subscribers', label: 'Subscribers', icon: Users },
 ]
 
 export default function Sidebar() {

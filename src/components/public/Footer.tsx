@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Facebook, Mail, MapPin, Heart, ArrowUpRight, Phone, Inbox } from 'lucide-react'
 import { staggerContainer, staggerItem } from '@/lib/animations'
+import EmailOptInForm from './EmailOptInForm'
 
 const quickLinks = [
   { href: '/play', label: 'Courts & Schedule' },
@@ -177,13 +178,26 @@ export default function Footer() {
           </motion.div>
         </motion.div>
 
+        {/* Email Opt-In */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="border-t border-white/20 mt-12 pt-8"
+        >
+          <div className="max-w-lg">
+            <EmailOptInForm variant="footer" />
+          </div>
+        </motion.div>
+
         {/* Bottom bar */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="border-t border-white/20 mt-12 pt-8"
+          className="border-t border-white/20 mt-8 pt-8"
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-white text-sm">

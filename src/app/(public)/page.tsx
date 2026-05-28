@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { prisma } from '@/lib/prisma'
 import Hero from '@/components/public/Hero'
+import EmailOptInForm from '@/components/public/EmailOptInForm'
 import HomePageSections from '@/components/public/HomePageSections'
 
 export const metadata: Metadata = {
@@ -36,6 +37,9 @@ export default async function HomePage() {
     <>
       {/* Hero Section */}
       <Hero />
+
+      {/* Email Opt-In Strip */}
+      <EmailOptInForm variant="strip" />
 
       {/* All other sections - client-side for animations */}
       <HomePageSections
