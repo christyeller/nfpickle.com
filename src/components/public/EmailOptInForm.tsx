@@ -141,7 +141,7 @@ export default function EmailOptInForm({ variant = 'strip' }: EmailOptInFormProp
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   required
-                  className="flex-1 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:border-white/50 focus:bg-white/15"
+                  className="flex-1 px-4 py-3 rounded-xl bg-white/80 border border-white text-gray-800 placeholder-gray-500 focus:outline-none focus:border-white focus:bg-white"
                 />
                 <input
                   type="text"
@@ -149,7 +149,7 @@ export default function EmailOptInForm({ variant = 'strip' }: EmailOptInFormProp
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                   required
-                  className="flex-1 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:border-white/50 focus:bg-white/15"
+                  className="flex-1 px-4 py-3 rounded-xl bg-white/80 border border-white text-gray-800 placeholder-gray-500 focus:outline-none focus:border-white focus:bg-white"
                 />
                 <input
                   type="email"
@@ -157,12 +157,12 @@ export default function EmailOptInForm({ variant = 'strip' }: EmailOptInFormProp
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="flex-1 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:border-white/50 focus:bg-white/15"
+                  className="flex-1 px-4 py-3 rounded-xl bg-white/80 border border-white text-gray-800 placeholder-gray-500 focus:outline-none focus:border-white focus:bg-white"
                 />
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-8 py-3 bg-white text-[#F38D09] font-bold text-lg rounded-xl hover:bg-white/90 transition-colors disabled:opacity-50 whitespace-nowrap"
+                  className="px-8 py-3 bg-white text-gray-600 font-bold text-lg rounded-xl hover:bg-white/90 transition-colors disabled:opacity-50 whitespace-nowrap"
                 >
                   {isSubmitting ? 'Joining...' : 'Join'}
                 </button>
