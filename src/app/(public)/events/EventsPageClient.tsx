@@ -114,11 +114,12 @@ export default function EventsPageClient({
               animate="visible"
               className="grid gap-6 max-w-4xl mx-auto"
             >
-              {upcomingEvents.map((event, index) => (
+              {upcomingEvents.map((event) => (
                 <EventCard
                   key={event.id}
                   event={event}
-                  variant={index === 0 ? 'featured' : 'default'}
+                  variant="default"
+                  showImage
                 />
               ))}
             </motion.div>

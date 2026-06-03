@@ -1,16 +1,20 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import { MapPin, Clock, ArrowRight, Users } from 'lucide-react'
 import { formatTime } from '@/lib/utils'
 import { eventTypeLabels, type EventType } from '@/types'
-import type { Event } from '@prisma/client'
+import type { Event, Media } from '@prisma/client'
 import { staggerItem } from '@/lib/animations'
 
+type EventWithMedia = Event & { Media?: Media | null }
+
 interface EventCardProps {
-  event: Event
-  variant?: 'default' | 'featured' | 'compact'
+  event: EventWithMedia
+  variant?: 'default' | 'featured' | 'compact' | 'homepage'
+  showImage?: boolean
 }
 
 const eventTypeColors: Record<string, { bg: string; text: string; border: string }> = {
@@ -21,7 +25,7 @@ const eventTypeColors: Record<string, { bg: string; text: string; border: string
   'meeting': { bg: 'bg-sunset/10', text: 'text-sunset-dark', border: 'border-sunset/30' },
 }
 
-export default function EventCard({ event, variant = 'default' }: EventCardProps) {
+export default function EventCard({ event, variant = 'default', showImage = false }: EventCardProps) {
   const prefersReducedMotion = useReducedMotion()
   const startDate = new Date(event.startDate)
   const month = startDate.toLocaleDateString('en-US', { month: 'short' })
@@ -38,6 +42,12 @@ export default function EventCard({ event, variant = 'default' }: EventCardProps
     return <CompactEventCard event={event} />
   }
 
+  if (variant === 'homepage') {
+    return <HomepageEventCard event={event} />
+  }
+
+  const imageUrl = event.Media?.secureUrl || event.Media?.url
+
   return (
     <motion.div variants={staggerItem}>
       <Link href={`/events/${event.slug}`} className="group block">
@@ -48,10 +58,23 @@ export default function EventCard({ event, variant = 'default' }: EventCardProps
           transition={{ duration: 0.2 }}
         >
           <div className="flex">
+            {/* Featured Image */}
+            {showImage && imageUrl && (
+              <div className="w-32 md:w-44 relative flex-shrink-0">
+                <Image
+                  src={imageUrl}
+                  alt={event.title}
+                  fill
+                  unoptimized
+                  className="object-cover"
+                />
+              </div>
+            )}
+
             {/* Date Badge */}
             <motion.div
               className="w-24 bg-gradient-to-b from-court to-court-dark text-white
-                flex flex-col items-center justify-center p-4 relative overflow-hidden"
+                flex flex-col items-center justify-center p-4 relative overflow-hidden flex-shrink-0"
               whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
             >
               {/* Decorative circles */}
@@ -187,6 +210,83 @@ function FeaturedEventCard({ event }: { event: Event }) {
         </div>
       </motion.div>
     </Link>
+  )
+}
+
+function HomepageEventCard({ event }: { event: EventWithMedia }) {
+  const prefersReducedMotion = useReducedMotion()
+  const startDate = new Date(event.startDate)
+  const month = startDate.toLocaleDateString('en-US', { month: 'short' })
+  const day = startDate.getDate()
+  const dayOfWeek = startDate.toLocaleDateString('en-US', { weekday: 'short' })
+  const imageUrl = event.Media?.secureUrl || event.Media?.url
+  const colors = eventTypeColors[event.eventType] || eventTypeColors['open-play']
+
+  return (
+    <motion.div variants={staggerItem}>
+      <Link href={`/events/${event.slug}`} className="group block h-full">
+        <motion.div
+          className="relative overflow-hidden rounded-2xl bg-white border border-gray-100
+            shadow-elevation-1 hover:shadow-elevation-3 transition-all duration-300 h-full flex flex-col"
+          whileHover={prefersReducedMotion ? {} : { y: -4 }}
+          transition={{ duration: 0.2 }}
+        >
+          {/* Image */}
+          {imageUrl && (
+            <div className="relative h-44 w-full">
+              <Image
+                src={imageUrl}
+                alt={event.title}
+                fill
+                unoptimized
+                className="object-cover"
+              />
+              <div className="absolute top-3 left-3">
+                <span
+                  className={`inline-flex items-center px-2.5 py-1 text-xs font-medium
+                    rounded-full border backdrop-blur-sm ${colors.bg} ${colors.text} ${colors.border}`}
+                >
+                  {eventTypeLabels[event.eventType as EventType] || event.eventType}
+                </span>
+              </div>
+            </div>
+          )}
+
+          {/* Content */}
+          <div className="p-5 flex-1 flex flex-col">
+            {/* Date row */}
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-b from-court to-court-dark text-white flex flex-col items-center justify-center flex-shrink-0">
+                <span className="text-xs font-medium uppercase text-lime leading-none">{dayOfWeek}</span>
+                <span className="text-xl font-display font-bold leading-none">{day}</span>
+                <span className="text-xs uppercase text-white/80 leading-none">{month}</span>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-display font-semibold group-hover:text-court transition-colors leading-tight">
+                  {event.title}
+                </h3>
+              </div>
+            </div>
+
+            {/* Meta info */}
+            <div className="mt-auto flex flex-wrap gap-3 text-sm text-gray-600">
+              <div className="flex items-center gap-1.5">
+                <Clock className="w-4 h-4 text-teal" />
+                <span>{formatTime(event.startDate)}</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <MapPin className="w-4 h-4 text-coral" />
+                <span>{event.locationName}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom accent line */}
+          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-lime via-teal to-purple
+            transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+        </motion.div>
+      </Link>
+    </motion.div>
   )
 }
 

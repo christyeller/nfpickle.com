@@ -11,6 +11,7 @@ export default async function EventsPage() {
   const events = await prisma.event.findMany({
     where: { status: 'published' },
     orderBy: { startDate: 'asc' },
+    include: { Media: true },
   })
 
   const now = new Date()

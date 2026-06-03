@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { prisma } from '@/lib/prisma'
 import Hero from '@/components/public/Hero'
 import EmailOptInForm from '@/components/public/EmailOptInForm'
+import UpcomingEventsSection from '@/components/public/UpcomingEventsSection'
 import HomePageSections from '@/components/public/HomePageSections'
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ export default async function HomePage() {
       },
       orderBy: { startDate: 'asc' },
       take: 3,
+      include: { Media: true },
     }),
     prisma.post.findMany({
       where: { status: 'published' },
@@ -40,6 +42,9 @@ export default async function HomePage() {
 
       {/* Email Opt-In Strip */}
       <EmailOptInForm variant="strip" />
+
+      {/* Upcoming Events */}
+      <UpcomingEventsSection events={upcomingEvents} />
 
       {/* All other sections - client-side for animations */}
       <HomePageSections
