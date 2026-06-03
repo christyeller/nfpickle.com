@@ -147,25 +147,14 @@ export default function NewEventPage() {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="label">Capacity</label>
-                <input
-                  type="number"
-                  {...register('capacity', { valueAsNumber: true })}
-                  className="input"
-                  placeholder="Leave empty for unlimited"
-                />
-              </div>
-              <div>
-                <label className="label">Cost ($)</label>
-                <input
-                  type="number"
-                  step="0.01"
-                  {...register('cost', { valueAsNumber: true })}
-                  className="input"
-                />
-              </div>
+            <div>
+              <label className="label">Cost ($)</label>
+              <input
+                type="number"
+                step="0.01"
+                {...register('cost', { valueAsNumber: true })}
+                className="input"
+              />
             </div>
 
             <div className="space-y-3">
