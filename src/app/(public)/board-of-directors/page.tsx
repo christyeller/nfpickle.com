@@ -30,11 +30,10 @@ const boardMembers: BoardMember[] = [
     bio: "I was born in Chicago, IL and lived in Southwestern Michigan before moving to Colorado in 1996. I competed in Division 1 Softball and graduated from Illinois State University with a Bachelors in Psychology, and stayed on to complete a Master's Degree in Special Education, while working as an Assistant Softball Coach for Illinois State. Upon completion of my Master's Degree, I worked at a high school in SW Michigan for three years, teaching students with Learning and Behavioral Disabilities. When I moved to Colorado, I worked in Summit County, CO for 21 years as a Day Treatment and Special Education Teacher, before retiring in 2016. My husband and I married in 2000, and moved from Leadville, CO to Grand Lake, CO in 2014, where we were small business owners until our move to Crawford in 2022. I learned to play Pickleball in Grand Lake, and continue to enjoy the accessibility of a competitive and fun sport that accommodates the aging process, while also providing social opportunities. I am excited about bringing Pickleball and Tennis courts to Hotchkiss and the North Fork Valley, so the folks in our communities, spanning all age groups, can stay active, have fun, and make new friends.",
   },
   {
-    name: 'Lynn Graunke',
+    name: 'Lenore Cambria',
     role: 'Secretary/Treasurer',
-    image: '/images/board/lynn.jpeg',
-    imagePosition: 'object-[50%_10%]',
-    bio: "My name is Lynn Graunke and I have called the North Fork Valley home for the past three years. I love being part of a community that values health, connection, and time outdoors! I have a professional background in project management and many years of service on a variety of volunteer committees, which has helped me develop strong skills in listening, collaborating, and helping move ideas into action. I care deeply about keeping people active at every age and I am very excited about supporting the continued growth of the North Fork pickleball program. When I'm not volunteering, I enjoy ranching, hiking, snowshoeing, and spending time with my husband and our two Labrador retrievers.",
+    image: 'https://media.nfpickle.com/site-assets/lenore-cambria.avif',
+    bio: '',
   },
   {
     name: 'Tony Vervloet',
