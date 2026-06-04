@@ -1,5 +1,6 @@
 import Header from '@/components/public/Header'
 import Footer from '@/components/public/Footer'
+import AnnouncementBar from '@/components/public/AnnouncementBar'
 
 export default function PublicLayout({
   children,
@@ -8,6 +9,7 @@ export default function PublicLayout({
 }) {
   return (
     <>
+      <AnnouncementBar />
       <Header />
       <main className="pt-[70px] lg:pt-[120px]">{children}</main>
       <Footer />
