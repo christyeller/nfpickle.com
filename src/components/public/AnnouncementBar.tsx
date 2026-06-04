@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function AnnouncementBar() {
   return (
-    <div className="bg-[#F38D09] text-white py-2.5 px-4 text-center relative z-50">
+    <div className="bg-[#F38D09] text-white py-2.5 px-4 text-center relative z-[60]">
       <div className="container-custom flex items-center justify-center gap-3 flex-wrap">
         <span className="font-semibold text-sm md:text-base">
           Kids Pickleball Clinic June 24!

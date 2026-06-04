@@ -11,7 +11,7 @@ export default function PublicLayout({
     <>
       <AnnouncementBar />
       <Header />
-      <main className="pt-[70px] lg:pt-[120px]">{children}</main>
+      <main className="pt-[114px] lg:pt-[164px]">{children}</main>
       <Footer />
     </>
   )
