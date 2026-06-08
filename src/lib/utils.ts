@@ -13,6 +13,7 @@ export function formatDate(date: Date | string): string {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
+    timeZone: 'America/Denver',
   })
 }
 
@@ -22,6 +23,7 @@ export function formatTime(date: Date | string): string {
     hour: 'numeric',
     minute: '2-digit',
     hour12: true,
+    timeZone: 'America/Denver',
   })
 }
 
