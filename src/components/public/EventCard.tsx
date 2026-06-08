@@ -28,9 +28,9 @@ const eventTypeColors: Record<string, { bg: string; text: string; border: string
 export default function EventCard({ event, variant = 'default', showImage = false }: EventCardProps) {
   const prefersReducedMotion = useReducedMotion()
   const startDate = new Date(event.startDate)
-  const month = startDate.toLocaleDateString('en-US', { month: 'short' })
-  const day = startDate.getDate()
-  const dayOfWeek = startDate.toLocaleDateString('en-US', { weekday: 'short' })
+  const month = startDate.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' })
+  const day = startDate.getUTCDate()
+  const dayOfWeek = startDate.toLocaleDateString('en-US', { weekday: 'short', timeZone: 'UTC' })
 
   const colors = eventTypeColors[event.eventType] || eventTypeColors['open-play']
 
@@ -155,6 +155,7 @@ function FeaturedEventCard({ event }: { event: Event }) {
     weekday: 'long',
     month: 'long',
     day: 'numeric',
+    timeZone: 'UTC',
   })
 
   return (
@@ -216,9 +217,9 @@ function FeaturedEventCard({ event }: { event: Event }) {
 function HomepageEventCard({ event }: { event: EventWithMedia }) {
   const prefersReducedMotion = useReducedMotion()
   const startDate = new Date(event.startDate)
-  const month = startDate.toLocaleDateString('en-US', { month: 'short' })
-  const day = startDate.getDate()
-  const dayOfWeek = startDate.toLocaleDateString('en-US', { weekday: 'short' })
+  const month = startDate.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' })
+  const day = startDate.getUTCDate()
+  const dayOfWeek = startDate.toLocaleDateString('en-US', { weekday: 'short', timeZone: 'UTC' })
   const imageUrl = event.Media?.secureUrl || event.Media?.url
   const colors = eventTypeColors[event.eventType] || eventTypeColors['open-play']
 
@@ -292,8 +293,8 @@ function HomepageEventCard({ event }: { event: EventWithMedia }) {
 
 function CompactEventCard({ event }: { event: Event }) {
   const startDate = new Date(event.startDate)
-  const day = startDate.getDate()
-  const month = startDate.toLocaleDateString('en-US', { month: 'short' })
+  const day = startDate.getUTCDate()
+  const month = startDate.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' })
 
   return (
     <Link href={`/events/${event.slug}`} className="group block">
