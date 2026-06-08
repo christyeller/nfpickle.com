@@ -163,6 +163,18 @@ model Post {
   Media           Media?   @relation(fields: [featuredImageId], references: [id])
 }
 
+model ClinicRegistration {
+  id         String   @id
+  parentName String
+  parentEmail String
+  parentPhone String
+  childName  String
+  childAge   String
+  message    String?
+  eventTitle String
+  createdAt  DateTime @default(now())
+}
+
 model Subscriber {
   id        String   @id
   firstName String

@@ -14,6 +14,7 @@ import {
   Settings,
   LogOut,
   Home,
+  ClipboardList,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -25,6 +26,7 @@ const navItems = [
   { href: '/admin/donations', label: 'Donations', icon: Heart },
   { href: '/admin/messages', label: 'Messages', icon: Mail },
   { href: '/admin/subscribers', label: 'Subscribers', icon: Users },
+  { href: '/admin/registrations', label: 'Registrations', icon: ClipboardList },
 ]
 
 export default function Sidebar() {

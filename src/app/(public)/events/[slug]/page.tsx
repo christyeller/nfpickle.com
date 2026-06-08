@@ -1,9 +1,11 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
 import { formatDate, formatTime } from '@/lib/utils'
 import { eventTypeLabels, type EventType } from '@/types'
 import { Calendar, Clock, MapPin, DollarSign, Users, ArrowLeft } from 'lucide-react'
+import ClinicRegistrationForm from '@/components/public/ClinicRegistrationForm'
 
 function sanitizeHtml(html: string): string {
   const allowedTags = ['p', 'br', 'strong', 'em', 'u', 's', 'h1', 'h2', 'h3',
@@ -40,13 +42,18 @@ export async function generateMetadata({ params }: EventPageProps) {
 
 export default async function EventPage({ params }: EventPageProps) {
   const { slug } = await params
-  const event = await prisma.event.findUnique({ where: { slug } })
+  const event = await prisma.event.findUnique({
+    where: { slug },
+    include: { Media: true },
+  })
 
   if (!event || event.status !== 'published') {
     notFound()
   }
 
   const isPast = new Date(event.startDate) < new Date()
+  const imageUrl = event.Media?.secureUrl || event.Media?.url
+  const isClinicEvent = slug === 'kids-pickleball-clinic-age-9-12'
 
   return (
     <>
@@ -94,6 +101,18 @@ export default async function EventPage({ params }: EventPageProps) {
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Main Content */}
             <div className="lg:col-span-2">
+              {imageUrl && (
+                <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden mb-8">
+                  <Image
+                    src={imageUrl}
+                    alt={event.title}
+                    fill
+                    unoptimized
+                    className="object-cover"
+                  />
+                </div>
+              )}
+
               {event.description ? (
                 <div
                   className="prose prose-lg max-w-none"
@@ -105,6 +124,12 @@ export default async function EventPage({ params }: EventPageProps) {
                 <p className="text-gray-600">
                   Join us for this event! More details coming soon.
                 </p>
+              )}
+
+              {isClinicEvent && !isPast && (
+                <div className="mt-12">
+                  <ClinicRegistrationForm eventTitle={event.title} />
+                </div>
               )}
             </div>
 
