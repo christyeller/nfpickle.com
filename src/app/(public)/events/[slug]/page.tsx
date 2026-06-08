@@ -4,7 +4,21 @@ import { prisma } from '@/lib/prisma'
 import { formatDate, formatTime } from '@/lib/utils'
 import { eventTypeLabels, type EventType } from '@/types'
 import { Calendar, Clock, MapPin, DollarSign, Users, ArrowLeft } from 'lucide-react'
-import DOMPurify from 'isomorphic-dompurify'
+
+function sanitizeHtml(html: string): string {
+  const allowedTags = ['p', 'br', 'strong', 'em', 'u', 's', 'h1', 'h2', 'h3',
+                       'ul', 'ol', 'li', 'blockquote', 'a', 'img', 'table', 'thead',
+                       'tbody', 'tr', 'th', 'td', 'code', 'pre', 'span', 'div']
+  const allowedAttrs = ['href', 'target', 'rel', 'class', 'align', 'src', 'alt', 'width', 'height', 'style']
+  const tagPattern = allowedTags.join('|')
+  return html.replace(/<\/?([a-zA-Z][a-zA-Z0-9]*)\b[^>]*>/g, (match, tag) => {
+    if (!allowedTags.includes(tag.toLowerCase())) return ''
+    return match.replace(/\s([a-zA-Z-]+)=/g, (attrMatch, attr) => {
+      if (!allowedAttrs.includes(attr.toLowerCase())) return ''
+      return attrMatch
+    })
+  }).replace(/on\w+\s*=/gi, '')
+}
 
 interface EventPageProps {
   params: Promise<{ slug: string }>
@@ -84,11 +98,7 @@ export default async function EventPage({ params }: EventPageProps) {
                 <div
                   className="prose prose-lg max-w-none"
                   dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(event.description, {
-                      ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 's', 'h1', 'h2', 'h3',
-                                     'ul', 'ol', 'li', 'blockquote', 'a'],
-                      ALLOWED_ATTR: ['href', 'target', 'rel', 'class', 'align']
-                    })
+                    __html: sanitizeHtml(event.description)
                   }}
                 />
               ) : (
