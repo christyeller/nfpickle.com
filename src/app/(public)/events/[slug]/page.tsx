@@ -102,7 +102,7 @@ export default async function EventPage({ params }: EventPageProps) {
             {/* Main Content */}
             <div className="lg:col-span-2">
               {imageUrl && (
-                <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden mb-8">
+                <div className="relative w-full aspect-square rounded-2xl overflow-hidden mb-8">
                   <Image
                     src={imageUrl}
                     alt={event.title}
