@@ -58,7 +58,7 @@ export default async function PublicPage({ params }: PageProps) {
       )}
 
       {/* Content */}
-      <section className="section bg-cream">
+      <section className={isGalleryPage ? 'pb-20 md:pb-32 bg-cream' : 'section bg-cream'}>
         <div className={isGalleryPage ? 'max-w-[1400px] mx-auto px-4 sm:px-6' : 'container-custom'}>
           <article className={isGalleryPage ? '' : 'max-w-3xl mx-auto'}>
             <PostContent content={page.content} />
