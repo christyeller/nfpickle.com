@@ -34,31 +34,33 @@ export default async function PublicPage({ params }: PageProps) {
   }
 
   const featuredImageUrl = page.Media?.secureUrl || page.Media?.url
+  const isGalleryPage = slug === 'photo-gallery'
 
   return (
     <>
-      {/* Hero */}
-      <section
-        className="relative pb-16 min-h-[350px] flex items-center justify-center"
-        style={featuredImageUrl ? {
-          backgroundImage: `url(${featuredImageUrl})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        } : undefined}
-      >
-        <div className={`absolute inset-0 ${featuredImageUrl ? 'bg-black/60' : 'bg-[#3893A4]'}`} />
+      {!isGalleryPage && (
+        <section
+          className="relative pb-16 min-h-[350px] flex items-center justify-center"
+          style={featuredImageUrl ? {
+            backgroundImage: `url(${featuredImageUrl})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          } : undefined}
+        >
+          <div className={`absolute inset-0 ${featuredImageUrl ? 'bg-black/60' : 'bg-[#3893A4]'}`} />
 
-        <div className="container-custom relative z-10 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mt-2">
-            {page.title}
-          </h1>
-        </div>
-      </section>
+          <div className="container-custom relative z-10 text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mt-2">
+              {page.title}
+            </h1>
+          </div>
+        </section>
+      )}
 
       {/* Content */}
       <section className="section bg-cream">
-        <div className="container-custom">
-          <article className="max-w-3xl mx-auto">
+        <div className={isGalleryPage ? 'max-w-[1400px] mx-auto px-4 sm:px-6' : 'container-custom'}>
+          <article className={isGalleryPage ? '' : 'max-w-3xl mx-auto'}>
             <PostContent content={page.content} />
           </article>
         </div>
