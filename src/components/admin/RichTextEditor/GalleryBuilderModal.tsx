@@ -149,6 +149,7 @@ export default function GalleryBuilderModal({
         <div className="flex items-center justify-between p-4 border-b">
           <h2 className="text-lg font-semibold text-gray-900">{initialImages ? 'Edit Image Gallery' : 'Create Image Gallery'}</h2>
           <button
+            type="button"
             onClick={onClose}
             className="p-1 hover:bg-gray-100 rounded-lg transition-colors"
           >
@@ -162,6 +163,7 @@ export default function GalleryBuilderModal({
             <span className="text-sm text-gray-600">Layout:</span>
             <div className="flex gap-1">
               <button
+                type="button"
                 onClick={() => setLayout('grid')}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors ${
                   layout === 'grid' ? 'bg-lime text-white' : 'bg-white border hover:bg-gray-50'
@@ -171,6 +173,7 @@ export default function GalleryBuilderModal({
                 Grid
               </button>
               <button
+                type="button"
                 onClick={() => setLayout('carousel')}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors ${
                   layout === 'carousel' ? 'bg-lime text-white' : 'bg-white border hover:bg-gray-50'
@@ -180,6 +183,7 @@ export default function GalleryBuilderModal({
                 Carousel
               </button>
               <button
+                type="button"
                 onClick={() => setLayout('slider')}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors ${
                   layout === 'slider' ? 'bg-lime text-white' : 'bg-white border hover:bg-gray-50'
@@ -266,6 +270,7 @@ export default function GalleryBuilderModal({
 
                 return (
                   <button
+                    type="button"
                     key={item.id}
                     onClick={() => toggleImageSelection(imageUrl)}
                     className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
@@ -295,6 +300,7 @@ export default function GalleryBuilderModal({
         {totalPages > 1 && (
           <div className="flex items-center justify-center gap-2 p-3 border-t">
             <button
+              type="button"
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
               className="px-3 py-1 rounded border hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
@@ -305,6 +311,7 @@ export default function GalleryBuilderModal({
               Page {page} of {totalPages}
             </span>
             <button
+              type="button"
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}
               className="px-3 py-1 rounded border hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
@@ -317,12 +324,14 @@ export default function GalleryBuilderModal({
         {/* Footer */}
         <div className="flex items-center justify-end gap-3 p-4 border-t bg-gray-50">
           <button
+            type="button"
             onClick={onClose}
             className="px-4 py-2 text-gray-700 hover:bg-gray-200 rounded-lg transition-colors"
           >
             Cancel
           </button>
           <button
+            type="button"
             onClick={handleInsert}
             disabled={selectedImages.length === 0}
             className="flex items-center gap-2 px-4 py-2 bg-lime text-white rounded-lg hover:bg-lime/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
