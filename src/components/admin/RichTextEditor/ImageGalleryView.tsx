@@ -2,7 +2,8 @@
 
 import { NodeViewWrapper, NodeViewProps } from '@tiptap/react'
 import { useState } from 'react'
-import { ChevronLeft, ChevronRight, Grid3X3, LayoutList, Images, Trash2, Settings } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Grid3X3, LayoutList, Images, Trash2, Settings, Pencil } from 'lucide-react'
+import GalleryBuilderModal from './GalleryBuilderModal'
 
 export default function ImageGalleryView({ node, updateAttributes, deleteNode, selected }: NodeViewProps) {
   const { images, layout, columns } = node.attrs as {
@@ -13,6 +14,7 @@ export default function ImageGalleryView({ node, updateAttributes, deleteNode, s
 
   const [currentSlide, setCurrentSlide] = useState(0)
   const [showSettings, setShowSettings] = useState(false)
+  const [showEditModal, setShowEditModal] = useState(false)
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % images.length)
@@ -120,6 +122,14 @@ export default function ImageGalleryView({ node, updateAttributes, deleteNode, s
           </div>
           <div className="flex gap-1">
             <button
+              onClick={() => setShowEditModal(true)}
+              className="p-1.5 hover:bg-blue-100 text-blue-600 rounded transition-colors"
+              contentEditable={false}
+              title="Edit images"
+            >
+              <Pencil size={16} />
+            </button>
+            <button
               onClick={() => setShowSettings(!showSettings)}
               className="p-1.5 hover:bg-gray-200 rounded transition-colors"
               contentEditable={false}
@@ -202,6 +212,17 @@ export default function ImageGalleryView({ node, updateAttributes, deleteNode, s
           )}
         </div>
       </div>
+
+      <GalleryBuilderModal
+        isOpen={showEditModal}
+        onClose={() => setShowEditModal(false)}
+        onInsertGallery={(newImages, newLayout, newColumns) => {
+          updateAttributes({ images: newImages, layout: newLayout, columns: newColumns })
+        }}
+        initialImages={images}
+        initialLayout={layout}
+        initialColumns={columns}
+      />
     </NodeViewWrapper>
   )
 }

@@ -17,12 +17,18 @@ interface GalleryBuilderModalProps {
   isOpen: boolean
   onClose: () => void
   onInsertGallery: (images: string[], layout: 'grid' | 'carousel' | 'slider', columns: number) => void
+  initialImages?: string[]
+  initialLayout?: 'grid' | 'carousel' | 'slider'
+  initialColumns?: number
 }
 
 export default function GalleryBuilderModal({
   isOpen,
   onClose,
   onInsertGallery,
+  initialImages,
+  initialLayout,
+  initialColumns,
 }: GalleryBuilderModalProps) {
   const [media, setMedia] = useState<MediaItem[]>([])
   const [loading, setLoading] = useState(false)
@@ -64,7 +70,15 @@ export default function GalleryBuilderModal({
   useEffect(() => {
     if (isOpen) {
       setPage(1)
-      setSelectedImages([])
+      setSelectedImages(initialImages || [])
+      setLayout(initialLayout || 'grid')
+      setColumns(initialColumns || 3)
+    }
+  }, [isOpen]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (isOpen) {
+      setPage(1)
     }
   }, [search, isOpen])
 
@@ -133,7 +147,7 @@ export default function GalleryBuilderModal({
       <div className="relative bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[85vh] flex flex-col m-4">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b">
-          <h2 className="text-lg font-semibold text-gray-900">Create Image Gallery</h2>
+          <h2 className="text-lg font-semibold text-gray-900">{initialImages ? 'Edit Image Gallery' : 'Create Image Gallery'}</h2>
           <button
             onClick={onClose}
             className="p-1 hover:bg-gray-100 rounded-lg transition-colors"
@@ -314,7 +328,7 @@ export default function GalleryBuilderModal({
             className="flex items-center gap-2 px-4 py-2 bg-lime text-white rounded-lg hover:bg-lime/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Check size={18} />
-            Insert Gallery ({selectedImages.length})
+            {initialImages ? 'Update' : 'Insert'} Gallery ({selectedImages.length})
           </button>
         </div>
       </div>
