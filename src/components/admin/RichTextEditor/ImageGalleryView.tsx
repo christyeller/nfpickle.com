@@ -62,6 +62,7 @@ export default function ImageGalleryView({ node, updateAttributes, deleteNode, s
       {images.length > 1 && (
         <>
           <button
+            type="button"
             onClick={prevSlide}
             className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70"
             contentEditable={false}
@@ -69,6 +70,7 @@ export default function ImageGalleryView({ node, updateAttributes, deleteNode, s
             <ChevronLeft size={20} />
           </button>
           <button
+            type="button"
             onClick={nextSlide}
             className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70"
             contentEditable={false}
@@ -78,6 +80,7 @@ export default function ImageGalleryView({ node, updateAttributes, deleteNode, s
           <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
             {images.map((_, index) => (
               <button
+                type="button"
                 key={index}
                 onClick={() => setCurrentSlide(index)}
                 className={`w-2 h-2 rounded-full transition-colors ${
@@ -122,6 +125,7 @@ export default function ImageGalleryView({ node, updateAttributes, deleteNode, s
           </div>
           <div className="flex gap-1">
             <button
+              type="button"
               onClick={() => setShowEditModal(true)}
               className="p-1.5 hover:bg-blue-100 text-blue-600 rounded transition-colors"
               contentEditable={false}
@@ -130,6 +134,7 @@ export default function ImageGalleryView({ node, updateAttributes, deleteNode, s
               <Pencil size={16} />
             </button>
             <button
+              type="button"
               onClick={() => setShowSettings(!showSettings)}
               className="p-1.5 hover:bg-gray-200 rounded transition-colors"
               contentEditable={false}
@@ -138,6 +143,7 @@ export default function ImageGalleryView({ node, updateAttributes, deleteNode, s
               <Settings size={16} />
             </button>
             <button
+              type="button"
               onClick={deleteNode}
               className="p-1.5 hover:bg-red-100 text-red-600 rounded transition-colors"
               contentEditable={false}
@@ -156,6 +162,7 @@ export default function ImageGalleryView({ node, updateAttributes, deleteNode, s
                 <label className="block text-xs text-gray-500 mb-1">Layout</label>
                 <div className="flex gap-1">
                   <button
+                    type="button"
                     onClick={() => updateAttributes({ layout: 'grid' })}
                     className={`p-2 rounded ${layout === 'grid' ? 'bg-lime text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
                     title="Grid"
@@ -163,6 +170,7 @@ export default function ImageGalleryView({ node, updateAttributes, deleteNode, s
                     <Grid3X3 size={16} />
                   </button>
                   <button
+                    type="button"
                     onClick={() => updateAttributes({ layout: 'carousel' })}
                     className={`p-2 rounded ${layout === 'carousel' ? 'bg-lime text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
                     title="Carousel"
@@ -170,6 +178,7 @@ export default function ImageGalleryView({ node, updateAttributes, deleteNode, s
                     <Images size={16} />
                   </button>
                   <button
+                    type="button"
                     onClick={() => updateAttributes({ layout: 'slider' })}
                     className={`p-2 rounded ${layout === 'slider' ? 'bg-lime text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
                     title="Slider"
