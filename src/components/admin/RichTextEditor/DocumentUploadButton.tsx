@@ -2,6 +2,7 @@
 
 import { Editor } from '@tiptap/react'
 import { useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { FileText, Upload, X, ExternalLink } from 'lucide-react'
 
 interface DocumentUploadButtonProps {
@@ -174,13 +175,14 @@ export default function DocumentUploadButton({ editor, children }: DocumentUploa
       </button>
 
       {/* Document Upload Modal */}
-      {showModal && (
+      {showModal && createPortal(
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="bg-white rounded-xl shadow-xl max-w-lg w-full mx-4 overflow-hidden">
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
               <h3 className="text-lg font-semibold text-gray-900">Upload Document</h3>
               <button
+                type="button"
                 onClick={handleClose}
                 className="p-1 hover:bg-gray-100 rounded-lg transition-colors"
               >
@@ -251,6 +253,7 @@ export default function DocumentUploadButton({ editor, children }: DocumentUploa
                       type="text"
                       value={linkText}
                       onChange={(e) => setLinkText(e.target.value)}
+                      onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}
                       placeholder="Enter the text to display for the link"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime focus:border-lime outline-none"
                       autoFocus
@@ -266,6 +269,7 @@ export default function DocumentUploadButton({ editor, children }: DocumentUploa
             {/* Footer */}
             <div className="flex justify-end gap-3 px-6 py-4 border-t border-gray-200 bg-gray-50">
               <button
+                type="button"
                 onClick={handleClose}
                 className="px-4 py-2 text-gray-700 hover:bg-gray-200 rounded-lg transition-colors"
               >
@@ -273,6 +277,7 @@ export default function DocumentUploadButton({ editor, children }: DocumentUploa
               </button>
               {uploadedDoc && (
                 <button
+                  type="button"
                   onClick={handleInsertLink}
                   disabled={!linkText.trim()}
                   className="px-4 py-2 bg-lime text-court-dark font-semibold rounded-lg hover:bg-lime/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -282,7 +287,8 @@ export default function DocumentUploadButton({ editor, children }: DocumentUploa
               )}
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   )

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { X, Upload, Loader2, Search, Check, Grid3X3, Images, LayoutList } from 'lucide-react'
 
 interface MediaItem {
@@ -138,7 +139,7 @@ export default function GalleryBuilderModal({
 
   if (!isOpen) return null
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
@@ -220,6 +221,7 @@ export default function GalleryBuilderModal({
               placeholder="Search images..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime focus:border-lime outline-none"
             />
           </div>
@@ -341,6 +343,7 @@ export default function GalleryBuilderModal({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }

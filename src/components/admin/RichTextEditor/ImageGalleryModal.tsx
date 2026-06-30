@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { X, Upload, Loader2, Search } from 'lucide-react'
 
 interface MediaItem {
@@ -67,7 +68,7 @@ export default function ImageGalleryModal({
 
   if (!isOpen) return null
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop */}
       <div
@@ -81,6 +82,7 @@ export default function ImageGalleryModal({
         <div className="flex items-center justify-between p-4 border-b">
           <h2 className="text-lg font-semibold text-gray-900">Image Gallery</h2>
           <button
+            type="button"
             onClick={onClose}
             className="p-1 hover:bg-gray-100 rounded-lg transition-colors"
           >
@@ -97,10 +99,12 @@ export default function ImageGalleryModal({
               placeholder="Search images..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime focus:border-lime outline-none"
             />
           </div>
           <button
+            type="button"
             onClick={() => {
               onClose()
               onUploadClick()
@@ -122,6 +126,7 @@ export default function ImageGalleryModal({
             <div className="flex flex-col items-center justify-center h-48 text-gray-500">
               <p>No images found</p>
               <button
+                type="button"
                 onClick={() => {
                   onClose()
                   onUploadClick()
@@ -135,6 +140,7 @@ export default function ImageGalleryModal({
             <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
               {media.map((item) => (
                 <button
+                  type="button"
                   key={item.id}
                   onClick={() => {
                     onSelectImage(item.secureUrl || item.url)
@@ -157,6 +163,7 @@ export default function ImageGalleryModal({
         {totalPages > 1 && (
           <div className="flex items-center justify-center gap-2 p-4 border-t">
             <button
+              type="button"
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
               className="px-3 py-1 rounded border hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -167,6 +174,7 @@ export default function ImageGalleryModal({
               Page {page} of {totalPages}
             </span>
             <button
+              type="button"
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}
               className="px-3 py-1 rounded border hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -176,6 +184,7 @@ export default function ImageGalleryModal({
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
