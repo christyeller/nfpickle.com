@@ -33,7 +33,7 @@ const boardMembers: BoardMember[] = [
     name: 'Lenore Cambria',
     role: 'Secretary/Treasurer',
     image: 'https://media.nfpickle.com/site-assets/lenore-cambria.avif',
-    bio: '',
+    bio: "I am a rural Utah native, graduating from Utah State University with a B.S. degree in Accounting. My career in Utah ranges from accounting manager at Utah Power & Light and the University of Utah, to director and choreographer for many professional & community theatre productions in the Salt Lake Valley. I moved to the North Fork Valley with my young family in 2001. We have enjoyed many different opportunities here and have fostered many great friendships. I was the District Administrator for the North Fork Pool, Park, and Recreation District for 7 years, during which time we built new baseball and softball fields, a single track bicycle/walking path, and painted Pickleball lines on the tennis courts in Apple Valley park. I value the importance of outdoor recreation in this valley that brings all ages and skill levels together to enjoy the community. I consider myself a beginner to the sport of Pickleball, but have found the Pickleball enthusiasts here to be very patient. My sons played competitive tennis at Hotchkiss High School and they are definitely much more skilled at Pickleball than I, and still play both sports today. I have found Pickleball to be a sport all levels and ages can enjoy, and I'm hopeful our grassroots efforts can expand the accessibility for Pickleball & Tennis to many, for years to come.",
   },
   {
     name: 'Tony Vervloet',
