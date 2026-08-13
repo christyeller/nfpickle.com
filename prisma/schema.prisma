@@ -156,11 +156,14 @@ model Post {
   content         String
   featuredImg     String?
   status          String   @default("published")
+  category        String   @default("News")
   publishedAt     DateTime @default(now())
   createdAt       DateTime @default(now())
   updatedAt       DateTime
   featuredImageId String?
   Media           Media?   @relation(fields: [featuredImageId], references: [id])
+
+  @@index([category])
 }
 
 model ClinicRegistration {

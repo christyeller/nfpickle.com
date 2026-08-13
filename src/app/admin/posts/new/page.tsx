@@ -114,6 +114,14 @@ export default function NewPostPage() {
             </div>
 
             <div>
+              <label className="label">Category *</label>
+              <select {...register('category')} className="input">
+                <option value="News">News</option>
+                <option value="Board Meeting Minutes">Board Meeting Minutes</option>
+              </select>
+            </div>
+
+            <div>
               <label className="label">Status *</label>
               <select {...register('status')} className="input">
                 <option value="published">Published</option>

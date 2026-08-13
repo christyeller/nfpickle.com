@@ -14,15 +14,17 @@ export default function PostsPage() {
   const [posts, setPosts] = useState<Post[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [filter, setFilter] = useState('all')
+  const [categoryFilter, setCategoryFilter] = useState('all')
 
   useEffect(() => {
     fetchPosts()
-  }, [filter])
+  }, [filter, categoryFilter])
 
   const fetchPosts = async () => {
     try {
       const params = new URLSearchParams()
       if (filter !== 'all') params.set('status', filter)
+      if (categoryFilter !== 'all') params.set('category', categoryFilter)
 
       const res = await fetch(`/api/posts?${params}`)
       const data = await res.json()
@@ -52,6 +54,21 @@ export default function PostsPage() {
 
   const columns = [
     { key: 'title', label: 'Title' },
+    {
+      key: 'category',
+      label: 'Category',
+      render: (post: Post) => (
+        <span
+          className={`px-2 py-1 text-xs rounded ${
+            post.category === 'Board Meeting Minutes'
+              ? 'bg-purple-100 text-purple-700'
+              : 'bg-blue-100 text-blue-700'
+          }`}
+        >
+          {post.category}
+        </span>
+      ),
+    },
     {
       key: 'publishedAt',
       label: 'Published',
@@ -95,20 +112,37 @@ export default function PostsPage() {
 
       <div className="p-6">
         <div className="flex items-center justify-between mb-6">
-          <div className="flex gap-2">
-            {['all', 'published', 'draft'].map((status) => (
-              <button
-                key={status}
-                onClick={() => setFilter(status)}
-                className={`px-4 py-2 text-sm rounded-lg capitalize ${
-                  filter === status
-                    ? 'bg-primary text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-50'
-                }`}
-              >
-                {status}
-              </button>
-            ))}
+          <div className="flex gap-4">
+            <div className="flex gap-2">
+              {['all', 'published', 'draft'].map((status) => (
+                <button
+                  key={status}
+                  onClick={() => setFilter(status)}
+                  className={`px-4 py-2 text-sm rounded-lg capitalize ${
+                    filter === status
+                      ? 'bg-primary text-white'
+                      : 'bg-white text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  {status}
+                </button>
+              ))}
+            </div>
+            <div className="flex gap-2">
+              {['all', 'News', 'Board Meeting Minutes'].map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setCategoryFilter(category)}
+                  className={`px-4 py-2 text-sm rounded-lg ${
+                    categoryFilter === category
+                      ? 'bg-primary text-white'
+                      : 'bg-white text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  {category === 'all' ? 'All Categories' : category}
+                </button>
+              ))}
+            </div>
           </div>
           <Link href="/admin/posts/new" className="btn btn-primary">
             <Plus size={20} className="mr-2" />

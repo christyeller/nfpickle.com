@@ -45,6 +45,7 @@ export default function EditPostPage() {
             content: post.content,
             featuredImageId: post.featuredImageId || null,
             status: post.status as PostFormData['status'],
+            category: post.category as PostFormData['category'],
           })
         }
       } catch (error) {
@@ -166,6 +167,14 @@ export default function EditPostPage() {
               {errors.content && (
                 <p className="text-red-500 text-sm mt-1">{errors.content.message}</p>
               )}
+            </div>
+
+            <div>
+              <label className="label">Category *</label>
+              <select {...register('category')} className="input">
+                <option value="News">News</option>
+                <option value="Board Meeting Minutes">Board Meeting Minutes</option>
+              </select>
             </div>
 
             <div>

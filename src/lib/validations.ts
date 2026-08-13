@@ -23,6 +23,7 @@ export const postSchema = z.object({
   excerpt: z.string().optional(),
   featuredImageId: z.string().optional().nullable(),
   status: z.enum(['published', 'draft']).default('published'),
+  category: z.enum(['News', 'Board Meeting Minutes']).default('News'),
 })
 
 export const pageSchema = z.object({

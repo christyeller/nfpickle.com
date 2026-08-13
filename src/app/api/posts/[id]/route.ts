@@ -66,6 +66,7 @@ export async function PUT(
 
     // Revalidate public pages so updated content appears immediately
     revalidatePath('/news')
+    revalidatePath('/board-meeting-minutes')
     revalidatePath(`/news/${slug}`)
     revalidatePath('/')
 
@@ -96,6 +97,7 @@ export async function DELETE(
 
     // Revalidate public pages
     revalidatePath('/news')
+    revalidatePath('/board-meeting-minutes')
     if (post?.slug) {
       revalidatePath(`/news/${post.slug}`)
     }

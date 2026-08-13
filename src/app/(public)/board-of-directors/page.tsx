@@ -201,7 +201,7 @@ export default function BoardOfDirectorsPage() {
               className="mt-8"
             >
               <Link
-                href="/news/board-meeting-minutes"
+                href="/board-meeting-minutes"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-[#F38D09] text-white font-bold text-lg rounded-xl hover:bg-[#F38D09]/90 transition-colors"
               >
                 View our Board Meeting Minutes

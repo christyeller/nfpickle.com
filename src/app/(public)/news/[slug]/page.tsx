@@ -66,11 +66,11 @@ export default async function PostPage({ params }: PostPageProps) {
           )}
 
           <Link
-            href="/news"
+            href={post.category === 'Board Meeting Minutes' ? '/board-meeting-minutes' : '/news'}
             className="inline-flex items-center text-white/80 hover:text-white mt-6"
           >
             <ArrowLeft size={20} className="mr-2" />
-            Back to News
+            {post.category === 'Board Meeting Minutes' ? 'Back to Board Meeting Minutes' : 'Back to News'}
           </Link>
         </div>
       </section>

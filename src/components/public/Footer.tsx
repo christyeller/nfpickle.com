@@ -14,6 +14,7 @@ const quickLinks = [
   { href: '/about', label: 'About Us' },
   { href: '/history', label: 'History' },
   { href: '/board-of-directors', label: 'Board of Directors' },
+  { href: '/board-meeting-minutes', label: 'Board Meeting Minutes' },
   { href: '/contact', label: 'Contact' },
 ]
 

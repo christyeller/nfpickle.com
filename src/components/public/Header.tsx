@@ -13,6 +13,7 @@ const aboutDropdownLinks = [
   { href: '/about', label: 'About Us' },
   { href: '/history', label: 'History' },
   { href: '/board-of-directors', label: 'Board of Directors' },
+  { href: '/board-meeting-minutes', label: 'Board Meeting Minutes' },
 ]
 
 const navLinks = [

@@ -11,12 +11,17 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const status = searchParams.get('status')
+    const category = searchParams.get('category')
     const limit = searchParams.get('limit')
 
     const where: Record<string, unknown> = {}
 
     if (status && status !== 'all') {
       where.status = status
+    }
+
+    if (category && category !== 'all') {
+      where.category = category
     }
 
     const posts = await prisma.post.findMany({
@@ -63,6 +68,7 @@ export async function POST(request: NextRequest) {
 
     // Revalidate public pages so new content appears immediately
     revalidatePath('/news')
+    revalidatePath('/board-meeting-minutes')
     revalidatePath('/')
 
     return NextResponse.json({ post }, { status: 201 })

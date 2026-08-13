@@ -25,7 +25,7 @@ export default async function HomePage() {
       include: { Media: true },
     }),
     prisma.post.findMany({
-      where: { status: 'published' },
+      where: { status: 'published', category: 'News' },
       orderBy: { publishedAt: 'desc' },
       take: 3,
       include: {
