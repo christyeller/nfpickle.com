@@ -16,6 +16,7 @@ import { createLowlight } from 'lowlight'
 import { useEffect } from 'react'
 import Toolbar from './Toolbar'
 import ImageGallery from './extensions/ImageGallery'
+import YoutubeEmbed from './extensions/YoutubeEmbed'
 
 // Create lowlight instance
 const lowlight = createLowlight()
@@ -97,6 +98,7 @@ export default function RichTextEditor({
       })
     )
     extensions.push(ImageGallery)
+    extensions.push(YoutubeEmbed)
   }
 
   extensions.push(

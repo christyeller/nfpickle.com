@@ -24,6 +24,7 @@ import {
   Undo,
   Redo,
   FileText,
+  Youtube,
 } from 'lucide-react'
 import { useState } from 'react'
 import ImageUploadButton from './ImageUploadButton'
@@ -87,6 +88,22 @@ export default function Toolbar({ editor, features }: ToolbarProps) {
 
   const addTable = () => {
     editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()
+  }
+
+  const addYoutubeVideo = () => {
+    const input = window.prompt('Paste a YouTube video URL or embed code:')
+    if (!input) return
+
+    const match = input.match(
+      /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+    )
+
+    if (!match) {
+      window.alert("Couldn't find a YouTube video in that link or code. Please check it and try again.")
+      return
+    }
+
+    editor.chain().focus().setYoutubeEmbed({ videoId: match[1] }).run()
   }
 
   return (
@@ -240,6 +257,13 @@ export default function Toolbar({ editor, features }: ToolbarProps) {
               <DocumentUploadButton editor={editor}>
                 <FileText size={18} />
               </DocumentUploadButton>
+              <ToolbarButton
+                onClick={addYoutubeVideo}
+                active={editor.isActive('youtubeEmbed')}
+                title="Embed YouTube Video"
+              >
+                <Youtube size={18} />
+              </ToolbarButton>
             </>
           )}
         </div>

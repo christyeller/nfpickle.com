@@ -18,6 +18,22 @@ interface GalleryData {
   columns: number
 }
 
+const YOUTUBE_VIDEO_ID_PATTERN = /^[a-zA-Z0-9_-]{11}$/
+
+function YoutubeEmbed({ videoId }: { videoId: string }) {
+  return (
+    <div className="relative w-full overflow-hidden rounded-lg my-6" style={{ paddingBottom: '56.25%' }}>
+      <iframe
+        className="absolute top-0 left-0 w-full h-full"
+        src={`https://www.youtube-nocookie.com/embed/${videoId}`}
+        title="YouTube video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    </div>
+  )
+}
+
 function ImageGallery({ images, layout, columns }: GalleryData) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [lightboxOpen, setLightboxOpen] = useState(false)
@@ -169,6 +185,7 @@ function ImageGallery({ images, layout, columns }: GalleryData) {
 export default function PostContent({ content }: PostContentProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [galleries, setGalleries] = useState<{ id: string; data: GalleryData }[]>([])
+  const [videos, setVideos] = useState<{ id: string; videoId: string }[]>([])
   const [sanitizedContent, setSanitizedContent] = useState('')
 
   useEffect(() => {
@@ -178,7 +195,7 @@ export default function PostContent({ content }: PostContentProps) {
                      'ul', 'ol', 'li', 'blockquote', 'a', 'img', 'table',
                      'thead', 'tbody', 'tr', 'th', 'td', 'pre', 'code', 'div', 'span'],
       ALLOWED_ATTR: ['href', 'target', 'rel', 'src', 'alt', 'class', 'align', 'style',
-                     'data-type', 'data-images', 'data-layout', 'data-columns']
+                     'data-type', 'data-images', 'data-layout', 'data-columns', 'data-video-id']
     })
 
     // Parse the sanitized HTML to find galleries
@@ -206,6 +223,25 @@ export default function PostContent({ content }: PostContentProps) {
     })
 
     setGalleries(foundGalleries)
+
+    // Parse the sanitized HTML to find YouTube embeds
+    const videoElements = doc.querySelectorAll('div[data-type="youtube-embed"]')
+    const foundVideos: { id: string; videoId: string }[] = []
+
+    videoElements.forEach((el, index) => {
+      const id = `video-${index}`
+      const videoId = el.getAttribute('data-video-id') || ''
+
+      if (YOUTUBE_VIDEO_ID_PATTERN.test(videoId)) {
+        foundVideos.push({ id, videoId })
+        el.setAttribute('data-video-placeholder-id', id)
+        el.innerHTML = ''
+      } else {
+        el.remove()
+      }
+    })
+
+    setVideos(foundVideos)
     setSanitizedContent(doc.body.innerHTML)
   }, [content])
 
@@ -255,6 +291,13 @@ export default function PostContent({ content }: PostContentProps) {
               columns={gallery.data.columns}
             />
           )
+        }
+      } else if (el.getAttribute('data-type') === 'youtube-embed') {
+        flushHtmlBuffer()
+        const videoPlaceholderId = el.getAttribute('data-video-placeholder-id')
+        const video = videos.find(v => v.id === videoPlaceholderId)
+        if (video) {
+          parts.push(<YoutubeEmbed key={videoPlaceholderId} videoId={video.videoId} />)
         }
       } else {
         htmlBuffer += el.outerHTML

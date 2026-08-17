@@ -43,7 +43,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: blob: https://media.nfpickle.com https://*.stripe.com",
-              "frame-src 'self' https://js.stripe.com https://hooks.stripe.com",
+              "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://www.youtube-nocookie.com",
               "connect-src 'self' https://api.stripe.com https://m.stripe.com https://r.stripe.com",
               "object-src 'none'",
               "base-uri 'self'",
