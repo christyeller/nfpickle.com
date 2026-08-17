@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { prisma } from '@/lib/prisma'
+import { getNextOccurrence } from '@/lib/utils'
 import Hero from '@/components/public/Hero'
 import EmailOptInForm from '@/components/public/EmailOptInForm'
 import UpcomingEventsSection from '@/components/public/UpcomingEventsSection'
@@ -14,14 +15,14 @@ export const metadata: Metadata = {
 }
 
 export default async function HomePage() {
-  const [upcomingEvents, recentPosts, membersCount] = await Promise.all([
+  const now = new Date()
+
+  const [candidateEvents, recentPosts, membersCount] = await Promise.all([
     prisma.event.findMany({
       where: {
         status: 'published',
-        startDate: { gte: new Date() },
+        OR: [{ startDate: { gte: now } }, { isRecurring: true }],
       },
-      orderBy: { startDate: 'asc' },
-      take: 3,
       include: { Media: true },
     }),
     prisma.post.findMany({
@@ -34,6 +35,21 @@ export default async function HomePage() {
     }),
     prisma.member.count(),
   ])
+
+  const upcomingEvents = candidateEvents
+    .map((event) => {
+      const { startDate, endDate } = getNextOccurrence(
+        event.startDate,
+        event.endDate,
+        event.isRecurring,
+        event.recurringPattern,
+        now
+      )
+      return { ...event, startDate, endDate }
+    })
+    .filter((e) => e.startDate >= now)
+    .sort((a, b) => a.startDate.getTime() - b.startDate.getTime())
+    .slice(0, 3)
 
   return (
     <>

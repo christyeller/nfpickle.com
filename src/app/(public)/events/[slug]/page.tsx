@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
-import { formatDate, formatTime } from '@/lib/utils'
+import { formatDate, formatTime, getNextOccurrence } from '@/lib/utils'
 import { eventTypeLabels, type EventType } from '@/types'
 import { Calendar, Clock, MapPin, DollarSign, Users, ArrowLeft } from 'lucide-react'
 import ClinicRegistrationForm from '@/components/public/ClinicRegistrationForm'
@@ -51,7 +51,13 @@ export default async function EventPage({ params }: EventPageProps) {
     notFound()
   }
 
-  const isPast = new Date(event.startDate) < new Date()
+  const { startDate, endDate } = getNextOccurrence(
+    event.startDate,
+    event.endDate,
+    event.isRecurring,
+    event.recurringPattern
+  )
+  const isPast = endDate < new Date()
   const imageUrl = event.Media?.secureUrl || event.Media?.url
   const isClinicEvent = slug === 'kids-pickleball-clinic-age-9-12'
 
@@ -79,11 +85,11 @@ export default async function EventPage({ params }: EventPageProps) {
           <div className="flex flex-wrap gap-6 text-white/90">
             <div className="flex items-center gap-2">
               <Calendar size={20} />
-              <span>{formatDate(event.startDate)}</span>
+              <span>{formatDate(startDate)}</span>
             </div>
             <div className="flex items-center gap-2">
               <Clock size={20} />
-              <span>{formatTime(event.startDate)} - {formatTime(event.endDate)}</span>
+              <span>{formatTime(startDate)} - {formatTime(endDate)}</span>
             </div>
           </div>
 
@@ -152,9 +158,9 @@ export default async function EventPage({ params }: EventPageProps) {
                   <li className="flex items-start gap-3">
                     <Calendar size={20} className="text-primary flex-shrink-0 mt-1" />
                     <div>
-                      <p className="font-medium">{formatDate(event.startDate)}</p>
+                      <p className="font-medium">{formatDate(startDate)}</p>
                       <p className="text-sm text-gray-600">
-                        {formatTime(event.startDate)} - {formatTime(event.endDate)}
+                        {formatTime(startDate)} - {formatTime(endDate)}
                       </p>
                     </div>
                   </li>
