@@ -75,24 +75,32 @@ async function sendDonationEmails(donation: {
       to: donation.donorEmail,
       subject: 'Thank You for Your Donation to North Fork Pickleball!',
       html: `
+        <p style="text-align: center; margin-bottom: 24px;">
+          <img src="https://media.nfpickle.com/site-assets/newlogo-tp.png"
+               alt="North Fork Pickleball Club"
+               width="200"
+               style="width: 200px; max-width: 100%; height: auto; display: inline-block;">
+        </p>
         <h2>Thank You, ${escapeHtml(donation.donorName)}!</h2>
-        <p>Your generous donation of <strong>${formattedAmount}</strong> has been received and is greatly appreciated.</p>
-        <p>Your support helps us bring dedicated pickleball courts to Hotchkiss, Colorado and grow our community.</p>
+        <p>Your generous donation of <strong>${formattedAmount}</strong> has been received by the North Fork Pickleball Club and is greatly appreciated. Your support means so much to us and to our current and future community of pickleball and tennis players!</p>
+        <p>In partnership with Delta County, the North Fork Pool, Park and Recreation District, and with the potential for future collaboration with the Delta County School District, we are creating an exciting new recreational complex at the Delta County Fairgrounds consisting of 8 dedicated pickleball courts and 4 dedicated tennis courts. Your support will help bring this project to fruition for players from Crawford, Hotchkiss, Paonia, and throughout the North Fork Valley, as well as for the students on the North Fork High School Tennis Team.</p>
+        <p>Together, we will create opportunities for healthy living, strengthen community connections, and provide recreation for all ages&mdash;giving residents a quality place to play close to home. The North Fork Pickleball and Tennis Complex will be a lasting recreational asset that will benefit the North Fork Valley for generations to come.</p>
+        <p>Thank you again for your generosity and for helping us make this vision a reality!</p>
         ${donation.donationType === 'recurring' ? `<p>This is a <strong>${donation.frequency}</strong> recurring donation. You can manage your subscription at any time.</p>` : ''}
         ${donation.receiptUrl ? `<p><a href="${donation.receiptUrl}">View your receipt</a></p>` : ''}
+        <p>With gratitude,<br><strong>NORTH FORK PICKLEBALL CLUB</strong></p>
+        <p>
+          <small>
+            PO Box 215, Crawford, CO 81415<br>
+            <a href="https://nfpickle.com">www.nfpickle.com</a><br>
+            970.261.5864
+          </small>
+        </p>
         <hr>
         <p style="font-size: 14px; color: #666; margin-top: 20px;">
           The North Fork Pickleball Club is a 501(c)(3) tax-exempt organization with public charity status.
           All contributions are fully tax-deductible.<br>
           <strong>EIN: 39-3292058</strong>
-        </p>
-        <hr>
-        <p>With gratitude,<br><strong>North Fork Pickleball Club</strong></p>
-        <p>
-          <small>
-            PO Box 215, Crawford, CO 81415<br>
-            <a href="https://nfpickle.com">nfpickle.com</a>
-          </small>
         </p>
       `,
     })
